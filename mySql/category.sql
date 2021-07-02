@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2021-06-30 10:29:08
+-- 產生時間： 2021-07-02 10:05:49
 -- 伺服器版本： 10.4.19-MariaDB
 -- PHP 版本： 8.0.7
 
@@ -33,6 +33,17 @@ CREATE TABLE `category` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
+-- 傾印資料表的資料 `category`
+--
+
+INSERT INTO `category` (`id`, `name`) VALUES
+(1, '有氧'),
+(2, '重訓'),
+(3, 'tabata'),
+(4, '核心'),
+(5, '飲食');
+
+--
 -- 已傾印資料表的索引
 --
 
@@ -50,7 +61,7 @@ ALTER TABLE `category`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
