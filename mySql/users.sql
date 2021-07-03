@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2021-07-02 08:54:28
+-- 產生時間： 2021-07-03 12:40:57
 -- 伺服器版本： 10.4.19-MariaDB
 -- PHP 版本： 8.0.7
 
@@ -28,20 +28,20 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `users` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `account` varchar(20) NOT NULL,
-  `password` varchar(50) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `user_name` varchar(20) NOT NULL,
+  `id` int(6) UNSIGNED NOT NULL,
+  `account` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `password` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `user_name` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
-  `profile_pic` varchar(50) NOT NULL,
-  `intro` text NOT NULL,
-  `article` text NOT NULL,
-  `videos` varchar(50) NOT NULL,
-  `phone` int(10) NOT NULL,
-  `address` tinyint(50) NOT NULL,
+  `profile_pic` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `intro` varchar(1000) COLLATE utf8_unicode_ci NOT NULL,
+  `article` varchar(1000) COLLATE utf8_unicode_ci NOT NULL,
+  `videos` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `phone` int(30) DEFAULT NULL,
+  `address` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `valid` int(1) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- 已傾印資料表的索引
@@ -61,7 +61,7 @@ ALTER TABLE `users`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
