@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2021-07-01 14:57:36
+-- 產生時間： 2021-07-04 14:41:09
 -- 伺服器版本： 10.4.18-MariaDB
 -- PHP 版本： 8.0.3
 
@@ -34,6 +34,17 @@ CREATE TABLE `product_type` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
+-- 傾印資料表的資料 `product_type`
+--
+
+INSERT INTO `product_type` (`id`, `name_frontend`, `name_backend`) VALUES
+(13, '顏色', 'color'),
+(14, '尺寸', 'size'),
+(15, '規格', 'specification'),
+(16, '重量', 'weight'),
+(17, '口味', 'flavor');
+
+--
 -- 已傾印資料表的索引
 --
 
@@ -51,7 +62,7 @@ ALTER TABLE `product_type`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `product_type`
 --
 ALTER TABLE `product_type`
-  MODIFY `id` int(3) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2021-07-01 14:56:30
+-- 產生時間： 2021-07-04 11:53:55
 -- 伺服器版本： 10.4.18-MariaDB
 -- PHP 版本： 8.0.3
 
@@ -33,6 +33,16 @@ CREATE TABLE `product_category` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
+-- 傾印資料表的資料 `product_category`
+--
+
+INSERT INTO `product_category` (`id`, `name`) VALUES
+(1, '服飾'),
+(2, '鞋子'),
+(3, '器材'),
+(4, '食品');
+
+--
 -- 已傾印資料表的索引
 --
 
@@ -50,7 +60,7 @@ ALTER TABLE `product_category`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `product_category`
 --
 ALTER TABLE `product_category`
-  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
