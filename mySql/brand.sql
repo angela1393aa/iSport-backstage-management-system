@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2021-07-01 14:53:40
+-- 產生時間： 2021-07-04 14:48:36
 -- 伺服器版本： 10.4.18-MariaDB
 -- PHP 版本： 8.0.3
 
@@ -33,6 +33,24 @@ CREATE TABLE `brand` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
+-- 傾印資料表的資料 `brand`
+--
+
+INSERT INTO `brand` (`id`, `name`) VALUES
+(1, 'MIZUNO 美津濃'),
+(2, 'Molybeka 魔力貝卡'),
+(3, 'adidas 愛迪達'),
+(4, 'PUMA'),
+(5, 'NIKE 耐吉'),
+(6, 'CHANSON 強生'),
+(7, 'Fun Sport'),
+(8, 'Comefree'),
+(9, 'ON 歐恩'),
+(10, 'Spark Protein'),
+(11, 'MYPROTEIN'),
+(12, 'Vilson 米森');
+
+--
 -- 已傾印資料表的索引
 --
 
@@ -50,7 +68,7 @@ ALTER TABLE `brand`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `brand`
 --
 ALTER TABLE `brand`
-  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
