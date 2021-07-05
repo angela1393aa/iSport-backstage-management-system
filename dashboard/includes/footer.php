@@ -17,7 +17,8 @@
   <script src="../vendors/fastclick/lib/fastclick.js"></script>
   <!-- NProgress -->
   <script src="../vendors/nprogress/nprogress.js"></script>
-
+  <!-- iCheck -->
+<!--  <script src="../vendors/iCheck/icheck.min.js"></script>-->
   <!-- Custom Theme Scripts -->
   <script src="../build/js/custom.min.js"></script>
 </body>

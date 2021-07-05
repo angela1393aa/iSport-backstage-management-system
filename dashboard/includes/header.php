@@ -23,7 +23,7 @@ if(isset($_SESSION['userLoggedIn'])) {
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>ISport! | </title>
+  <title>ISport! | <?= $title ?></title>
 
   <!-- Bootstrap -->
   <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -31,7 +31,8 @@ if(isset($_SESSION['userLoggedIn'])) {
   <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
     integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
-
+    <!-- iCheck -->
+<!--    <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">-->
   <!-- NProgress -->
   <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
 
@@ -39,7 +40,7 @@ if(isset($_SESSION['userLoggedIn'])) {
   <link href="../build/css/custom.min.css" rel="stylesheet">
 </head>
 
-<body class="nav-sm">
+<body class="nav-md">
   <div class="container body">
     <div class="main_container">
       <div class="col-md-3 left_col">
@@ -79,14 +80,14 @@ if(isset($_SESSION['userLoggedIn'])) {
                 </li>
                 <li><a><i class="fas fa-shopping-bag"></i> 商品管理 <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                    <li><a href="form.html">商品列表</a></li>
+                    <li><a href="/project_01/dashboard/product_list.php">商品列表</a></li>
                     <li><a href="form_advanced.html">新增商品</a></li>
                     <li><a href="form_validation.html">商品分類</a></li>
                   </ul>
                 </li>
                 <li><a><i class="far fa-list-alt"></i> 訂單管理 <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                    <li><a href="general_elements.html">訂單列表</a></li>
+                    <li><a href="#">訂單列表</a></li>
                     <li><a href="media_gallery.html">新增訂單</a></li>
                     <li><a href="typography.html">訂單統計</a></li>
                   </ul>
