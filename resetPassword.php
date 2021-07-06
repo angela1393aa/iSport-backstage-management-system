@@ -10,10 +10,11 @@ if(!isset($_GET['code'])) {
 $code = $_GET['code'];
 $account->getEmailQuery($code);
 
-if(isset($_POST['password'])) {
+if(isset($_POST['password']) && isset($_POST['password2'])) {
     $pw = $_POST['password'];
+    $pw2 = $_POST['password2'];
 
-    $success = $account->PasswordReset($pw, $code);
+    $success = $account->PasswordReset($pw, $pw2, $code);
     if($success) {
         header("Refresh: 2; url=signIn.php");
         //Refresh after 2 secs
@@ -46,12 +47,16 @@ if(isset($_POST['password'])) {
                     <input class="form__input" type="password" name="password" placeholder="新密碼" required title="請輸入新密碼">
                     <label class="form__label" for="password" id="pw">新密碼</label>
                 </div>
-                <!-- <div class="form">
-                    <input class="form__input" type="password" name="password" placeholder="再確認" required>
+                <div class="form">
+                    <input class="form__input" type="password" name="password2" placeholder="再確認" required title="請再確認新密碼">
                     <label class="form__label" for="password" id="pw2">再確認</label>
-                </div> -->
+                </div>
 
                 <?= $account->getMessage("新密碼設定完成！2秒後自動跳轉"); ?>
+                <?= $account->getError("密碼不相符！"); ?>
+                <?= $account->getError("密碼只能使用英文字母及數字"); ?>
+                <?= $account->getError("密碼長度必須為8-20個字"); ?>
+
                 <input class="form__submit" type="submit" name="submitButton" value="更新密碼" title="更新密碼">
             </form>
         
