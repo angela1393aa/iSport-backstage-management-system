@@ -43,7 +43,7 @@ if(isset($_POST['password'])) {
 
             <form method="POST" class="resetPassword__container-form">
                 <div class="form">
-                    <input class="form__input" type="password" name="password" placeholder="新密碼" required>
+                    <input class="form__input" type="password" name="password" placeholder="新密碼" required title="請輸入新密碼">
                     <label class="form__label" for="password" id="pw">新密碼</label>
                 </div>
                 <!-- <div class="form">
@@ -52,7 +52,7 @@ if(isset($_POST['password'])) {
                 </div> -->
 
                 <?= $account->getMessage("新密碼設定完成！2秒後自動跳轉"); ?>
-                <input class="form__submit" type="submit" name="submitButton" value="更新密碼">
+                <input class="form__submit" type="submit" name="submitButton" value="更新密碼" title="更新密碼">
             </form>
         
         </div>

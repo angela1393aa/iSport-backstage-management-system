@@ -33,14 +33,14 @@ if(isset($_POST['email'])) {
 
                 <form method="POST" class="forgetPassword__container-form">
                     <div class="form">
-                        <input class="form__input" type="email" name="email" placeholder="Email" autocomplete="off" required>
+                        <input class="form__input" type="email" name="email" placeholder="Email" autocomplete="off" required title="請輸入Email">
                         <label class="form__label" for="email" id="em">Email</label>
                     </div>
                     <?= $account->getError("此Email非管理者Email！"); ?>
                     <?= $account->getMessage("重設密碼連結已傳送至Email！"); ?>
-                    <input class="form__submit" type="submit" name="submitButton" value="確認">
+                    <input class="form__submit" type="submit" name="submitButton" value="確認" title="確認">
                 </form>
-                <a class="form__backToSignin" href="signIn.php">返回</a>
+                <a class="form__backToSignin" href="signIn.php" title="返回">返回</a>
 
         </div>
     </div>
