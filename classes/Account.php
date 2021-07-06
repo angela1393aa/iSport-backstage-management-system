@@ -79,7 +79,7 @@ class Account {
                 $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
                 //Recipients
-                $mail->setFrom('learning1112345@gmail.com', 'Isport');
+                $mail->setFrom('learning1112345@gmail.com', 'ISport');
                 $mail->addAddress($emailTo);     //Add a recipient
                 $mail->addReplyTo('no-reply@gmail.com', 'No reply');
 
