@@ -55,7 +55,7 @@ if(isset($_POST['password']) && isset($_POST['password2'])) {
                 <?= $account->getMessage("新密碼設定完成！2秒後自動跳轉"); ?>
                 <?= $account->getError("密碼不相符！"); ?>
                 <?= $account->getError("密碼只能使用英文字母及數字"); ?>
-                <?= $account->getError("密碼長度必須為8-20個字"); ?>
+                <?= $account->getError("密碼長度必須為8-20個字之間"); ?>
 
                 <input class="form__submit" type="submit" name="submitButton" value="更新密碼" title="更新密碼">
             </form>

@@ -111,12 +111,12 @@ class Account {
 
     public function PasswordReset($pw, $pw2, $code) {
 
-        $pw = hash("sha512", $pw); 
-        $pw2 = hash("sha512", $pw2);
-
         $this->validatePassword($pw, $pw2);
 
         if(empty($this->errorArray)) {
+            $pw = hash("sha512", $pw); 
+            $pw2 = hash("sha512", $pw2);
+
             $row = $this->getEmailQuery($code)->fetch(PDO::FETCH_ASSOC);
             $email = $row['email'];
 
@@ -151,14 +151,17 @@ class Account {
             return;
         }
 
-        if(!preg_match("/[^A-Za-z0-9]/", $pw)) {
+        if(preg_match("/[^A-Za-z0-9]/", $pw)) {
             array_push($this->errorArray, "密碼只能使用英文字母及數字");
             return;
         }
 
-        if(strlen($pw) > 21 || strlen($pw) < 7) {
-            array_push($this->errorArray, "密碼長度必須為8-20個字");
+        if(strlen($pw) > 20 || strlen($pw) < 8) {
+            array_push($this->errorArray, "密碼長度必須為8-20個字之間");
+            return;
         }
+
+
     }
 
 }
