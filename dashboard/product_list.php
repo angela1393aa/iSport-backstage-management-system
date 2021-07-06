@@ -57,41 +57,38 @@ require_once("includes/header.php");
                                     <th class="column-title">狀態</th>
                                     <th class="column-title">上架時間</th>
                                     <th class="column-title">最後更新時間</th>
-                                    <th class="column-title">操作</th>
+                                    <th class="column-title text-center">操作</th>
                                 </tr>
                                 </thead>
                                 <tbody>
 
-                                <?php
-                                try {
-                                $stmt->execute();
-                                $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                                foreach ($rows as $row) {
-                                ?>
-                                <tr class="even pointer ">
-                                    <td class="text-center">
-                                        <input type="checkbox" class="" name="">
-                                    </td>
-                                    <td class=" ">121000040</td>
-                                    <td class="text-truncate" style="max-width: 30px;"><?= $row['name'];} ?></td>
-                                    <td class=" ">121000210 </td>
-                                    <td class=" ">John Blank L</td>
-                                    <td class=" ">Paid</td>
-                                    <td class=" ">$7.45</td>
-                                    <td class=""></td>
-                                    <td class=" "></td>
-                                    <td class="d-flex justify-content-center m-0 p-1">
-                                        <a href="#" class="btn btn-round btn-secondary d-flex justify-content-center align-items-center p-0" style="width: 30px;height: 30px;"><i class="fas fa-edit"></i></a>
-                                        <a href="#" class="btn btn-round btn-danger d-flex justify-content-center align-items-center p-0" style="width: 30px;height: 30px;"><i class="fas fa-trash-alt"></i></a>
-                                    </td>
-                                </tr>
-                                <?php
 
-                                }catch (PDOException $e) {
-                                    echo 'database connection error : <br>' . $e->getMessage() . '<br>';
-                                    exit();
-                                }
-                                ?>
+<!--                                <tr class="even pointer p-0">-->
+<!--                                    <td class="text-center align-middle">-->
+<!--                                        <input type="checkbox" class="" name="">-->
+<!--                                    </td>-->
+<!--                                    <td class="align-baseline align-middle p-1">121000040</td>-->
+<!--                                    <td class="align-baseline align-middle p-1" style="max-width: 30px;"></td>-->
+<!--                                    <td class="align-baseline align-middle p-1">121000210</td>-->
+<!--                                    <td class="align-baseline align-middle p-1">John Blank L</td>-->
+<!--                                    <td class="align-baseline align-middle p-1">Paid</td>-->
+<!--                                    <td class="align-baseline align-middle p-1">$7.45</td>-->
+<!--                                    <td class="align-baseline align-middle p-1"></td>-->
+<!--                                    <td class="align-baseline align-middle p-1"></td>-->
+<!--                                    <td class="align-middle p-1">-->
+<!--                                        <div class="d-flex justify-content-center">-->
+<!--                                            <a href="#"-->
+<!--                                               class="btn btn-round btn-info d-flex justify-content-center align-items-center "-->
+<!--                                               style="width: 30px;height: 30px;"><i class="fas fa-info"></i></a>-->
+<!--                                            <a href="#"-->
+<!--                                               class="btn btn-round btn-secondary d-flex justify-content-center align-items-center "-->
+<!--                                               style="width: 30px;height: 30px;"><i class="fas fa-edit"></i></a>-->
+<!--                                            <a href="#"-->
+<!--                                               class="btn btn-round btn-danger d-flex justify-content-center align-items-center "-->
+<!--                                               style="width: 30px;height: 30px;"><i class="fas fa-trash-alt"></i></a>-->
+<!--                                        </div>-->
+<!--                                    </td>-->
+<!--                                </tr>-->
 
 
                                 </tbody>
@@ -108,5 +105,77 @@ require_once("includes/header.php");
 </div>
 <!-- /page content -->
 
+<!-- footer content -->
+<footer>
+    <div class="pull-right">
+        Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+    </div>
+    <div class="clearfix"></div>
+</footer>
+<!-- /footer content -->
+</div>
+</div>
 
-<?php require_once("includes/footer.php"); ?>
+<!-- jQuery -->
+<script src="../vendors/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="../vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<!-- FastClick -->
+<script src="../vendors/fastclick/lib/fastclick.js"></script>
+<!-- NProgress -->
+<script src="../vendors/nprogress/nprogress.js"></script>
+<!-- iCheck -->
+<!--  <script src="../vendors/iCheck/icheck.min.js"></script>-->
+<!-- Custom Theme Scripts -->
+<script src="../build/js/custom.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    axios({
+        method: 'post',
+        url: '/project_01/dashboard/api/productList.php',
+    })
+        .then(function (response) {
+            // console.log(response);
+            let data = response.data;
+            // console.log(data);
+            let content;
+            for(let i = 50; i < 60; i++){
+                content += `
+                    <tr class="even pointer p-0">
+                        <td class="text-center align-middle">
+                            <input type="checkbox" class="" name="">
+                        </td>
+                        <td class="align-baseline align-middle p-1">${data[i].sku_code}</td>
+                        <td class="align-baseline align-middle p-1" style="max-width: 200px;">${data[i].product_name}</td>
+                        <td class="align-baseline align-middle p-1">${data[i].sku_group}</td>
+                        <td class="align-baseline align-middle p-1">${data[i].price}</td>
+                        <td class="align-baseline align-middle p-1">${data[i].stock}</td>
+                        <td class="align-baseline align-middle p-1">${data[i].status}</td>
+                        <td class="align-baseline align-middle p-1">${data[i].upload_time}</td>
+                        <td class="align-baseline align-middle p-1">${data[i].upload_time}</td>
+                        <td class="align-middle p-1">
+                            <div class="d-flex justify-content-center">
+                                <a href="#"
+                                   class="btn btn-round btn-info d-flex justify-content-center align-items-center "
+                                   style="width: 30px;height: 30px;"><i class="fas fa-info"></i></a>
+                                <a href="#"
+                                   class="btn btn-round btn-secondary d-flex justify-content-center align-items-center "
+                                   style="width: 30px;height: 30px;"><i class="fas fa-edit"></i></a>
+                                <a href="#"
+                                   class="btn btn-round btn-danger d-flex justify-content-center align-items-center "
+                                   style="width: 30px;height: 30px;"><i class="fas fa-trash-alt"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                `
+            }
+            $('tbody').append(content);
+
+        }).catch(function (error) {
+            console.log(error);
+        }
+    );
+</script>
+</body>
+
+</html>
