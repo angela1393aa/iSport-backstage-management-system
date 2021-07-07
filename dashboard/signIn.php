@@ -25,6 +25,7 @@ function getInputValue($name) {
         echo $_POST[$name];
     }
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -39,7 +40,7 @@ function getInputValue($name) {
 </head>
 
 <body>
-    <div class="signInContainer">
+    <div class="signIn-container">
         
         <div class="signin__container">
 
@@ -48,24 +49,22 @@ function getInputValue($name) {
             <form method="POST" class="signin__container-form">
 
                 <div class="form">
-                    <input class="form__input" type="text" name="user" id="user" placeholder="帳號" value="<?= getInputValue('user')?>" required autocomplete="off">
+                    <input class="form__input" type="text" name="user" id="user" placeholder="帳號" value="<?= getInputValue('user')?>" title="請輸入帳號" required autocomplete="off">
                     <label class="form__label" for="user">帳號</label>
                 </div>
 
                 <div class="form">
-                    <input class="form__input" type="password" name="password" placeholder="密碼" required>
+                    <input class="form__input" type="password" name="password" placeholder="密碼" title="請輸入密碼" required>
                     <label class="form__label" for="password">密碼</label>
                 </div>
                 <?= $account->getError("帳號名稱或密碼錯誤！"); ?>
-                <input class="form__submit" type="submit" name="submitButton" value="登入">
+                <input class="form__submit" type="submit" name="submitButton" value="登入" title="登入">
                 </form>
-
+                <a class="form__forgetPassword" href="forgetPassword.php" title="忘記密碼">忘記密碼</a>
 
         </div>
 
     </div>
-
-
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>

@@ -79,7 +79,7 @@ class Account {
                 $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
                 //Recipients
-                $mail->setFrom('learning1112345@gmail.com', 'ISport');
+                $mail->setFrom('learning1112345@gmail.com', 'Isport');
                 $mail->addAddress($emailTo);     //Add a recipient
                 $mail->addReplyTo('no-reply@gmail.com', 'No reply');
 
@@ -109,32 +109,59 @@ class Account {
         return $query;
     }
 
-    public function PasswordReset($pw, $code) {
+    public function PasswordReset($pw, $pw2, $code) {
 
-        $pw = hash("sha512", $pw); 
-        $row = $this->getEmailQuery($code)->fetch(PDO::FETCH_ASSOC);
-        $email = $row['email'];
+        $this->validatePassword($pw, $pw2);
 
-        $query = $this->con->prepare("UPDATE admin_user SET password=:pw WHERE email=:em");
-        $query->bindParam(":pw", $pw);
-        $query->bindParam(":em", $email);
-        $query->execute();
+        if(empty($this->errorArray)) {
+            $pw = hash("sha512", $pw); 
+            $pw2 = hash("sha512", $pw2);
 
-        if($query) {
-            $query = $this->con->prepare("DELETE FROM reset_password WHERE code=:code");
-            $query->bindParam(":code", $code);
+            $row = $this->getEmailQuery($code)->fetch(PDO::FETCH_ASSOC);
+            $email = $row['email'];
+
+            $query = $this->con->prepare("UPDATE admin_user SET password=:pw WHERE email=:em");
+            $query->bindParam(":pw", $pw);
+            $query->bindParam(":em", $email);
             $query->execute();
+
             if($query) {
-                array_push($this->messageArray, "新密碼設定完成！2秒後自動跳轉");
-                return true;
+                $query = $this->con->prepare("DELETE FROM reset_password WHERE code=:code");
+                $query->bindParam(":code", $code);
+                $query->execute();
+                if($query) {
+                    array_push($this->messageArray, "新密碼設定完成！2秒後自動跳轉");
+                    return true;
+                } else {
+                    exit("Something went wrong!");
+                    return false;
+                }
             } else {
                 exit("Something went wrong!");
                 return false;
             }
         } else {
-            exit("Something went wrong!");
             return false;
         }
+    }
+
+    private function validatePassword($pw, $pw2) {
+        if($pw != $pw2) {
+            array_push($this->errorArray, "密碼不相符！");
+            return;
+        }
+
+        if(preg_match("/[^A-Za-z0-9]/", $pw)) {
+            array_push($this->errorArray, "密碼只能使用英文字母及數字");
+            return;
+        }
+
+        if(strlen($pw) > 20 || strlen($pw) < 8) {
+            array_push($this->errorArray, "密碼長度必須為8-20個字之間");
+            return;
+        }
+
+
     }
 
 }
