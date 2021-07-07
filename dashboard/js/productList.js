@@ -1,5 +1,26 @@
 axios({
     method: 'post',
+    url: '/project_01/dashboard/api/productCategory.php',
+}).then(function(response){
+    let categoryData = response.data;
+    let content = '';
+    console.log(categoryData);
+
+    categoryData.forEach(item => {
+        content += `
+        <option value="${item.id}">${item.name}</option>
+         `
+    });
+    $('#categoryFilter').append(content);
+
+}).catch(function (error) {
+    console.log(error);
+});
+
+
+
+axios({
+    method: 'post',
     url: '/project_01/dashboard/api/productList.php',
 })
     .then(function (response) {
@@ -8,23 +29,17 @@ axios({
         // console.log(data);
         let content;
         let data = [];
-
         data = $.grep(originalData, (row) => {
             return row.status !== '0';
         });
+
+        $('#dataCount').text(`共有${data.length}件商品`);
+        console.log($('#dataCount').text());
+
         
-        console.log(data.length);
 
 
-
-
-
-
-
-
-
-
-        for(let i = 0; i < 10; i++){
+        for(let i = 0; i < 20; i++){
             let status, statusColor;
             switch(data[i].status){
                 case '1':
@@ -75,3 +90,5 @@ axios({
         console.log(error);
     }
 );
+
+$

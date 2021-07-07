@@ -41,6 +41,7 @@ try {
             'product_id' => $row['id'],
             'product_name' => $row['name'],
             'category' => $categoryArr[$row['category']],
+            'category_id' => $row['category'],
             'sku_code' => $row['sku_code'],
             'sku_group' => $typeStr,
             'price' => $row['product_sku_price'],
