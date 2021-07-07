@@ -38,6 +38,7 @@ if(isset($_SESSION['userLoggedIn'])) {
 
   <!-- Custom Theme Style -->
   <link href="../build/css/custom.min.css" rel="stylesheet">
+  <link href="../build/css/<?= $style ?>.css" rel="stylesheet">
 </head>
 
 <body class="nav-md">
