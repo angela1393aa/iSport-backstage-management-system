@@ -4,19 +4,27 @@ require_once('../includes/config.php');
 $sql = "SELECT product_sku.stock,product_sku.status AS product_sku_status,product_sku.id AS product_sku_id,product_sku.sku_code,product_sku.status,product_sku.sku_group, product_sku.price AS product_sku_price, product_sku.stock,product_sku.Sales, product.*
     	FROM product
     	JOIN product_sku ON product.id = product_sku.product_id";
-$stmt = $db_host->prepare($sql);
 $typeSql = "SELECT * FROM product_type_value";
+$categorySql = "SELECT * FROM product_category";
+$stmt = $db_host->prepare($sql);
 $typeStmt = $db_host->prepare($typeSql);
+$categoryStmt = $db_host->prepare($categorySql);
 
 try {
     $stmt->execute();
     $typeStmt->execute();
+    $categoryStmt->execute();
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $typeRows = $typeStmt->fetchAll(PDO::FETCH_ASSOC);
+    $categoryRows = $categoryStmt->fetchAll(PDO::FETCH_ASSOC);
     $typeArr = [];
+    $categoryArr = [];
     $jArr = [];
     foreach ($typeRows as $row) {
         $typeArr[$row['id']] = $row['type_value'];                  //以id作為key產生新的陣列以便後續取值
+    }
+    foreach ($categoryRows as $row) {
+        $categoryArr[$row['id']] = $row['name'];                  //以id作為key產生新的陣列以便後續取值
     }
     foreach ($rows as $row) {
         $typeStrArr = [];
@@ -32,6 +40,7 @@ try {
         $arr2 = [
             'product_id' => $row['id'],
             'product_name' => $row['name'],
+            'category' => $categoryArr[$row['category']],
             'sku_code' => $row['sku_code'],
             'sku_group' => $typeStr,
             'price' => $row['product_sku_price'],

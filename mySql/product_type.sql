@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2021-07-04 14:41:09
+-- 產生時間： 2021-07-07 15:24:53
 -- 伺服器版本： 10.4.18-MariaDB
 -- PHP 版本： 8.0.3
 
@@ -38,11 +38,11 @@ CREATE TABLE `product_type` (
 --
 
 INSERT INTO `product_type` (`id`, `name_frontend`, `name_backend`) VALUES
-(13, '顏色', 'color'),
-(14, '尺寸', 'size'),
-(15, '規格', 'specification'),
-(16, '重量', 'weight'),
-(17, '口味', 'flavor');
+(1, '顏色', 'color'),
+(2, '尺寸', 'size'),
+(3, '規格', 'specification'),
+(4, '重量', 'weight'),
+(5, '口味', 'flavor');
 
 --
 -- 已傾印資料表的索引

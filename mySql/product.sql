@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2021-07-04 20:14:29
+-- 產生時間： 2021-07-07 15:24:00
 -- 伺服器版本： 10.4.18-MariaDB
 -- PHP 版本： 8.0.3
 
@@ -35,14 +35,14 @@ CREATE TABLE `product` (
   `intro` varchar(2000) COLLATE utf8mb4_unicode_ci NOT NULL,
   `price` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `creat_time` datetime DEFAULT NULL,
-  `valid` tinyint(1) UNSIGNED NOT NULL DEFAULT 1
+  `status` tinyint(1) UNSIGNED NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- 傾印資料表的資料 `product`
 --
 
-INSERT INTO `product` (`id`, `name`, `category`, `brand`, `intro`, `price`, `creat_time`, `valid`) VALUES
+INSERT INTO `product` (`id`, `name`, `category`, `brand`, `intro`, `price`, `creat_time`, `status`) VALUES
 (1, '【MIZUNO 美津濃】女款路跑背心 J2TA1201XX（任選）(T恤)', 1, 1, '吸汗快乾材質,​前胸後中反光燙印,優惠便宜好價格,值得推薦！', '476', '2021-07-04 11:00:44', 1),
 (2, '【Molybeka 魔力貝卡】高強度運動-抗震QQ纖維X型美背運動內衣 / 運動背心(超值3件組-隨機)', 1, 2, '多次實驗調整\r\n完美比例QQ彈力纖維\r\n全面包覆胸部\r\n體驗自由運動的舒適\r\n滿足各種運動姿勢的溫柔包覆\r\n高強度防震支\r\n運動內衣也要滿滿的安全感\r\n\r\n商品內容：\r\n顏色：黑/膚/藍 隨機（不含內褲）\r\n\r\n材質：尼龍/氨綸\r\n\r\n適穿尺寸：\r\nS 70/32 BCD\r\nM 75/34 BCD\r\nL 80/36 BCD\r\nXL 85/38 BCD\r\n\r\n\r\n(((貼身內著衣物-內褲、襪子(基於衛生原則)，以上述無法受理退換貨，瑕疵品除外)))\r\n\r\n注意事項：\r\n布料染料時，深色比淺色不易固色，因此深色衣服下水時，會見水中有許色水，此屬正常現象，請您別擔心，請安心穿著！\r\n洗滌方法：手洗（深色衣物與淺色衣物請分開洗，請勿浸泡或使用洗衣機、脫水機，及任何刷子類物品清洗，請使用中性洗劑（沐浴乳、洗 精等），加入少許清水，待充分溶解后再放入衣物清洗。', '857', '2021-07-04 11:04:49', 1),
 (3, 'S.G ADIDAS ORIGINALS ADICOLOR 短袖 女款 休閒 運動 透氣 純棉 天空藍', 1, 3, '', '870', '2021-07-04 11:04:49', 1),

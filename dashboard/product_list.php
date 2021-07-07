@@ -44,6 +44,7 @@ require_once("includes/header.php");
                                         <input type="checkbox" id="" class="">
                                     </th>
                                     <th class="px-2 py-3">商品編號</th>
+                                    <th class="px-2 py-3 text-center">分類</th>
                                     <th class="px-2 py-3">商品名稱</th>
                                     <th class="px-2 py-3 text-center">規格</th>
                                     <th class="px-2 py-3">價格</th>
