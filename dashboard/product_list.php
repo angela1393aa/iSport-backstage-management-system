@@ -1,5 +1,7 @@
 <?php
 $title = '商品列表';
+$style = 'product-list.css';
+$js = 'productList.js';
 require_once("includes/header.php");
 ?>
 
@@ -27,7 +29,7 @@ require_once("includes/header.php");
                 <div class="x_panel">
                     <div class="x_title">
                         <h2>商品列表<small>所有商品</small></h2>
-                        <ul class="nav navbar-right panel_toolbox" style="min-width: 20px;">
+                        <ul class="nav navbar-right panel_toolbox" >
                             <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
                         </ul>
                         <div class="clearfix"></div>
@@ -48,11 +50,14 @@ require_once("includes/header.php");
                             </div>
                             <select class="form-control form-control-sm text-white ml-1" style="width: 120px; background-color:#2A3F54;border:none;border-radius:5px;">
                                 <option>所有狀態</option>
+                                <option value="1">供貨中</option>
+                                <option value="2">已下架</option>
+                                <option value="3">缺貨中</option>
                             </select>
                             <select id="categoryFilter" class="form-control form-control-sm text-white ml-1" style="width: 120px; background-color:#2A3F54;border:none;border-radius:5px;">
                                 <option>所有分類</option>
                             </select>
-                            <a class="btn btn-dark p-0 m-0 d-flex align-items-center justify-content-center ml-1 text-white" style="width: 30px;height: 30px;"><i class="fas fa-search"></i></a>
+                            <a id="" class="btn btn-dark p-0 m-0 d-flex align-items-center justify-content-center ml-1 text-white" style="width: 30px;height: 30px;"><i class="fas fa-search"></i></a>
                         </div>
                         <div class="table-responsive">
                             <table class="table table-striped jambo_table bulk_action">
@@ -93,30 +98,4 @@ require_once("includes/header.php");
     </div>
 </div>
 <!-- /page content -->
-<!-- footer content -->
-<footer>
-    <div class="pull-right">
-        Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
-    </div>
-    <div class="clearfix"></div>
-</footer>
-<!-- /footer content -->
-</div>
-</div>
-<!-- jQuery -->
-<script src="../vendors/jquery/dist/jquery.min.js"></script>
-<!-- Bootstrap -->
-<script src="../vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<!-- FastClick -->
-<script src="../vendors/fastclick/lib/fastclick.js"></script>
-<!-- NProgress -->
-<script src="../vendors/nprogress/nprogress.js"></script>
-<!-- iCheck -->
-<!--  <script src="../vendors/iCheck/icheck.min.js"></script>-->
-<!-- Custom Theme Scripts -->
-<script src="../build/js/custom.min.js"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script src="/project_01/dashboard/js/productList.js"></script>
-</body>
-
-</html>
+<?= require_once('includes/footer.php') ?>

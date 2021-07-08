@@ -21,6 +21,8 @@
 <!--  <script src="../vendors/iCheck/icheck.min.js"></script>-->
   <!-- Custom Theme Scripts -->
   <script src="../build/js/custom.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="/project_01/dashboard/js/<?= $js ?>"></script>
 </body>
 
 </html>
