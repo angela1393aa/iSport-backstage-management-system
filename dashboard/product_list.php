@@ -39,7 +39,7 @@ require_once("includes/header.php");
                         <div class="d-flex py-2 align-items-center">
                             <p class="flex-grow-1 m-0" id="dataCount"></p>
                             <p class="m-0 pr-2">價格區間</p>
-                            <div class="input-group input-group-sm m-0 p-0" style="width: 90px;">
+                            <div class="cost-filter input-group input-group-sm m-0 p-0">
                                 <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="MAX">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="inputGroup-sizing-sm"> > </span>
