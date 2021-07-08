@@ -58,13 +58,13 @@ require_once("includes/header.php");
                             <th>
                               <input type="checkbox" id="check-all" class="flat">
                             </th>
-                            <th class="column-title">訂單編號</th>
-                            <th class="column-title">訂購日</th>
-                            <th class="column-title">數量 </th>
-                            <th class="column-title">訂單總額</th>
-                            <th class="column-title">付款方式</th>
-                            <th class="column-title">發票號碼</th>
-                            <th class="column-title no-link last"><span class="nobr">詳細資訊</span>
+                            <th class="px-2 py-3 text-center">訂單編號</th>
+                            <th class="px-2 py-3 text-center">使用者</th>
+                            <th class="px-2 py-3 text-center">訂購日</th>
+                            <th class="px-2 py-3 text-center">訂單總額</th>
+                            <th class="px-2 py-3 text-center">付款方式</th>
+                            <th class="px-2 py-3 text-center">發票號碼</th>
+                            <th class="px-2 py-3 text-center"><span class="nobr">詳細資訊</span>
                             </th>
                             <th class="bulk-actions" colspan="7">
                               <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
@@ -131,20 +131,20 @@ require_once("includes/header.php");
             let data=response.data;
             // console.log(data);
             let content="";
-            console.log(data);
-            data.forEach((user)=>{
+            // console.log(data);
+            data.forEach((order)=>{
             content+=`
                 <tr class="even pointer">
                         <td class="a-center ">
                           <input type="checkbox" class="flat" name="table_records">
                         </td>
-                        <td>${user.id}</td>
-                        <td>${user.user_id}</td>
-                        <td>${user.invoice_no}</td>
-                        <td>${user.order_date}</td>
-                        <td>${user.order_status}</td>
-                        <td>${user.email}</td>
-                        <td>${user.phone}</td>
+                        <td class="text-center">${order.order_id}</td>
+                        <td class="text-center">${order.user_id}</td>
+                        <td class="text-center">${order.order_date}</td>
+                        <td class="text-center">${order.total}</td>
+                        <td class="text-center">${order.paytype}</td>
+                        <td class="text-center">${order.invoice_no}</td>
+                        <td class="text-center"><a href="user_order_detail.php?order_id=${order.order_id}">詳細資訊</a></td>
                 </tr>
                 `
             })
