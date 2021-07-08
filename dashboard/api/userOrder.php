@@ -10,49 +10,46 @@ require_once('../includes/config.php');
 
 $sql = "SELECT * FROM user_order";
 $detailSql = "SELECT * FROM user_order_detail";
-$productSkuSql = "SELECT * FROM user_order_detail";
+$productSql = "SELECT * FROM product_sku";
 $stmt = $db_host->prepare($sql);
 $detailStmt = $db_host->prepare($detailSql);
+$productStmt = $db_host->prepare($productSql);
 
 
 
 try{
     $stmt -> execute();
     $detailStmt -> execute();
+    $productStmt -> execute();
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $detailRows = $detailStmt->fetchAll(PDO::FETCH_ASSOC);
+    $productRows = $detailStmt->fetchAll(PDO::FETCH_ASSOC);
     // echo json_encode($rows);
+    $orderArr = [];
+    $orderDetailArr = [];
+    foreach ($detailRows as $detailRow){
+        $detailArray[$detailRow['order_id']] = $row['product_id'];
+    }
+    foreach ($productRows as $productRow){
+        ""
+        $detailArray[$detailRow['order_id']] = $row['product_id'];
+    }
 
-    $orderArr = array();
-    foreach($rows as $row){
+    foreach ($rows as $row){
         // echo "<div>".$row["account"]."</div>";
-        $data=array(
+        $data=[
             "order_id"=>$row["id"],
             "user_id"=>$row["user_id"],
             "invoice_no"=>$row["invoice_no"],
             "order_date"=>$row["order_date"],
             "order_status"=>$row["order_status"],
-        );
-        array_push($orderArr, $data);
+        ];
+            array_push($orderArr, $data);
     }
     // print_r($orderArr);
     // echo json_encode($orderArr);
 
-    $orderDetailArr = array();
-    foreach($detailRows as $detailRow){
-        // echo "<div>".$row["account"]."</div>";
-        $data=array(
-            // "order_id"=>$detailRow["order_id"],
-            "product_id"=>$detailRow["product_id"],
-            "qty"=>$detailRow["qty"],
-        );
-        array_push($orderDetailArr, $data);
-    }
-    // print_r($orderDetailArr);
-    // echo json_encode($orderDetailArr);
     
-    $arrayMerge = array_merge($orderArr, $orderDetailArr);
-    echo json_encode($arrayMerge);
     
 
 }catch(PDOException $e){
