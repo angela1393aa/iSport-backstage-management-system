@@ -40,24 +40,24 @@ require_once("includes/header.php");
                             <p class="flex-grow-1 m-0" id="dataCount"></p>
                             <p class="m-0 pr-2">價格區間</p>
                             <div class="cost-filter input-group input-group-sm m-0 p-0">
-                                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="MAX">
+                                <input id="costFilterMax" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="MAX">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="inputGroup-sizing-sm"> > </span>
+                                    <span class="input-group-text" id="inputGroup-sizing-sm"> ~ </span>
                                 </div>
                             </div>
-                            <div class="input-group input-group-sm m-0 pr-2" style="width: 70px;">
-                                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="MIN">
+                            <div class="cost-filter-2 input-group input-group-sm m-0 pr-2">
+                                <input id="costFilterMin" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="MIN">
                             </div>
-                            <select class="form-control form-control-sm text-white ml-1" style="width: 120px; background-color:#2A3F54;border:none;border-radius:5px;">
-                                <option>所有狀態</option>
+                            <select id="statusFilter" class="category-filter form-control form-control-sm text-white ml-1" style="width: 120px; background-color:#2A3F54;border:none;border-radius:5px;">
+                                <option value="0">所有狀態</option>
                                 <option value="1">供貨中</option>
                                 <option value="2">已下架</option>
                                 <option value="3">缺貨中</option>
                             </select>
                             <select id="categoryFilter" class="form-control form-control-sm text-white ml-1" style="width: 120px; background-color:#2A3F54;border:none;border-radius:5px;">
-                                <option>所有分類</option>
+                                <option value="0">所有分類</option>
                             </select>
-                            <a id="" class="btn btn-dark p-0 m-0 d-flex align-items-center justify-content-center ml-1 text-white" style="width: 30px;height: 30px;"><i class="fas fa-search"></i></a>
+                            <a id="filterSearch" class="filter-search btn btn-dark p-0 m-0 d-flex align-items-center justify-content-center ml-1 text-white"><i class="fas fa-search"></i></a>
                         </div>
                         <div class="table-responsive">
                             <table class="table table-striped jambo_table bulk_action">
@@ -83,12 +83,10 @@ require_once("includes/header.php");
                             </table>
 
                         </div>
-                        <div class="btn-group mr-2 align-self-center" role="group" aria-label="First group">
-                            <button type="button" class="btn btn-secondary flex-grow-0">
+                        <div id="pageBtnGroup" class="btn-group mr-2 align-self-center" role="group" aria-label="First group">
+                            <button type="button" class="btn btn-secondary flex-grow-0" id="btnPrevious">
                                 < </button>
-                                    <button type="button" class="btn btn-secondary flex-grow-0">2</button>
-                                    <button type="button" class="btn btn-secondary flex-grow-0">3</button>
-                                    <button type="button" class="btn btn-secondary flex-grow-0"> > </button>
+                                    <button type="button" class="btn btn-secondary flex-grow-0" id="btnNext"> > </button>
                         </div>
                     </div>
                 </div>
