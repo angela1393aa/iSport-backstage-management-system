@@ -97,30 +97,8 @@ require_once("includes/header.php");
         </div>
       </div>
       <!-- /page content -->
-<!-- footer content -->
-<footer>
-    <div class="pull-right">
-        Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
-    </div>
-    <div class="clearfix"></div>
-</footer>
-<!-- /footer content -->
-</div>
-</div>
 
-<!-- jQuery -->
-<script src="../vendors/jquery/dist/jquery.min.js"></script>
-<!-- Bootstrap -->
-<script src="../vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<!-- FastClick -->
-<script src="../vendors/fastclick/lib/fastclick.js"></script>
-<!-- NProgress -->
-<script src="../vendors/nprogress/nprogress.js"></script>
-<!-- iCheck -->
-<!--  <script src="../vendors/iCheck/icheck.min.js"></script>-->
-<!-- Custom Theme Scripts -->
-<script src="../build/js/custom.min.js"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>     
+
 <script>
         axios({
             method: 'post',
@@ -163,6 +141,5 @@ require_once("includes/header.php");
         // 您將很容易知道前 8 個字符 ( YYYYmmdd)之後的部分是從數據庫中查找的訂單 ID。
 </script>
 
-</body>
 
-</html>
+
