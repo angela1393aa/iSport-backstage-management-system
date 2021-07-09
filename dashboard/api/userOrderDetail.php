@@ -11,18 +11,18 @@ require_once('../includes/config.php');
 $sql = 'SELECT * FROM user_order';
 $detailSql = 'SELECT * FROM user_order_detail';
 $productSql = 'SELECT * FROM product_sku';
-$stmt = $db_host->prepare($sql);
-$detailStmt = $db_host->prepare($detailSql);
-$productStmt = $db_host->prepare($productSql);
+$stmt = $db_host -> prepare($sql);
+$detailStmt = $db_host -> prepare($detailSql);
+$productStmt = $db_host -> prepare($productSql);
 
 try{
     $stmt -> execute();
-    $detailStmt->execute();
-    $productStmt->execute();
+    $detailStmt -> execute();
+    $productStmt -> execute();
 
-    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    $detailRows = $detailStmt->fetchAll(PDO::FETCH_ASSOC);
-    $productRows = $productStmt->fetchAll(PDO::FETCH_ASSOC);
+    $rows = $stmt -> fetchAll(PDO::FETCH_ASSOC);
+    $detailRows = $detailStmt -> fetchAll(PDO::FETCH_ASSOC);
+    $productRows = $productStmt -> fetchAll(PDO::FETCH_ASSOC);
     // echo json_encode($rows);
 
     $orderArr = [];
