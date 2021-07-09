@@ -25,7 +25,7 @@
             <div class="col-md-12 col-sm-12">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>注意事項 </h2>
+                        <h2>注意事項  </h2>
                         <ul class="nav navbar-right panel_toolbox">
                             <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                             </li>
@@ -43,7 +43,7 @@
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
-                        <form class="" action="" method="post" novalidate>
+                        <form class="" action="UserCreate.php" method="post" novalidate>
                             <p>填寫會員註冊資料，標記有 <code>*</code> 請務必填寫 </a>
                             </p>
                             <span class="section">會員註冊訊息</span>
@@ -51,7 +51,7 @@
                                 <label class="col-form-label col-md-3 col-sm-3  label-align">姓名<span
                                         class="required"><code>*</code></span></label>
                                 <div class="col-md-6 col-sm-6">
-                                    <input class="form-control" name="name" placeholder="請輸入姓名" required="required" />
+                                    <input class="form-control" name="user_name" placeholder="請輸入姓名" required="required" />
                                 </div>
                             </div>
                             <div class="field item form-group">
@@ -101,6 +101,12 @@
                                 </div>
                             </div>
                             <div class="field item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3  label-align">地址</label>
+                                <div class="col-md-6 col-sm-6">
+                                    <input class="form-control" type="tel" class='text' name="address"/>
+                                </div>
+                            </div>
+                            <div class="field item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3  label-align">生日</label>
                                 <div class="col-md-6 col-sm-6">
                                     <input class="form-control" class='birthdate' type="date" name="birthdate"
@@ -110,7 +116,7 @@
                             <div class="field item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3  label-align">其他訊息</label>
                                 <div class="col-md-6 col-sm-6">
-                                    <textarea  name='message'></textarea>
+                                    <textarea  name='intro'></textarea>
                                 </div>
                             </div>
                             <div class="ln_solid">
