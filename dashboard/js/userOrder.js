@@ -10,16 +10,28 @@
         data.forEach((order)=>{
         content+=`
             <tr class="even pointer">
-                <td class="a-center ">
+                <td class="align-middle">
                   <input type="checkbox" class="flat" name="table_records">
                 </td>
-                <td class="text-center">${order.order_date}</td>
-                <td class="text-center">${order.order_id}</td>
-                <td class="text-center">${order.user_id}</td>
-                <td class="text-center">${order.total}</td>
-                <td class="text-center">${order.paytype}</td>
-                <td class="text-center">${order.invoice_no}</td>
-                <td class="text-center"><a href="user_order_detail.php?order_id=${order.order_id}">詳細資訊</a></td>
+                <td class="align-middle text-center">${order.order_date}</td>
+                <td class="align-middle text-center">${order.order_id}</td>
+                <td class="align-middle text-center">${order.user_account}</td>
+                <td class="align-middle text-center">${order.paytype}</td>
+                <td class="align-middle text-center">${order.order_status}</td>
+                <td class="align-middle text-center"><a href="user_order_detail.php?order_id=${order.order_id}">${order.invoice_no}</a></td>
+                <td class=" p-2">
+                        <div class="d-flex justify-content-center">
+                            <a href="#"
+                               class="btn btn-round btn-info d-flex justify-content-center align-items-center "
+                               style="width: 30px;height: 30px;"><i class="fas fa-info"></i></a>
+                            <a href="#"
+                               class="btn btn-round btn-secondary d-flex justify-content-center align-items-center "
+                               style="width: 30px;height: 30px;"><i class="fas fa-edit"></i></a>
+                            <a href="#"
+                               class="btn btn-round btn-danger d-flex justify-content-center align-items-center "
+                               style="width: 30px;height: 30px;"><i class="fas fa-trash-alt"></i></a>
+                        </div>
+                    </td>
             </tr>
             `
         });

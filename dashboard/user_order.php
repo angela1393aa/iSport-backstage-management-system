@@ -1,13 +1,12 @@
 <?php
-$title = "訂單資訊";
-// $style="orderCss";
+$title = '訂單資訊';
+$style='userOrder.css';
 $js = 'userOrder.js';
-require_once("includes/header.php");
+require_once('includes/header.php');
 
 $sql = 'SELECT id FROM user_order';
 $stmt = $db_host->prepare($sql);
 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
 ?>
 
 <!-- page content -->
@@ -33,29 +32,31 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <div class="clearfix"></div>
 
     <div class="row">
-      <div class="col-md-12 col-sm-12  ">
+      <div class="col-md-12 col-sm-12">
         <div class="x_panel">
-          <div class="x_title">
+          <div class="x_title m-0">
             <h2>訂單列表<small>檢視或編輯訂單</small></h2>
-            <ul class="nav navbar-right panel_toolbox">
-              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-              </li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" href="#">Settings 1</a>
-                  <a class="dropdown-item" href="#">Settings 2</a>
-                </div>
-              </li>
-              <li><a class="close-link"><i class="fa fa-close"></i></a>
-              </li>
-            </ul>
             <div class="clearfix"></div>
           </div>
 
           <div class="x_content">
-
-            <p>共有<?php ?>張訂單</p>
+            <div class="d-flex py-2 align-items-center">
+              <p class="flex-grow-1 m-0">共有15<?php ?>張訂單</p>
+              <div>
+                    <form class="d-flex form-control border-0 m-0 p-0" style="height:33px;" action="user_order.php">
+                        <input type="date" class="form-control"  style="height:33px;" name="start">
+                        <input type="date" class="form-control"  style="height:33px;" name="end">
+                        <button class="btn btn-dark text-nowrap mx-2 my-0 border-0" style="border-radius:5px; font-size:14px" type="submit">選擇</button>
+                    </form>
+                </div>
+              <select name="" id="" class="form-control text-white" style="width:120px; background:rgba(52,73,94,0.94); border-radius:5px; font-size:14px">
+                <option value="0" selected>訂單狀態</option>
+                <option value="1">待出貨</option>
+                <option value="2">已出貨</option>
+                <option value="3"></option>
+              </select>
+              <!-- <a id="filterSearch" class="btn btn-dark p-0 m-0 d-flex align-items-center justify-content-center ml-1 text-white" style="width:33px; height:33px;"><i class="fas fa-search"></i></a> -->
+            </div>
 
             <div class="table-responsive">
               <table class="table table-striped jambo_table bulk_action">
@@ -64,22 +65,21 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <th>
                       <input type="checkbox" id="check-all" class="flat">
                     </th>
-                    <th class="px-2 py-3 text-center">
+                    <th class="align-middle text-center">
                       訂購日
                       <i class="fas fa-sort"></i>
                     </th>
-                    <th class="px-2 py-3 text-center">
+                    <th class="align-middle text-center">
                       訂單編號
                       <i class="fas fa-sort"></i>
                     </th>
-                    <th class="px-2 py-3 text-center">使用者</th>
-                    <th class="px-2 py-3 text-center">訂單總額</th>
-                    <th class="px-2 py-3 text-center">付款方式</th>
-                    <th class="px-2 py-3 text-center">發票號碼</th>
-                    <th class="px-2 py-3 text-center"><span class="nobr">詳細資訊</span>
+                    <th class="align-middle text-center">使用者</th>
+                    <!-- <th class="align-middle text-center">訂單總額</th> -->
+                    <th class="align-middle text-center">付款方式</th>
+                    <th class="align-middle text-center"><span class="nobr">出貨狀態</span>
+                    <th class="align-middle text-center">發票號碼</th>
                     </th>
-                    <th class="bulk-actions" colspan="7">
-                      <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                    <th class="align-middle text-center">操作</th>
                     </th>
                   </tr>
                 </thead>
