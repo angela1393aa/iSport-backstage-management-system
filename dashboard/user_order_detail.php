@@ -1,4 +1,4 @@
-<?php require_once("includes/header.php"); ?>
+<?php require_once("includes/header.php");?>
 
 <!-- page content -->
       <div class="right_col" role="main">
