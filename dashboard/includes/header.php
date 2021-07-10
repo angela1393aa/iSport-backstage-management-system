@@ -101,11 +101,10 @@ if(isset($_SESSION['userLoggedIn'])) {
                     <li><a href="tables_dynamic.html">影片統計</a></li>
                   </ul>
                 </li>
-                <li><a><i class="far fa-newspaper"></i> 文章 <span class="fa fa-chevron-down"></span></a>
+                <li><a><i class="far fa-newspaper"></i> 文章管理 <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                    <li><a href="chartjs.html">文章列表</a></li>
-                    <li><a href="chartjs2.html">文章上傳</a></li>
-                    <li><a href="morisjs.html">文章統計</a></li>
+                    <li><a href="/project_01/dashboard/includes/article_list.php">文章列表</a></li>
+                    <li><a href="/project_01/dashboard/includes/article_create.php">新增文章</a></li>
                   </ul>
                 </li>
               </ul>
@@ -132,5 +131,3 @@ if(isset($_SESSION['userLoggedIn'])) {
         </div>
       </div>
       <!-- /top navigation -->
-
-      
