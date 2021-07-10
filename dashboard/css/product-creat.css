@@ -1,0 +1,67 @@
+textarea {
+  resize: none;
+  overflow: auto;
+  width: 100%;
+  height: 300px;
+  border: 1px solid #bdbdbd;
+  border-radius: 5px;
+}
+textarea:focus {
+  outline: none;
+}
+
+.product-creat-form input,
+.product-creat-form select {
+  border: none;
+  width: 100%;
+  height: 25px;
+  margin: 0;
+  padding: 1px 2px;
+  border-bottom: 2px solid #bdbdbd;
+}
+.product-creat-form input:focus,
+.product-creat-form select:focus {
+  border-bottom: 2px solid #20c997;
+}
+.product-creat-form label {
+  margin: 0;
+  padding: 5px 5px;
+}
+.product-creat-form .product-creat-alert {
+  border: none;
+  width: 100%;
+  height: 25px;
+  margin: 0;
+  padding: 1px 2px;
+}
+.product-creat-form .addBtn {
+  height: 25px;
+  width: 25px;
+  border-radius: 5px;
+}
+.product-creat-form .type-config:nth-child(odd) {
+  background-color: white;
+  border-radius: 10px;
+}
+.product-creat-form .type-config:nth-child(even) {
+  background-color: #eeeeee;
+  border-radius: 10px;
+}
+
+.photoUpload figure {
+  border-radius: 5px;
+  overflow: hidden;
+  transition: 0.4s;
+  box-shadow: 0px 0px 5px rgba(57, 57, 57, 0.3);
+}
+.photoUpload figure:hover {
+  box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.3);
+}
+.photoUpload img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+}/*# sourceMappingURL=product-creat.css.map */

@@ -1,9 +1,1 @@
-{
-    "version": 3,
-    "mappings": "AAAA,AAAA,IAAI,AAAC,CACD,SAAS,CAAE,IAAI,CAClB,AACD,AAAA,YAAY,AAAC,CACT,KAAK,CAAE,IAAI,CAId,AAHI,AAAD,cAAG,AAAC,CACA,KAAK,CAAE,IAAI,CACd,AAEL,AAAA,cAAc,AAAC,CACX,KAAK,CAAE,IAAI,CACX,MAAM,CAAE,IAAI,CACf",
-    "sources": [
-        "product-list.scss"
-    ],
-    "names": [],
-    "file": "product-list.css"
-}
+{"version":3,"sources":["product-list.scss"],"names":[],"mappings":"AAAA;EACI,eAAA;AACJ;;AACA;EACI,WAAA;AAEJ;AADI;EACI,WAAA;AAGR;;AAAA;EACI,WAAA;EACA,YAAA;AAGJ","file":"product-list.css"}

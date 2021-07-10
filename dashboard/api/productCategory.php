@@ -13,4 +13,6 @@ try{
     echo "Eroor: ".$e->getMessage(). "<br>";
     exit;
 }
+
+$db_host=null;
 ?>

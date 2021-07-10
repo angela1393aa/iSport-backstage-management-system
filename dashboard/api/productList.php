@@ -103,4 +103,5 @@ try {
     echo 'database connection error : <br>' . $e->getMessage() . '<br>';
     exit();
 }
+$db_host=null;
 ?>
