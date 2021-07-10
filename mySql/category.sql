@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2021-07-03 12:32:38
--- 伺服器版本： 10.4.19-MariaDB
--- PHP 版本： 8.0.7
+-- 產生時間： 2021-07-10 10:19:58
+-- 伺服器版本： 10.4.18-MariaDB
+-- PHP 版本： 8.0.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- 資料庫: `mffee7_4_db`
+-- 資料庫： `mfee17_4_db`
 --
 
 -- --------------------------------------------------------
@@ -29,19 +29,20 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `category` (
   `id` int(6) UNSIGNED NOT NULL,
-  `name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+  `name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `valid` tinyint(1) UNSIGNED NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- 傾印資料表的資料 `category`
 --
 
-INSERT INTO `category` (`id`, `name`) VALUES
-(1, '有氧'),
-(2, '重訓'),
-(3, 'tabata'),
-(4, '核心'),
-(5, '飲食');
+INSERT INTO `category` (`id`, `name`, `valid`) VALUES
+(1, '有氧', 1),
+(2, '重訓', 1),
+(3, 'tabata', 1),
+(4, '核心', 1),
+(5, '飲食', 1);
 
 --
 -- 已傾印資料表的索引

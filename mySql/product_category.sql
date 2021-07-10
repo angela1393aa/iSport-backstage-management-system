@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2021-07-07 15:24:21
+-- 產生時間： 2021-07-10 13:10:46
 -- 伺服器版本： 10.4.18-MariaDB
 -- PHP 版本： 8.0.3
 
@@ -29,18 +29,19 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `product_category` (
   `id` int(5) UNSIGNED NOT NULL,
-  `name` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL
+  `name` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `valid` tinyint(1) UNSIGNED NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- 傾印資料表的資料 `product_category`
 --
 
-INSERT INTO `product_category` (`id`, `name`) VALUES
-(1, '服飾'),
-(2, '鞋子'),
-(3, '器材'),
-(4, '食品');
+INSERT INTO `product_category` (`id`, `name`, `valid`) VALUES
+(1, '服飾', 1),
+(2, '鞋子', 1),
+(3, '器材', 1),
+(4, '食品', 1);
 
 --
 -- 已傾印資料表的索引
