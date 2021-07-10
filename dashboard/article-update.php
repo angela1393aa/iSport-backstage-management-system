@@ -27,7 +27,7 @@ $result = $db_host->query($sql);
                     <a class="btn btn-secondary" href="article-list.php">文章列表</a>修改文章:
                   </h2>
                   <div style="text-align: end;">
-                    <a class="btn btn-secondary" href="article-list.php">返回</a> 
+                    
                 </div>
                   <div class="clearfix"></div>
                 </div>
@@ -35,14 +35,11 @@ $result = $db_host->query($sql);
 
           <div class="container">
           <form action="articleUpdate.php" method="post">
-            <?php  
+            <!-- <?php  
                 foreach($result as $key => $value ){
-            ?> 
-                <div class="mb-2">
-                    <label for="upload_date"></label>
-                    <input type="hidden" class="form-control " name="upload_date" value="<?=$value["upload_date"]?>">
-                </div>
-                <input type="hidden" name="id" value="<?=$row["id"]?>">
+            ?>  -->
+                
+                <input type="hidden" name="id" value="<?=$value["id"]?>">
                 <!-- type="hidden"讓使用者看不到 -->
                 
                 <div class="mb-2">
@@ -50,38 +47,15 @@ $result = $db_host->query($sql);
                     <input type="text" class="form-control " name="article_name" value="<?=$value["article_name"]?>">
                 </div>
                 <div class="mb-2">
-                    <input type="text" class="form-control" name="category" value="
-                    <?php 
-                                switch($value["category"]){
-                                    case('1'):
-                                        echo '有氧';
-                                    break;
-                                    case('2'):
-                                        echo '健身';
-                                    break;
-                                    case('3'):
-                                        echo 'tabata';
-                                    break;
-                                    case('4'):
-                                        echo '飲食';
-                                    break;
-                                    case('5'):
-                                        echo '核心';
-                                    break;
-                                }
-
-                            ?>">
-                </div>
-                <div class="mb-2">
                 <label for="category">分類:</label>
-                <select name="category" id="category">
-                    <option value="1">有氧</option>
-                    <option value="2">重訓</option>
-                    <option value="3">tabata</option>
-                    <option value="4"  selected="selected">核心</option>
-                    <option value="5">飲食</option>
+                <select name="category" id="category"  class="form-control " >
+                    <option value="1" <?php if($value["category"]=='1')echo "selected"?>>有氧</option>
+                    <option value="2" <?php if($value["category"]=='2')echo "selected"?>>重訓</option>
+                    <option value="3" <?php if($value["category"]=='3')echo "selected"?>>tabata</option>
+                    <option value="4" <?php if($value["category"]=='4')echo "selected"?>>核心</option>
+                    <option value="5" <?php if($value["category"]=='5')echo "selected"?>>飲食</option>
                 </select>
-            </div>
+                 </div>
                 
                 <div class="mb-2">
                     <label for="added_by">標題:</label>
@@ -93,8 +67,9 @@ $result = $db_host->query($sql);
                 </div>
 
                 
-                <div>
-                    <button class="btn btn-secondary" type="article-list.php">送出</button>
+                <div style="text-align: end;">
+                  <a class="btn btn-secondary" href="article-list.php">返回</a> 
+                  <button class="btn btn-secondary" type="article-list.php">修改</button>
                 </div>
                 
             <?php

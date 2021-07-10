@@ -1,6 +1,11 @@
 <?php
 require_once("./config.php");
-
+// if (
+//     empty($_POST['article_name'])
+//   ) {
+//     header('Location: update_comment.php?errCode=1&id='.$_POST['id']);
+//     die('資料不齊全');
+//   }
 $article_name = $_POST["article_name"];
 $added_by = $_POST["added_by"];
 $content = $_POST["content"];

@@ -15,17 +15,6 @@ $result = $db_host->query($sql);
             <div class="title_left">
               <h3>文章</h3>
             </div>
-
-            <!-- <div class="title_right">
-              <div class="col-md-5 col-sm-5   form-group pull-right top_search">
-                <div class="input-group">
-                  <input type="text" class="form-control" placeholder="Search for...">
-                  <span class="input-group-btn">
-                    <button class="btn btn-default" type="button">Go!</button>
-                  </span>
-                </div>
-              </div>
-            </div> -->
           </div>
 
           <div class="clearfix"></div>
@@ -35,24 +24,21 @@ $result = $db_host->query($sql);
               <div class="x_panel">
                 <div class="x_title">
                   <h2>
-                    <a class="btn btn-secondary" href="article-list.php">文章列表</a>預覽文章:
+                    <a class="btn btn-secondary" href="article-list.php">文章列表</a>刪除文章:
                   </h2>
-                  <div style="text-align: end;">
-                    
-                </div>
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
 
           <div class="container">
-          <form action="" method="post">
-            <?php  
+          <form action="articleDelete.php" method="post">
+            <!-- <?php  
                 foreach($result as $key => $value ){
-            ?> 
+            ?>  -->
                 <div class="mb-2" style="text-align: end;">
                     <span>時間:<?=$value["upload_date"]?></span>
                 </div>
-                <input type="hidden" name="id" value="<?=$row["id"]?>">
+                <input type="hidden" name="id" value="<?=$value["id"]?>">
                 <!-- type="hidden"讓使用者看不到 -->
                 <div class="mb-2">
                     <label>作者:</label>
@@ -93,10 +79,11 @@ $result = $db_host->query($sql);
                 </div>
                 <div style="text-align: end;">
                   <a class="btn btn-secondary" href="article-list.php">返回</a> 
+                  <button class="btn btn-secondary">刪除</button>
                 </div>
-            <?php
+            <!-- <?php
             } 
-            ?>
+            ?> -->
         </form>
     </div>
       <!-- /page content -->
