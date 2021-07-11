@@ -40,7 +40,7 @@ $('.typeListAdd').click(function () {
     let typeNum = $(this).closest('div').data('type');
     // console.log(typeNum);
     $(this).before(`
-        <input class="col-1 bg-transparent my-0 ml-3 typeInput" type="text" name="typeList${typeNum}[]">
+        <input class="col-1 bg-transparent my-0 ml-3 typeInput" type="text" name="typeValue${typeNum}[]">
         <a class="btn text-secondery p-0 my-0  typeListDelete" id=""><i class="fas fa-minus-square"></i></a>
     `)
 });
@@ -58,13 +58,17 @@ function typeInputeCount(type, element) {
         typeInputeCount1 = [];
         for (let i = 0; i < typeInputLength; i++) {
             typeInputVal = element.closest('div').children('.typeInput').eq(i).val();
+            if (typeInputVal && typeInputVal != '') {
             typeInputeCount1.push(typeInputVal);
+            }
         }
     } else {
         typeInputeCount2 = [];
         for (let i = 0; i < typeInputLength; i++) {
             typeInputVal = element.closest('div').children('.typeInput').eq(i).val();
+            if (typeInputVal && typeInputVal != '') {
             typeInputeCount2.push(typeInputVal);
+            }
         }
     }
 }
@@ -78,7 +82,6 @@ typeTotalCalc = () => {
 }
 
 newSkuType = () => {
-
     console.log(typeInputeCount2, typeInputeCount1);
     $('.newSkuTypeList').empty();
     if (typeInputeCount1 <= 0) {
@@ -86,7 +89,7 @@ newSkuType = () => {
         console.log(typeInputeCount1Length)
         for (i = 0; i < typeInputeCount2Length; i++) {
             newSkuTypeListContent += `
-                <option value="">${typeInputeCount2[i]}</option>
+                <option value="[2,${i}]">${typeInputeCount2[i]}</option>
             `
         }
         $('.newSkuTypeList').append(newSkuTypeListContent);
@@ -95,11 +98,11 @@ newSkuType = () => {
         console.log(typeInputeCount1Length)
         for (i = 0; i < typeInputeCount1Length; i++) {
             newSkuTypeListContent += `
-                <option value="">${typeInputeCount1[i]}</option>
+                <option value="[1,${i}]">${typeInputeCount1[i]}</option>
             `
         }
         $('.newSkuTypeList').append(newSkuTypeListContent);
-    }else if(typeInputeCount1 <= 0 && typeInputeCount2 <= 0){
+    } else if (typeInputeCount1 <= 0 && typeInputeCount2 <= 0) {
         $('.newSkuTypeList').empty();
     } else {
         newSkuTypeListContent = '<option value="0">無</option>'
@@ -107,20 +110,26 @@ newSkuType = () => {
         for (i = 0; i < typeInputeCount1Length; i++) {
             for (j = 0; j < typeInputeCount2Length; j++) {
                 newSkuTypeListContent += `
-                <option value="">${typeInputeCount1[i]}  ${typeInputeCount2[j]}</option>
+                <option value="[1,${i}],[2,${j}]">${typeInputeCount1[i]}  ${typeInputeCount2[j]}</option>
             `
             }
         }
         $('.newSkuTypeList').append(newSkuTypeListContent);
     }
-
-
 }
 
 itemLimitAlert = () => {
     console.log(itemCount, typeTotal);
     if (itemCount > typeTotal) {
         alert('已超出可新增數目請再修改');
+    }
+}
+
+changeName = (target, parent, children, name) => {
+    let targetBrother = parent.find(children);
+    for (i = 0; i < targetBrother.length; i++) {
+        targetBrother.eq(i).attr('name', `${name}[${i}]`);
+        console.log(targetBrother.eq(i));
     }
 }
 
@@ -146,6 +155,7 @@ $('.typeList').on('change', '.typeInput', function () {
 });
 
 $('#addItemBtn').on('click', (function () {
+    let parent = $(this).closest('#addItem');
     itemCount = $('.itemInput').length;
     console.log()
     console.log(typeTotal);
@@ -157,29 +167,59 @@ $('#addItemBtn').on('click', (function () {
         $('#addItem').append(`
         <div class="itemInput d-flex col-12 row py-3 mx-2 type-config shadow-sm my-1">
         <label class="text-body" for="">規格：</label>
-                        <select class="col-2 mr-2 bg-transparent newSkuTypeList" name="" id="newSkuTypeList">
-                        <option value="0">無</option>
+        <select class="col-2 mr-2 bg-transparent newSkuTypeList sku-group"  id="newSkuTypeList" data-num="" name="skuGroup[]">
+        <option value="0">無</option>
                         </select>
-                        <label class="col-auto text-right text-body ml-3" for="">貨號：</label>
-                        <input class="col-3 bg-transparent" type="text" placeholder="">
-                        <label class="col-auto text-right text-body ml-3" for="">價格：</label>
-                        <input class="col-1 bg-transparent" type="text" placeholder="">
-                        <label class="col-auto text-right text-body ml-3" for="">數量：</label>
-                        <input class="col-1 bg-transparent" type="text" placeholder="">
+                        <label class="col-auto text-right text-body ml-3" for="" >貨號：</label>
+                    <input class="col-3 bg-transparent sku-code" type="text" placeholder="" name="skuCode[]">
+                    <label class="col-auto text-right text-body ml-3" for="">價格：</label>
+                    <input class="col-1 bg-transparent sku-price" type="text" placeholder="" name="skuPrice[]">
+                    <label class="col-auto text-right text-body ml-3" for="">數量：</label>
+                    <input class="col-1 bg-transparent stock" type="text" placeholder="" name="stock[]">
                         <a class="btn text-secondery p-0 my-0 mx-1 itemListDelete flex-grow-1 text-right" id=""><i class="fas fa-minus-square"></i></a>
                       </div>
         `)
     }
     newSkuType();
+    changeName($(this), parent, '.sku-group', 'skuGroup');
+    changeName($(this), parent, '.sku-code', 'skuCode');
+    changeName($(this), parent, '.sku-price', 'skuPrice');
+    changeName($(this), parent, '.stock', 'stock');
 }));
 
 $('#addItem').on('click', '.itemListDelete', function () {
+    let parent = $(this).closest('#addItem');
     console.log($('.itemListDelete'))
     $(this).closest('div').remove();
+    changeName($(this), parent, '.sku-group', 'skuGroup');
+    changeName($(this), parent, '.sku-code', 'skuCode');
+    changeName($(this), parent, '.price', 'price');
+    changeName($(this), parent, '.stock', 'stock');
 });
 
+$('#productName').on({
+    change:function(){
+        let length = $(this).val().length;
+        $('#productNameCount').css('color','#73879C');
+        $('#productNameCount').text(`${length}/100`);
+        if(length >= 100){
+            $('#productNameCount').css('color','red');
+            }
+    },
+    keydown:function(){
+        let length = $(this).val().length;
+        $('#productNameCount').css('color','#73879C');
+        $('#productNameCount').text(`${length}/100`);
+        if(length >= 100){
+            $('#productNameCount').css('color','red');
+        }
+        console.log(length);
+    }
+});
 
-
+$('#submitBtn').click(function(e){
+    e.preventDefault();
+});
 // -----------------------------------------------------------------------------
 $("#productPhotoUpload").change(function () {
     $("#previewPhoto").html(""); // 清除預覽
