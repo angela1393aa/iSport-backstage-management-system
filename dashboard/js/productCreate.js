@@ -1,3 +1,5 @@
+
+
 axios({
     method: 'post',
     url: '/project_01/dashboard/api/productCreat.php',
@@ -7,6 +9,11 @@ axios({
     let categoryContent = '';
     let productTypeContent = '';
 
+    let brandData = [];
+    data['brand'].forEach(item => {
+        brandData.push(item['name']);
+    });
+    console.log(brandData);
     data['brand'].forEach(item => {
         brandContent += `
             <option value="${item['name']}">
@@ -31,18 +38,33 @@ axios({
     $('.typeListSelect').append(productTypeContent);
     // console.log(productTypeContent);
 
+    $('#brand').change(function () {
+        let brandInput = $(this).val();
+        let find = $.inArray(brandInput, brandData);
+        $('#brandAlert').text('');
+        if (find == -1) {
+            $('#brandAlert').text('請選擇正確品牌名稱');
+            console.log(find);
+        }
+    })
+
 
 }).catch();
 
 
+
 $('.typeListAdd').click(function () {
-    // console.log($(this));
-    let typeNum = $(this).closest('div').data('type');
-    // console.log(typeNum);
-    $(this).before(`
+    let value = $('#typeConfig').val();
+    if (value == 1) {
+        // console.log($(this));
+        let typeNum = $(this).closest('div').data('type');
+        // console.log(typeNum);
+        $(this).before(`
         <input class="col-1 bg-transparent my-0 ml-3 typeInput" type="text" name="typeValue${typeNum}[]">
         <a class="btn text-secondery p-0 my-0  typeListDelete" id=""><i class="fas fa-minus-square"></i></a>
     `)
+    }
+
 });
 let typeInputeCount1 = [];
 let typeInputeCount2 = [];
@@ -59,7 +81,7 @@ function typeInputeCount(type, element) {
         for (let i = 0; i < typeInputLength; i++) {
             typeInputVal = element.closest('div').children('.typeInput').eq(i).val();
             if (typeInputVal && typeInputVal != '') {
-            typeInputeCount1.push(typeInputVal);
+                typeInputeCount1.push(typeInputVal);
             }
         }
     } else {
@@ -67,7 +89,7 @@ function typeInputeCount(type, element) {
         for (let i = 0; i < typeInputLength; i++) {
             typeInputVal = element.closest('div').children('.typeInput').eq(i).val();
             if (typeInputVal && typeInputVal != '') {
-            typeInputeCount2.push(typeInputVal);
+                typeInputeCount2.push(typeInputVal);
             }
         }
     }
@@ -121,7 +143,8 @@ newSkuType = () => {
 itemLimitAlert = () => {
     console.log(itemCount, typeTotal);
     if (itemCount > typeTotal) {
-        alert('已超出可新增數目請再修改');
+        $('#addSkuAlert').text('已超出可新增數目請再修改');
+        setTimeout(alert, 4500)
     }
 }
 
@@ -129,7 +152,7 @@ changeName = (target, parent, children, name) => {
     let targetBrother = parent.find(children);
     for (i = 0; i < targetBrother.length; i++) {
         targetBrother.eq(i).attr('name', `${name}[${i}]`);
-        console.log(targetBrother.eq(i));
+        // console.log(targetBrother.eq(i));
     }
 }
 
@@ -155,14 +178,19 @@ $('.typeList').on('change', '.typeInput', function () {
 });
 
 $('#addItemBtn').on('click', (function () {
+    alert = () => {
+        $('#addSkuAlert').text('')
+    }
     let parent = $(this).closest('#addItem');
     itemCount = $('.itemInput').length;
-    console.log()
+    console.log(itemCount)
     console.log(typeTotal);
     if (itemCount > typeTotal) {
-        alert('已超出新增上限');
+        $('#addSkuAlert').text('已超出新增上限');
+        setTimeout(alert, 3500)
     } else if (itemCount >= typeTotal) {
-        alert('已達新增上限,請修改');
+        $('#addSkuAlert').text('已達新增上限');
+        setTimeout(alert, 3500)
     } else {
         $('#addItem').append(`
         <div class="itemInput d-flex col-12 row py-3 mx-2 type-config shadow-sm my-1">
@@ -189,7 +217,7 @@ $('#addItemBtn').on('click', (function () {
 
 $('#addItem').on('click', '.itemListDelete', function () {
     let parent = $(this).closest('#addItem');
-    console.log($('.itemListDelete'))
+    // console.log($('.itemListDelete'))
     $(this).closest('div').remove();
     changeName($(this), parent, '.sku-group', 'skuGroup');
     changeName($(this), parent, '.sku-code', 'skuCode');
@@ -197,36 +225,76 @@ $('#addItem').on('click', '.itemListDelete', function () {
     changeName($(this), parent, '.stock', 'stock');
 });
 
+
+
+$('#typeConfig').on('change', function () {
+    let value = $('#typeConfig').val();
+    // console.log(value);
+    if (value == 0) {
+        $('.typeListSelect').attr("disabled", "disabled");
+        $('.typeInput').attr('readonly');
+        $('.typeInput').val('');
+        $('.typeListSelect').val('');
+    } else {
+        $('.typeListSelect').removeAttr("disabled", "disabled");
+        $('.typeInput').removeAttr('readonly');
+    }
+})
+
+
+let productNameCount = 0;
+let introInputCount = 0;
+
 $('#productName').on({
-    change:function(){
-        let length = $(this).val().length;
-        $('#productNameCount').css('color','#73879C');
-        $('#productNameCount').text(`${length}/100`);
-        if(length >= 100){
-            $('#productNameCount').css('color','red');
-            }
-    },
-    keydown:function(){
-        let length = $(this).val().length;
-        $('#productNameCount').css('color','#73879C');
-        $('#productNameCount').text(`${length}/100`);
-        if(length >= 100){
-            $('#productNameCount').css('color','red');
+    change: function () {
+        productNameCount = $(this).val().length;
+        $('#productNameCount').css('color', '#73879C');
+        $('#productNameCount').text(`${productNameCount}/100`);
+        if (productNameCount >= 100) {
+            $('#productNameCount').css('color', 'red');
         }
-        console.log(length);
+    },
+    keydown: function () {
+        productNameCount = $(this).val().length;
+        $('#productNameCount').css('color', '#73879C');
+        $('#productNameCount').text(`${productNameCount}/100`);
+        if (productNameCount >= 100) {
+            $('#productNameCount').css('color', 'red');
+        }
+        console.log(productNameCount);
     }
 });
 
-$('#submitBtn').click(function(e){
-    e.preventDefault();
-});
+$('#introInput').on({
+    change: function () {
+        introInputCount = $(this).val().length;
+        $('#introInputCount').css('color', '#73879C');
+        $('#introInputCount').text(`${introInputCount}/1000`);
+        if (introInputCount >= 1000) {
+            $('#introInputCount').css('color', 'red');
+        }
+    },
+    keydown: function () {
+        introInputCount = $(this).val().length;
+        $('#introInputCount').css('color', '#73879C');
+        $('#introInputCount').text(`${introInputCount}/1000`);
+        if (introInputCount >= 1000) {
+            $('#introInputCount').css('color', 'red');
+        }
+        console.log(introInputCount);
+    }
+})
+
+
 // -----------------------------------------------------------------------------
+let photoInput = 0;
 $("#productPhotoUpload").change(function () {
     $("#previewPhoto").html(""); // 清除預覽
     readURL(this);
 });
 
 function readURL(input) {
+    photoInput = input.files.length;
     if (input.files && input.files.length >= 0) {
         for (let i = 0; i < input.files.length; i++) {
             $('#previewPhoto').append(`
@@ -246,3 +314,58 @@ function readURL(input) {
         $("#previewPhoto").append(noPictures);
     }
 }
+//-----------------------------------------------------------------------------------
+
+$('#submitBtn').click(function (e) {
+    let value = $('#typeConfig').val();
+    let verify = true;
+    console.log(value);
+
+    console.log('123')
+    e.preventDefault();
+    // console.log(productNameCount);
+    $('.submitAlert').empty();
+    alert = '';
+    if (productNameCount <= 0) {
+        alert += '<p class="p-1 m-0">*請輸入商品名稱</p>';
+        verify = false;
+    } else if (productNameCount > 100) {
+        alert += '<p class="p-1 m-0">*商品名稱過長</p>'
+        verify = false;
+    }
+
+    if (value == 1 && ($('.typeListSelect').eq(0).val() == 0 || $('.typeListSelect').eq(1).val() == 0)) {
+        alert += '<p class="p-1 m-0">*請設定規格</p>';
+        verify = false;
+    }
+
+    if ($('#categoryList').val() < 0 || $('#categoryList').val() == '') {
+        alert += '<p class="p-1 m-0">*請選擇商品分類</p>';
+        verify = false;
+    }
+
+    for (let i = 0; i < $('.sku-group').length; i++) {
+        if ($('.sku-group').eq(i).val() == '' || $('.sku-code').eq(i).val() == '' || $('.sku-price').eq(i).val() == '' || $('.stock').eq(i).val() == '') {
+            alert += '<p class="p-1 m-0">*請輸入欲新增之單品的完整資訊</p>';
+            verify = false;
+            break;
+        }
+    }
+    if (photoInput == 0) {
+        alert += '<p class="p-1 m-0">*請至少選擇一張圖片</p>';
+        verify = false;
+    }
+
+    if (introInputCount > 1000) {
+        alert += '<p class="p-1 m-0">*商品介紹過長</p>'
+        verify = false;
+    }
+    $('.submitAlert').append(alert);
+    if(verify){
+        $('.typeListSelect').removeAttr("disabled", "disabled");
+        $('.typeInput').removeAttr('readonly');
+        $("form").submit();
+    }
+    
+});
+
