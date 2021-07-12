@@ -1,9 +1,9 @@
 <?php
 require_once('../includes/config.php');
 
-$userOrderSql = 'SELECT * FROM user_order';
-$usersSql = 'SELECT id, account FROM users WHERE valid = 1';
-$orderStatusSql = 'SELECT * FROM order_status';
+$userOrderSql = "SELECT * FROM user_order";
+$usersSql = "SELECT id, account FROM users WHERE valid = 1";
+$orderStatusSql = "SELECT * FROM order_status";
 
 
 $userOrderStmt = $db_host->prepare($userOrderSql);
@@ -58,3 +58,5 @@ try {
     echo 'Eroor: ' . $e->getMessage() . '<br>';
     exit;
 }
+
+?>
