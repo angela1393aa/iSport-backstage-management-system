@@ -89,8 +89,8 @@ if(isset($_SESSION['userLoggedIn'])) {
                 </li>
                 <li><a><i class="far fa-list-alt"></i> 訂單管理 <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                    <li><a href="#">訂單列表</a></li>
-                    <li><a href="media_gallery.html">新增訂單</a></li>
+                    <li><a href="user_order.php">訂單列表</a></li>
+                    <li><a href="user_order_create.php">新增訂單</a></li>
                     <li><a href="typography.html">訂單統計</a></li>
                   </ul>
                 </li>
