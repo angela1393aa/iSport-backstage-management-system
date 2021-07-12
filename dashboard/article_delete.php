@@ -1,6 +1,6 @@
 <?php require_once("header.php"); ?>
 <?php
-require_once("./config.php");
+require_once("config.php");
 $id=$_GET["id"];
 $sql="SELECT * FROM article WHERE id='$id'";
 $result = $db_host->query($sql);

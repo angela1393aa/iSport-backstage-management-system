@@ -1,5 +1,5 @@
 <?php
-require_once("./config.php");
+require_once("config.php");
 
 $id = $_POST['id'];
 $sql="DELETE FROM article WHERE id=?";//這裡要改
