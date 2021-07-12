@@ -12,4 +12,25 @@
         };
         console.log("invoice_random_no", invoice_random_no(1));
 
-        let 
+
+        // 加入判斷帳號是否存在
+        $("#account").on({
+            "change": function() {
+                // console.log("change");
+                $("#accountMsg").text("");
+                let account = $(this).val();  //取值
+                let formdata = new FormData();
+                formdata.append("account", account);
+
+                axios.post('/project_01/dashboard/api/userOrderCheck.php', formdata)
+                .then(function(response) {
+                    // console.log(response);
+                    if (response.data.count === 0) {
+                        $("#accountMsg").text("沒有這個帳號")
+                    }
+                })
+                .catch(function(error) {
+                    console.log(error);
+                });
+            },
+        });
