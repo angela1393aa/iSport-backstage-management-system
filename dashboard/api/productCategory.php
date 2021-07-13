@@ -10,7 +10,7 @@ try{
     echo json_encode($rows);
 }catch(PDOException $e){
     echo "資料庫連結失敗<br>";
-    echo "Eroor: ".$e->getMessage(). "<br>";
+    echo "Error: ".$e->getMessage(). "<br>";
     exit;
 }
 

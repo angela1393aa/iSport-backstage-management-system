@@ -315,9 +315,16 @@ function readURL(input) {
     }
 }
 //-----------------------------------------------------------------------------------
+// function isNull( str ){
+//     if ( str == "" ) return true;
+//     var regu = "^[ ] $";
+//     var re = new RegExp(regu);
+//     return re.test(str);
+//     }
 
 $('#submitBtn').click(function (e) {
     let value = $('#typeConfig').val();
+    let productNameValue = $('#productName').val();
     let verify = true;
     console.log(value);
 
@@ -326,8 +333,11 @@ $('#submitBtn').click(function (e) {
     // console.log(productNameCount);
     $('.submitAlert').empty();
     alert = '';
-    if (productNameCount <= 0) {
+    if (productNameValue == '') {
         alert += '<p class="p-1 m-0">*請輸入商品名稱</p>';
+        verify = false;
+    }else if(productNameValue.indexOf(' ') >= 0){
+        alert += '<p class="p-1 m-0">*商品名稱不能包含空格</p>';
         verify = false;
     } else if (productNameCount > 100) {
         alert += '<p class="p-1 m-0">*商品名稱過長</p>'
