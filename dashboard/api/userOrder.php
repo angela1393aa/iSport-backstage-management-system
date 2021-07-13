@@ -1,8 +1,8 @@
 <?php
 require_once('../includes/config.php');
 
-$userOrderSql = "SELECT * FROM user_order";
-$usersSql = "SELECT id, account FROM users WHERE valid = 1";
+$userOrderSql = "SELECT * FROM user_order WHERE valid = 1";
+$usersSql = "SELECT id, account, address FROM users WHERE valid = 1";
 $orderStatusSql = "SELECT * FROM order_status";
 
 
@@ -20,15 +20,25 @@ try {
     $orderStatusRows = $orderStatusStmt->fetchAll(PDO::FETCH_ASSOC);
 
     $userArr = [];
-    $orderStatusArr = [];
-    $orderArr = [];
+    $userAddressArr = [];
 
-    // 從product_sku資料表撈sku_code
+    // 從users資料表撈account及address
     foreach ($usersRows as $row){
         $userArr[$row['id']] = $row['account'];
+        $userAddressArr[$row['id']] = $row['address'];
     }
-    // print_r($userArr);
     
+    // 從users資料表撈address
+    // foreach ($usersRows as $row){
+    //     $userAddressArr[$row['id']] = $row['address'];
+    // }
+    // print_r($userArr);
+
+
+    $orderStatusArr = [];
+    $orderArr = [];
+    
+    // 從order_status資料表撈出狀態
     foreach ($orderStatusRows as $row){
         $orderStatusArr[$row['id']] = $row['status'];
     }
@@ -41,6 +51,7 @@ try {
             'order_id' => $row['id'],
             'user_id' => $row['user_id'],
             'user_account' => $userArr[$row['user_id']],
+            'address' => $userAddressArr[$row['user_id']],
             'order_status' => $orderStatusArr[$row['order_status']],
             'invoice_no' => $row['invoice_no'],
             'paytype' => $row['paytype'],
