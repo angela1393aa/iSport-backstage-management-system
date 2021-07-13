@@ -18,14 +18,16 @@ try {
     exit();
 }
 
-
+$productId = 41;
 
 $brand = $_POST['brand'];
 $newBrand = '';                         //篩選過的
 $category = $_POST['category'];
 $type = $_POST['type'];
 $typeValue1 = $_POST['typeValue1'];
+$newTypeValue1 = array_values(array_filter($typeValue1));
 $typeValue2 = $_POST['typeValue2'];
+$newTypeValue2 = array_values(array_filter($typeValue2));
 $skuGroup = $_POST['skuGroup'];
 $skuCode = $_POST['skuCode'];
 $skuPrice = $_POST['skuPrice'];
@@ -33,6 +35,10 @@ $productPrice = '';                     //篩選過的
 $stock = $_POST['stock'];
 $intro = $_POST['intro'];
 $now = date('Y-m-d H:i:s');
+
+print_r($newTypeValue1);
+print_r($newTypeValue2);
+
 
 echo ('productName' . $productName . '<br>');
 echo ('brand' . $brand . '<br>');
@@ -70,23 +76,65 @@ foreach ($brandRows as $row) {
     }
 }
 
-if(count($skuPrice) > 1){
+if (count($skuPrice) > 1) {
     $productPrice = min($skuPrice) . '~' . max($skuPrice);
-}else{
+} else {
     $productPrice = $skuPrice[0];
 }
 // echo($productPrice);
 
-$productSql = "INSERT INTO product (name, category, brand, intro, price, creat_time) VALUE (?, ?, ?, ?, ?, ?) ";
-$productStmt = $db_host -> prepare($productSql);
+
+
+/**
+ * product資料表寫入
+ */
+// $productSql = "INSERT INTO product (name, category, brand, intro, price, creat_time) VALUE (?, ?, ?, ?, ?, ?) ";
+// $productStmt = $db_host -> prepare($productSql);
+// try {
+//   $productStmt->execute(([$productName, $category, $newBrand, $intro, $productPrice, $now]));
+//   $productId = $db_host->lastInsertId();
+//   echo($productId);
+// } catch (PDOException $e) {
+//   echo 'database connection error : <br>' . $e->getMessage() . '<br>';
+//   exit();
+// }
+
+
+
+/**
+ * product_type_value資料表寫入
+ */
+$productTypeValueSql = "INSERT INTO product_type_value (product_id, type_id, type_value) VALUE (?, ?, ?) ";
+$productTypeValueStmt = $db_host->prepare($productTypeValueSql);
 try {
-  $productStmt->execute(([$productName, $category, $newBrand, $intro, $productPrice, $now]));
-  $productId = $db_host->lastInsertId();
-  echo($productId);
+    $productTypeValueId1 = [];
+    $productTypeValueId2 = [];
+
+    $typeId = $type[0];
+    foreach ($newTypeValue1 as $value) {
+        $typeValue = $value;
+        $productTypeValueStmt->execute(([$productId, $typeId, $typeValue]));
+        array_push($productTypeValueId1, $db_host->lastInsertId());
+        var_dump($productTypeValueId1);
+    }
+
+    $typeId = $type[1];
+    foreach ($newTypeValue2 as $value) {
+        $typeValue = $value;
+        $productTypeValueStmt->execute(([$productId, $typeId, $typeValue]));
+        array_push($productTypeValueId2, $db_host->lastInsertId());
+        var_dump($productTypeValueId2);
+    }
+
 } catch (PDOException $e) {
-  echo 'database connection error : <br>' . $e->getMessage() . '<br>';
-  exit();
+    echo 'database connection error : <br>' . $e->getMessage() . '<br>';
+    exit();
 }
+
+
+
+
+
 
 
 # 取得上傳檔案數量

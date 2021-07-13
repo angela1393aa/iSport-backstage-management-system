@@ -111,7 +111,7 @@ newSkuType = () => {
         console.log(typeInputeCount1Length)
         for (i = 0; i < typeInputeCount2Length; i++) {
             newSkuTypeListContent += `
-                <option value="[2,${i}]">${typeInputeCount2[i]}</option>
+                <option value="2,${i}">${typeInputeCount2[i]}</option>
             `
         }
         $('.newSkuTypeList').append(newSkuTypeListContent);
@@ -120,7 +120,7 @@ newSkuType = () => {
         console.log(typeInputeCount1Length)
         for (i = 0; i < typeInputeCount1Length; i++) {
             newSkuTypeListContent += `
-                <option value="[1,${i}]">${typeInputeCount1[i]}</option>
+                <option value="1,${i}">${typeInputeCount1[i]}</option>
             `
         }
         $('.newSkuTypeList').append(newSkuTypeListContent);
@@ -132,7 +132,7 @@ newSkuType = () => {
         for (i = 0; i < typeInputeCount1Length; i++) {
             for (j = 0; j < typeInputeCount2Length; j++) {
                 newSkuTypeListContent += `
-                <option value="[1,${i}],[2,${j}]">${typeInputeCount1[i]}  ${typeInputeCount2[j]}</option>
+                <option value="1,${i},2,${j}">${typeInputeCount1[i]}  ${typeInputeCount2[j]}</option>
             `
             }
         }
@@ -315,17 +315,12 @@ function readURL(input) {
     }
 }
 //-----------------------------------------------------------------------------------
-// function isNull( str ){
-//     if ( str == "" ) return true;
-//     var regu = "^[ ] $";
-//     var re = new RegExp(regu);
-//     return re.test(str);
-//     }
-
 $('#submitBtn').click(function (e) {
     let value = $('#typeConfig').val();
     let productNameValue = $('#productName').val();
+    const skuCodeRules = /[\d]{8}/
     let verify = true;
+
     console.log(value);
 
     console.log('123')
@@ -344,7 +339,7 @@ $('#submitBtn').click(function (e) {
         verify = false;
     }
 
-    if (value == 1 && ($('.typeListSelect').eq(0).val() == 0 || $('.typeListSelect').eq(1).val() == 0)) {
+    if (value == 1 && ($('.typeListSelect').eq(0).val() == 0 && $('.typeListSelect').eq(1).val() == 0)) {
         alert += '<p class="p-1 m-0">*請設定規格</p>';
         verify = false;
     }
@@ -361,6 +356,15 @@ $('#submitBtn').click(function (e) {
             break;
         }
     }
+    // for(let i = 0; i < $('.sku-group').length; i++){
+    //     console.log(skuCodeRules.test($('.sku-code').eq(i).val()));
+
+    //     if(skuCodeRules.test($('.sku-code').eq(i).val())){
+    //         alert += '<p class="p-1 m-0">*貨號須為8碼數字</p>';
+    //         verify = false;
+    //         break;
+    //     }
+    // }
     if (photoInput == 0) {
         alert += '<p class="p-1 m-0">*請至少選擇一張圖片</p>';
         verify = false;
