@@ -75,6 +75,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
                       <i class="fas fa-sort"></i>
                     </th>
                     <th class="align-middle text-center">訂購人</th>
+                    <th class="align-middle text-center">寄件地址</th>
                     <!-- <th class="align-middle text-center">訂單總額</th> -->
                     <th class="align-middle text-center">付款方式</th>
                     <th class="align-middle text-center"><span class="nobr">訂單狀態</span>
@@ -89,6 +90,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
                       <td class="a-center ">
                         <input type="checkbox" class="flat" name="table_records">
                       </td>
+                      <td></td>
                       <td></td>
                       <td></td>
                       <td></td>
