@@ -4,9 +4,10 @@ $style = 'userOrder.css';
 $js = 'userOrderCreate.js';
 require_once('includes/header.php');
 
-$sql = 'SELECT id FROM user_order';
-$stmt = $db_host->prepare($sql);
-$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+// 帶出品名
+// $productSql = 'SELECT id FROM user_order';
+// $stmt = $db_host->prepare($sql);
+// $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <div class="right_col" role="main">
@@ -150,7 +151,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <div class="ln_solid"></div>
                             <div class="item form-group">
                                 <div class="col-md-6 col-sm-6 offset-md-3">
-                                    <button class="btn btn-primary" type="button">取消</button>
+                                    <a href="user_order.php" class="btn btn-primary" type="button">取消</a>
                                     <button class="btn btn-primary" type="reset">重設</button>
                                     <button type="submit" class="btn btn-success">送出</button>
                                 </div>

@@ -34,27 +34,22 @@ try{
     $user_id = $userArr["$account"];
     // $invoice_no = $_POST["invoice"];
     $order_date = date("Y-m-d H:i:s");
-    $order_id = $db_host->lastInsertId($sql);
-    $order_no = "";
+    $order_no = date("ym")."ORD".date("d").$order_id;
     $paytype = $_POST["paytype"];
     $order_status = $_POST["order_status"];
     $valid = 1;
     
-    //先$stmt->execute, 才能抓到lastInsertId(), 但是我的$order_no變數需要抓$order_id的值
-    $stmt->execute([$user_id, $order_date, $order_no, $paytype, $order_status, $valid]);
-    $order_id = $db_host->lastInsertId($sql);  //PDO 取得上一筆新增的序號(user_order資料表的id), 必須execute後才可以產生
     
     $product_id = $_POST["productId"];
     $qty = $_POST["qty"];
+
+    //我要先$stmt->execute, 才能抓到lastInsertId(), 但是我的$order_no變數需要抓$order_id的值
+    $stmt->execute([$user_id, $order_date, $order_no, $paytype, $order_status, $valid]);
+    $order_id = $db_host->lastInsertId($sql);  //PDO 取得上一筆新增的序號(user_order資料表的id)
     $orderDetailStmt->execute([$order_id, $product_id, $qty]);
 
-    //UPDATE 為了在取得$stmt->execute()後使用lastInsertId()的id序號
-    $order_no = date("ym")."ORD".date("d").$order_id;
-    $updateSql = "UPDATE user_order SET order_no = ? WHERE id = ?";
-    $updateStmt = $db_host->prepare($updateSql);
-    $updateStmt->execute([$order_no, $order_id]);
-
     header("location: user_order.php");
+
 
 
 }catch(PDOException $e){
