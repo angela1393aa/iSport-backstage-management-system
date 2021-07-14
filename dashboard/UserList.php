@@ -9,7 +9,6 @@ if(!isset($_GET["p"])){
     $p=$_GET["p"];
 }
 
-$p=$_GET["p"];
 $per_page=9;
 $star_item=($p-1)*$per_page;
 $sql="SELECT * FROM users WHERE valid=1 LIMIT $star_item,$per_page";

@@ -1,4 +1,6 @@
-<?php require_once("includes/header.php"); ?>
+<?php require_once("includes/header.php"); 
+
+?>
 
 <!-- page content -->
 <div class="right_col" role="main">
@@ -51,15 +53,17 @@
                                 <label class="col-form-label col-md-3 col-sm-3  label-align">姓名<span
                                         class="required"><code>*</code></span></label>
                                 <div class="col-md-6 col-sm-6">
-                                    <input class="form-control" name="user_name" placeholder="請輸入姓名" required="required" />
+                                    <input class="form-control" required="required" name="user_name" placeholder="請輸入姓名" required />
                                 </div>
                             </div>
                             <div class="field item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3  label-align">會員帳號 <span
                                         class="required"><code>*</code></span></label>
+                                        <small class="text-danger" id="accountMsg"></small>
+
                                 <div class="col-md-6 col-sm-6">
-                                    <input class="form-control" type="text" class='account' name="account"
-                                         required='required'>
+                                    <input class="form-control" type="text" class='account' name="account" id="account" placeholder="請輸入 4~8 碼帳號"
+                                    required="required">
                                 </div>
                             </div>
                             <div class="field item form-group">
@@ -68,7 +72,7 @@
                                 <div class="col-md-6 col-sm-6">
                                     <input class="form-control" type="password" id="password1" name="password"
                                         title="請輸入密碼"
-                                        required />
+                                        required="required" />
 
                                     <span style="position: absolute;right:15px;top:7px;" onclick="hideshow()">
                                         <i id="slash" class="fa fa-eye-slash"></i>
@@ -81,7 +85,7 @@
                                         class="required text-red"><code>*</code></span></label>
                                 <div class="col-md-6 col-sm-6">
                                     <input class="form-control" type="password" name="password2"
-                                        data-validate-linked='password' required='required' />
+                                        data-validate-linked='password' required="required" />
                                 </div>
                             </div>
                             <div class="field item form-group">
@@ -96,7 +100,7 @@
                                 <label class="col-form-label col-md-3 col-sm-3  label-align">手機<span
                                         class="required"><code>*</code></span></label>
                                 <div class="col-md-6 col-sm-6">
-                                    <input class="form-control" type="tel" class='tel' name="phone" required='required'
+                                    <input class="form-control" type="tel" class='tel' name="phone" required="required"
                                         data-validate-length-range="8,20" />
                                 </div>
                             </div>
@@ -122,8 +126,8 @@
                             <div class="ln_solid">
                                 <div class="form-group">
                                     <div class="col-md-6 offset-md-3">
-                                        <button type='submit' class="btn btn-primary">Submit</button>
-                                        <button type='reset' class="btn btn-success">Reset</button>
+                                        <button type='submit' class="btn btn-primary">建立會員</button>
+                                        <button type='reset' class="btn btn-success">重置資料</button>
                                     </div>
                                 </div>
                             </div>
@@ -161,28 +165,70 @@
 	</script>
 
     <script>
+    $("#account").on({
+                "change": function(){
+                    // console.log("change")
+                    $("#accountMsg").text("");
+                    let account=$(this).val();
+                    let formdata=new FormData();
+                    formdata.append("account", account);
+
+                    axios.post('api/check-user.php', formdata)
+                        .then(function (response) {
+                            console.log(response);
+                            // if(response.data.count===1){
+                            //     $("#accountMsg").text("這個帳號已經有人註冊過了")
+                            // }
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                },
+                "keyup": function(){
+                    $("#accountMsg").text("");
+                    let accountLength=$(this).val().length;
+                    if(accountLength<4){
+                        $("#accountMsg").text("帳號太短")
+                    }else if(accountLength>8){
+                        $("#accountMsg").text("帳號太長")
+                    }
+                }
+            })
+
+            $("#sign").click(function(e){
+                e.preventDefault();
+                let passContent=$("#password").val();
+                let repassContent=$("#repassword").val();
+                if(passContent===repassContent){
+                    // alert("密碼一致")
+                    $("form").submit();
+                }else{
+                    alert("前後密碼不一致")
+                }
+            })
+
         // initialize a validator instance from the "FormValidator" constructor.
         // A "<form>" element is optionally passed as an argument, but is not a must
-        var validator = new FormValidator({
-            "events": ['blur', 'input', 'change']
-        }, document.forms[0]);
-        // on form "submit" event
-        document.forms[0].onsubmit = function(e) {
-            var submit = true,
-                validatorResult = validator.checkAll(this);
-            console.log(validatorResult);
-            return !!validatorResult.valid;
-        };
-        // on form "reset" event
-        document.forms[0].onreset = function(e) {
-            validator.reset();
-        };
-        // stuff related ONLY for this demo page:
-        $('.toggleValidationTooltips').change(function() {
-            validator.settings.alerts = !this.checked;
-            if (this.checked)
-                $('form .alert').remove();
-        }).prop('checked', false);
+        // var validator = new FormValidator({
+        //     "events": ['blur', 'input', 'change']
+        // }, document.forms[0]);
+        // // on form "submit" event
+        // document.forms[0].onsubmit = function(e) {
+        //     var submit = true,
+        //         validatorResult = validator.checkAll(this);
+        //     console.log(validatorResult);
+        //     return !!validatorResult.valid;
+        // };
+        // // on form "reset" event
+        // document.forms[0].onreset = function(e) {
+        //     validator.reset();
+        // };
+        // // stuff related ONLY for this demo page:
+        // $('.toggleValidationTooltips').change(function() {
+        //     validator.settings.alerts = !this.checked;
+        //     if (this.checked)
+        //         $('form .alert').remove();
+        // }).prop('checked', false);
 
     </script>
 

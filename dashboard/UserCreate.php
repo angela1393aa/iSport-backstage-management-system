@@ -33,7 +33,9 @@ try{
     echo "Eroor: ".$e->getMessage(). "<br>";
     exit;
 }
-header('location: user_create.php');
+
+// $stmt->close();
+header('location: axios_user_list.php');
 
     
     
