@@ -89,7 +89,8 @@ try {
             'upload_time' => $creatTimeArr[$row['product_id']],
             'status_id' => $row['status'],
             'status' => $statusArr[$row['status']],
-            'stytusStyle' => $statusStyle[$row['status']]
+            'stytusStyle' => $statusStyle[$row['status']],
+            'sale' => $row['sale']
         ];
         array_push($jArr, $arr2);                                   //將每一row(array)傳到一個陣列中
     }

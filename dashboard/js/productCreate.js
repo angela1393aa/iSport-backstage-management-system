@@ -111,7 +111,7 @@ newSkuType = () => {
         console.log(typeInputeCount1Length)
         for (i = 0; i < typeInputeCount2Length; i++) {
             newSkuTypeListContent += `
-                <option value="2,${i}">${typeInputeCount2[i]}</option>
+                <option value="${i}">${typeInputeCount2[i]}</option>
             `
         }
         $('.newSkuTypeList').append(newSkuTypeListContent);
@@ -120,7 +120,7 @@ newSkuType = () => {
         console.log(typeInputeCount1Length)
         for (i = 0; i < typeInputeCount1Length; i++) {
             newSkuTypeListContent += `
-                <option value="1,${i}">${typeInputeCount1[i]}</option>
+                <option value="${i}">${typeInputeCount1[i]}</option>
             `
         }
         $('.newSkuTypeList').append(newSkuTypeListContent);
@@ -132,7 +132,7 @@ newSkuType = () => {
         for (i = 0; i < typeInputeCount1Length; i++) {
             for (j = 0; j < typeInputeCount2Length; j++) {
                 newSkuTypeListContent += `
-                <option value="1,${i},2,${j}">${typeInputeCount1[i]}  ${typeInputeCount2[j]}</option>
+                <option value="${i},${j}">${typeInputeCount1[i]}  ${typeInputeCount2[j]}</option>
             `
             }
         }
