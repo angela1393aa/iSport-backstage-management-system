@@ -1,8 +1,10 @@
 <?php
 require_once('../includes/config.php');
 
+// 用PDO將資料庫資料提取 -> 轉成json檔 -> 再以js方式取得json檔裡的資訊
+
 $userOrderSql = "SELECT * FROM user_order WHERE valid = 1";
-$usersSql = "SELECT id, account, address FROM users WHERE valid = 1";
+$usersSql = "SELECT id, account, phone, address FROM users WHERE valid = 1";
 $orderStatusSql = "SELECT * FROM order_status";
 
 
@@ -21,18 +23,15 @@ try {
 
     $userArr = [];
     $userAddressArr = [];
+    $userPhoneArr = [];
 
     // 從users資料表撈account及address
     foreach ($usersRows as $row){
         $userArr[$row['id']] = $row['account'];
         $userAddressArr[$row['id']] = $row['address'];
+        $userPhoneArr[$row['id']] = $row['phone'];
     }
-    
-    // 從users資料表撈address
-    // foreach ($usersRows as $row){
-    //     $userAddressArr[$row['id']] = $row['address'];
-    // }
-    // print_r($userArr);
+    // print_r($userAddressArr);
 
 
     $orderStatusArr = [];
@@ -49,8 +48,10 @@ try {
         $arr = [
             'order_date' => $row['order_date'],
             'order_id' => $row['id'],
+            'order_no' => $row['order_no'],
             'user_id' => $row['user_id'],
             'user_account' => $userArr[$row['user_id']],
+            'phone' => "0".$userPhoneArr[$row['user_id']],
             'address' => $userAddressArr[$row['user_id']],
             'order_status' => $orderStatusArr[$row['order_status']],
             'invoice_no' => $row['invoice_no'],

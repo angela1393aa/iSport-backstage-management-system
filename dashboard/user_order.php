@@ -35,7 +35,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
       <div class="col-md-12 col-sm-12">
         <div class="x_panel">
           <div class="x_title m-0 d-flex">
-            <h2 class="flex-grow-1">訂單列表<small>檢視或編輯訂單</small></h2>
+            <h2 class="flex-grow-1">訂單列表<small></small></h2>
             <a class="btn btn-dark text-nowrap m-0 border-0 text-white" style="border-radius:5px; font-size:14px" href="user_order_create.php" type="submit"><i class="fas fa-plus mr-2"></i>新增訂單</a>
             <div class="clearfix"></div> <!-- 分隔線偽元素 -->
           </div>
@@ -63,9 +63,9 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
               <table class="table table-striped jambo_table bulk_action">
                 <thead>
                   <tr class="headings">
-                    <th>
+                    <!-- <th>
                       <input type="checkbox" id="check-all" class="flat">
-                    </th>
+                    </th> -->
                     <th class="align-middle text-center">
                       訂購日
                       <i class="fas fa-sort"></i>
@@ -75,8 +75,8 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
                       <i class="fas fa-sort"></i>
                     </th>
                     <th class="align-middle text-center">訂購人</th>
+                    <th class="align-middle text-center">連絡電話</th>
                     <th class="align-middle text-center">寄件地址</th>
-                    <!-- <th class="align-middle text-center">訂單總額</th> -->
                     <th class="align-middle text-center">付款方式</th>
                     <th class="align-middle text-center"><span class="nobr">訂單狀態</span>
                     <th class="align-middle text-center">發票號碼</th>
