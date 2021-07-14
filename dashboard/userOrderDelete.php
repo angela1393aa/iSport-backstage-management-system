@@ -4,11 +4,10 @@ require_once('includes/config.php');
 $id = $_GET["id"];
 
 $userOrderSql = "UPDATE user_order SET valid = 0 WHERE id = ?";
-
 $userOrderStmt = $db_host->prepare($userOrderSql);
+$userOrderStmt->execute([$id]);
 
 try{
-    $userOrderStmt->execute([$id]);
     header("location: user_order.php");
 
 }catch (PDOException $e){
