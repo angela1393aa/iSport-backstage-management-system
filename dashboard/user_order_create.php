@@ -1,5 +1,5 @@
 <?php
-$title = '訂單資訊';
+$title = '新增訂單';
 $style = 'userOrder.css';
 $js = 'userOrderCreate.js';
 require_once('includes/header.php');
@@ -66,6 +66,14 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
                                     <input type="tel" id="phone" name="phone" class="form-control">
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="address" required>寄件地址
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input type="tel" id="address" name="address" class="form-control">
                                 </div>
                             </div>
                             <h2 class="flex-grow-1 mb-2">商品資訊</h2>

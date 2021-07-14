@@ -9,7 +9,7 @@ require_once('includes/config.php');
 
 //寫入user_order
 $sql = "INSERT INTO user_order (user_id, order_date, paytype, order_status) VALUES (?, ?, ?, ?)";
-$usersSql = "SELECT id, account FROM users WHERE valid = 1";
+$usersSql = "SELECT id, account, address FROM users WHERE valid = 1";
 $orderDetailSql = "INSERT INTO user_order_detail (order_id, product_id, qty) VALUES (?, ?, ?)";
 
 $stmt = $db_host->prepare($sql);
