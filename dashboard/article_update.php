@@ -1,9 +1,16 @@
-<?php require_once("includes/header.php"); ?>
-<?php
+<?php 
+require_once("includes/header.php");
 require_once("includes/config.php");
+
 $id=$_GET["id"];
-$sql="SELECT * FROM article WHERE id='$id'";
-$result = $db_host->query($sql);
+$stmt = $db_host->prepare("SELECT * FROM article WHERE id='$id'");
+
+try{
+	$stmt->execute();
+	$rows=$stmt->fetchAll(PDO::FETCH_ASSOC);
+}catch(PDOException $e){
+	echo "資料庫連結失敗";
+}
 ?>
 <!-- page content -->
 <div class="right_col" role="main">
@@ -13,9 +20,7 @@ $result = $db_host->query($sql);
         <h3>文章</h3>
       </div>
     </div>
-
     <div class="clearfix"></div>
-
     <div class="row">
       <div class="col-md-12 col-sm-12">
         <div class="x_panel">
@@ -24,24 +29,19 @@ $result = $db_host->query($sql);
               <a class="btn btn-secondary" href="article_list.php">文章列表</a>修改文章:
             </h2>
             <div style="text-align: end;">
-
             </div>
             <div class="clearfix"></div>
           </div>
           <div class="x_content">
-
             <div class="container">
               <form action="articleUpdate.php" method="post">
-                <!-- <?php  
-                foreach($result as $key => $value ){
-            ?>  -->
-
-                <input type="hidden" name="id" value="<?=$value["id"]?>">
-                <!-- type="hidden"讓使用者看不到 -->
-
+                <?php
+                  foreach($rows as $value){
+                ?>
+                <input type="hidden" name="id" value="<?=$value[" id"]?>">
                 <div class="mb-2">
                   <label for="article_name">作者:</label>
-                  <input type="text" class="form-control " name="article_name" value="<?=$value["article_name"]?>">
+                  <input type="text" class="form-control " name="article_name" value="<?=$value[" article_name"]?>">
                 </div>
                 <div class="mb-2">
                   <label for="category">分類:</label>
@@ -53,10 +53,9 @@ $result = $db_host->query($sql);
                     <option value="5" <?php if($value["category"]=='5' )echo "selected" ?>>飲食</option>
                   </select>
                 </div>
-
                 <div class="mb-2">
                   <label for="added_by">標題:</label>
-                  <input type="text" class="form-control" name="added_by" value="<?=$value["added_by"]?>">
+                  <input type="text" class="form-control" name="added_by" value="<?=$value[" added_by"]?>">
                 </div>
                 <div class="mb-2">
                   <label for="content">內容:</label>
@@ -66,10 +65,9 @@ $result = $db_host->query($sql);
                   <a class="btn btn-secondary" href="article_list.php">返回</a>
                   <button class="btn btn-secondary" type="article_list.php">修改</button>
                 </div>
-
                 <?php
-            } 
-            ?>
+                  } 
+                ?>
               </form>
             </div>
             <!-- /page content -->

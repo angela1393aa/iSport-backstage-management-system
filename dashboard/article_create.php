@@ -1,5 +1,4 @@
 <?php require_once("includes/header.php"); ?>
-
 <!-- page content -->
 <div class="right_col" role="main">
   <div class="">
@@ -24,7 +23,7 @@
                 <!-- userCreate.php -->
                 <div class="mb-2">
                   <label for="article_name">作者</label>
-                  <input type="text" class="form-control" name="article_name" id="article_name" required>
+                  <input type="text" class="form-control" name="article_name" id="article_name">
                 </div>
                 <div class="mb-2">
                   <label for="category">分類</label>
@@ -38,11 +37,11 @@
                 </div>
                 <div class="mb-2">
                   <label for="added_by">標題</label>
-                  <input type="text" class="form-control" name="added_by" id="added_by" required>
+                  <input type="text" class="form-control" name="added_by" id="added_by">
                 </div>
                 <div class="mb-2">
                   <label for="content">內容:</label>
-                  <textarea class="form-control" rows="30" name="content" id="content" required></textarea>
+                  <textarea class="form-control" rows="30" name="content" id="content"></textarea>
                 </div>
                 <div style="text-align: end;">
                   <button class="btn btn-secondary" type="submit">新增</button>
@@ -50,5 +49,4 @@
               </form>
             </div>
             <!-- /page content -->
-
             <?php require_once("includes/footer.php"); ?>

@@ -1,11 +1,17 @@
-<?php require_once("includes/header.php"); ?>
-<?php
+<?php 
+require_once("includes/header.php");
 require_once("includes/config.php");
-$id=$_GET["id"];
-$sql="SELECT * FROM article WHERE id='$id'";
-$result = $db_host->query($sql);
-?>
 
+$id=$_GET["id"];
+$stmt = $db_host->prepare("SELECT * FROM article WHERE id='$id'");
+
+try{
+	$stmt->execute();
+	$rows=$stmt->fetchAll(PDO::FETCH_ASSOC);
+}catch(PDOException $e){
+	echo "資料庫連結失敗";
+}
+?>
 <!-- page content -->
 <div class="right_col" role="main">
   <div>
@@ -32,9 +38,9 @@ $result = $db_host->query($sql);
 
             <div class="container">
               <form action="" method="post">
-                <?php  
-                foreach($result as $key => $value ){
-            ?>
+              <?php
+                  foreach($rows as $value){
+              ?>
                 <div class="mb-2" style="text-align: end;">
                   <span>時間:
                     <?=$value["upload_date"]?>
@@ -50,25 +56,25 @@ $result = $db_host->query($sql);
                 <div class="mb-2">
                   <label>分類:</label>
                   <input type="text" class="form-control" name="category" value="<?php 
-          switch($value["category"]){
-              case('1'):
-                   echo '有氧';
-              break;
-              case('2'):
-                  echo '重訓';
-              break;
-              case('3'):
-                  echo 'tabata';
-              break;
-              case('4'):
-                  echo '飲食';
-               break;
-              case('5'):
-                  echo '核心';
-              break;
-          }
+                    switch($value["category"]){
+                        case('1'):
+                            echo '有氧';
+                        break;
+                        case('2'):
+                            echo '重訓';
+                        break;
+                        case('3'):
+                            echo 'tabata';
+                        break;
+                        case('4'):
+                            echo '飲食';
+                        break;
+                        case('5'):
+                            echo '核心';
+                        break;
+                    }
 
-      ?>" readonly>
+                ?>" readonly>
                 </div>
                 <div class="mb-2">
                   <label>標題:</label>
@@ -82,8 +88,8 @@ $result = $db_host->query($sql);
                   <a class="btn btn-secondary" href="article_list.php">返回</a>
                 </div>
                 <?php
-            } 
-            ?>
+                  } 
+                ?>
               </form>
             </div>
             <!-- /page content -->
