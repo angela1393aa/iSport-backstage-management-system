@@ -1,16 +1,16 @@
 <?php
 require_once("config.php");
 
-// if(isset($_SESSION['userLoggedIn'])) {
-//   $userLoggedIn = $_SESSION['userLoggedIn'];
-//   $query = $db_host->prepare("SELECT * FROM admin_user WHERE username=:username");
-//   $query->bindParam(":username", $userLoggedIn);
-//   $query->execute();
+if(isset($_SESSION['userLoggedIn'])) {
+  $userLoggedIn = $_SESSION['userLoggedIn'];
+  $query = $db_host->prepare("SELECT * FROM admin_user WHERE username=:username");
+  $query->bindParam(":username", $userLoggedIn);
+  $query->execute();
 
-//   $sqlData = $query->fetch(PDO::FETCH_ASSOC);
-// } else {
-//   header("Location: signIn.php");
-// }
+  $sqlData = $query->fetch(PDO::FETCH_ASSOC);
+} else {
+  header("Location: signIn.php");
+}
 ?>
 
 <!DOCTYPE html>
@@ -89,8 +89,8 @@ require_once("config.php");
                 </li>
                 <li><a><i class="far fa-list-alt"></i> 訂單管理 <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                    <li><a href="#">訂單列表</a></li>
-                    <li><a href="media_gallery.html">新增訂單</a></li>
+                    <li><a href="user_order.php">訂單列表</a></li>
+                    <li><a href="user_order_create.php">新增訂單</a></li>
                     <li><a href="typography.html">訂單統計</a></li>
                   </ul>
                 </li>
@@ -103,8 +103,8 @@ require_once("config.php");
                 </li>
                 <li><a><i class="far fa-newspaper"></i> 文章管理 <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                    <li><a href="/project_01/dashboard/includes/article_list.php">文章列表</a></li>
-                    <li><a href="/project_01/dashboard/includes/article_create.php">新增文章</a></li>
+                    <li><a href="article_list.php">文章列表</a></li>
+                    <li><a href="article_create.php">新增文章</a></li>
                   </ul>
                 </li>
               </ul>
