@@ -1,57 +1,57 @@
 <?php
 require_once('../includes/config.php');
+$id=$_POST["product_id"];
+// $id = 3;
+$productSql = "SELECT * FROM product WHERE valid = 1 AND id = ?";
+$productStmt = $db_host->prepare($productSql);
 
-// $sql = "SELECT product_sku.valid AS product_sku_valid,product_sku.stock,product_sku.status AS product_sku_status,product_sku.id AS product_sku_id,product_sku.sku_code,product_sku.status,product_sku.sku_group, product_sku.price AS product_sku_price, product_sku.stock,product_sku.Sales, product.*
-//     	FROM product
-//     	JOIN product_sku ON product.id = product_sku.product_id";
-// $stmt = $db_host->prepare($sql);
+$productSkuSql = "SELECT * FROM product_sku WHERE valid = 1 AND product_id=?";
 
-$productSkuSql = "SELECT * FROM product_sku WHERE valid = 1";
-$productSql = "SELECT * FROM product WHERE valid = 1";
-$typeSql = "SELECT * FROM product_type_value";
 $categorySql = "SELECT * FROM product_category";
-$statusSql = "SELECT * FROM product_status";
 $brandSql = "SELECT * FROM brand WHERE valid = 1";
-
-// $totalArr = [];
-// for($i = 1; $i <= count($productRows); $i++){
-//     $totalSql = "SELECT product_id,sum(stock) AS totalStock,sum(sale) AS totalSale FROM product_sku WHERE product_id=$i";
-//     $totalStmt = $db_host->prepare($totalSql);
-//     $totalStmt->execute();
-//     $totalRows = $totalStmt->fetchAll(PDO::FETCH_ASSOC);
-//     array_push($totalArr, $totalRows);
-// }
-
+$statusSql = "SELECT * FROM product_status";
+$typeSql = "SELECT * FROM product_type_value WHERE product_id=?";
 
 $productSkuStmt = $db_host->prepare($productSkuSql);
-$productStmt = $db_host->prepare($productSql);
-$typeStmt = $db_host->prepare($typeSql);
 $categoryStmt = $db_host->prepare($categorySql);
-$statusStmt = $db_host->prepare($statusSql);
 $brandStmt = $db_host->prepare($brandSql);
+$statusStmt = $db_host->prepare($statusSql);
+
+$typeStmt = $db_host->prepare($typeSql);
+
+
+
 
 try {
-    // $stmt->execute();
-    // $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $productSkuStmt->execute([$id]);
+    $productSkuRows = $productSkuStmt->fetchAll(PDO::FETCH_ASSOC);
 
-    $productSkuStmt->execute();
-    $productStmt->execute();
-    $typeStmt->execute();
+    $productStmt->execute([$id]);
+    $productRows = $productStmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+    $typeStmt->execute([$id]);
     $categoryStmt->execute();
     $statusStmt->execute();
     $brandStmt->execute();
 
-    $productSkuRows = $productSkuStmt->fetchAll(PDO::FETCH_ASSOC);
-    $productRows = $productStmt->fetchAll(PDO::FETCH_ASSOC);
     $typeRows = $typeStmt->fetchAll(PDO::FETCH_ASSOC);
     $categoryRows = $categoryStmt->fetchAll(PDO::FETCH_ASSOC);
     $statusRows = $statusStmt->fetchAll(PDO::FETCH_ASSOC);
     $brandRows = $brandStmt->fetchAll(PDO::FETCH_ASSOC);
 
+    $typeGroupArr = [];
+    foreach ($typeRows as $row) {
+        $typeGroupArr[$row['type_id']][$row['id']] = $row['type_value'];
+    }
+    // print_r($typeGroupArr);
+
+    
+
     $creatTimeArr = [];
     $productArr = [];
     $productCategory = [];
-    $brandArr =[];
+    $brandArr = [];
 
     $statusStyle = [
         '1' => 'success',
@@ -80,6 +80,7 @@ try {
     foreach ($typeRows as $row) {
         $typeArr[$row['id']] = $row['type_value'];                  //以id作為key產生新的陣列以便後續取值
     }
+    // print_r($typeArr);
     foreach ($categoryRows as $row) {
         $categoryArr[$row['id']] = $row['name'];                  //以id作為key產生新的陣列以便後續取值
     }
@@ -88,27 +89,25 @@ try {
     }
 
     $totalArr = [];
-    for ($i = 1; $i <= count($productRows); $i++) {
-        $totalSql = "SELECT product_id,sum(stock) AS totalStock,sum(sale) AS totalSale,max(update_time) AS maxUpdateTime FROM product_sku WHERE product_id=$i";
-        $totalStmt = $db_host->prepare($totalSql);
-        $totalStmt->execute();
-        $totalRows = $totalStmt->fetchAll(PDO::FETCH_ASSOC);
-        $totalArr[$i] = $totalRows;
-    }
+    $totalSql = "SELECT product_id,sum(stock) AS totalStock,sum(sale) AS totalSale,max(update_time) AS maxUpdateTime FROM product_sku WHERE product_id=$id";
+    $totalStmt = $db_host->prepare($totalSql);
+    $totalStmt->execute();
+    $totalRows = $totalStmt->fetchAll(PDO::FETCH_ASSOC);
+
     // print_r($totalArr);
 
     $imgArr = [];
-        $imgSql = "SELECT product_id,GROUP_CONCAT(id) AS img_id,GROUP_CONCAT(img_name) AS img_name FROM product_img GROUP BY product_id ORDER BY product_id";
-        $imgStmt = $db_host->prepare($imgSql);
-        $imgStmt->execute();
-        $imgRows = $imgStmt->fetchAll(PDO::FETCH_ASSOC);
+    $imgSql = "SELECT product_id,GROUP_CONCAT(id) AS img_id,GROUP_CONCAT(img_name) AS img_name FROM product_img GROUP BY product_id ORDER BY product_id";
+    $imgStmt = $db_host->prepare($imgSql);
+    $imgStmt->execute();
+    $imgRows = $imgStmt->fetchAll(PDO::FETCH_ASSOC);
 
     $img = [];
-    foreach($imgRows as $row){
+    foreach ($imgRows as $row) {
         $arr1 = explode(',', $row['img_id']);
         $arr2 = explode(',', $row['img_name']);
         $arr3 = [];
-        for($i = 0; $i < count($arr1); $i++){
+        for ($i = 0; $i < count($arr1); $i++) {
             $arr3[$arr1[$i]] = $arr2[$i];
         }
         array_push($img, $arr3);
@@ -146,34 +145,36 @@ try {
     }
 
     foreach ($productRows as $row) {
-        $arr = [
+        $product = [
             'product_id' => $row['id'],
             'category' => $categoryArr[$row['category']],
+            'category_id' => $row['category'],
             'product_name' => $row['name'],
             'product_brand' => $brandArr[$row['brand']],
             'product_intro' => $row['intro'],
             'price' => $row['price'],
-            'totalStock' => $totalArr[$row['id']][0]['totalStock'],
-            'totalSale' => $totalArr[$row['id']][0]['totalSale'],
+            'totalStock' => $totalRows[0]['totalStock'],
+            'totalSale' => $totalRows[0]['totalSale'],
             'create_time' => $row['creat_time'],
-            'maxUpdateTime' => $totalArr[$row['id']][0]['maxUpdateTime'],
+            'maxUpdateTime' => $totalRows[0]['maxUpdateTime'],
             'product_img' => $imgArr[$row['id']]
         ];
-        array_push($product, $arr);
+        // array_push($product, $arr);
     }
 
     $jArr = [
         'productSku' => $productSku,
-        'product' => $product
+        'product' => $product,
+        'typeGroup' => $typeGroupArr
     ];
-    //    var_dump($jArr);
-    //foreach ($jArr as $value){
-    //    print_r($value);
-    //    echo '<br>';
-    //}
-    echo json_encode($jArr);                                        //形成json檔
 } catch (PDOException $e) {
-    echo 'database connection error : <br>' . $e->getMessage() . '<br>';
-    exit();
+    echo "讀取資料失敗";
 }
+
+// print_r($productRows);
+
+
+// var_dump($rows);
+echo json_encode($jArr);
+
 $db_host = null;

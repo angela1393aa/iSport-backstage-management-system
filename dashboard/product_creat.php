@@ -17,9 +17,9 @@ require_once("includes/header.php");
     <div class="row">
       <div class="col-md-12 col-sm-12  ">
         <div class="x_panel">
-          <div class="x_title">
+          <div class="x_title d-flex justify-content-between">
             <h2>新增商品</h2>
-            <div class="clearfix"></div>
+            <a class="btn btn-dark text-nowrap m-0 border-0 text-white" style="border-radius:5px; font-size:14px" href="product_list_sku.php" type="submit">回商品列表</a>
           </div>
           <form class="product-creat-form" action="productCreate.php" method="post" enctype="multipart/form-data">
             <div class="row p-1 justify-content-center">

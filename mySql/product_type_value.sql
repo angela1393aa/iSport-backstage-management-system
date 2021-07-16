@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2021-07-04 20:16:09
+-- 產生時間： 2021-07-16 10:08:00
 -- 伺服器版本： 10.4.18-MariaDB
 -- PHP 版本： 8.0.3
 
@@ -184,7 +184,7 @@ INSERT INTO `product_type_value` (`id`, `product_id`, `type_id`, `type_value`) V
 (143, 32, 5, '香草冰淇淋(10磅/袋)'),
 (144, 32, 5, '香草冰淇淋(10磅/袋)'),
 (145, 33, 3, '600公克/罐'),
-(146, 3, 3, '1200公克/罐'),
+(146, 33, 3, '1200公克/罐'),
 (147, 34, 3, '4種口味綜合組'),
 (148, 35, 5, '黑巧可可(單入/包)'),
 (149, 36, 5, '玄米煎茶拿鐵(1kg/袋)'),
@@ -193,7 +193,9 @@ INSERT INTO `product_type_value` (`id`, `product_id`, `type_id`, `type_value`) V
 (152, 39, 5, '無麩質大燕麥片'),
 (153, 39, 5, '無麩質野莓麥片'),
 (154, 39, 3, '1入'),
-(155, 39, 3, '4入');
+(155, 39, 3, '4入'),
+(156, 41, 1, 'h'),
+(157, 41, 2, '4');
 
 --
 -- 已傾印資料表的索引
@@ -213,7 +215,7 @@ ALTER TABLE `product_type_value`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `product_type_value`
 --
 ALTER TABLE `product_type_value`
-  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=156;
+  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=158;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

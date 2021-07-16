@@ -1,6 +1,17 @@
 <?php
 require_once('../includes/config.php');
-$stmt=$db_host->prepare("SELECT * FROM users");
+require_once('../UserCount.php');
+
+
+if(!isset($_GET["p"])){
+    $p=1;
+}else{
+    $p=$_GET["p"];
+}
+$per_page=7;
+$star_item=($p-1)*$per_page;
+$stmt=$db_host->prepare("SELECT * FROM users WHERE valid=1 LIMIT $star_item,$per_page");
+
 try{
     $stmt->execute();
     $rows=$stmt->fetchAll(PDO::FETCH_ASSOC);
