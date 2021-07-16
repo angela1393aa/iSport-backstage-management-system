@@ -4,9 +4,10 @@ $style = 'userOrder.css';
 $js = 'userOrder.js';
 require_once('includes/header.php');
 
-$sql = 'SELECT id FROM user_order'; // WHERE order_status = 
+$sql = 'SELECT * FROM user_order'; // WHERE order_status = 
 $stmt = $db_host->prepare($sql);
-$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$stmt->execute();
+$count = $stmt->rowCount();
 ?>
 
 <!-- page content -->
@@ -42,7 +43,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
           <div class="x_content">
             <div class="d-flex py-2 align-items-center">
-              <p class="flex-grow-1 m-0">共有15<?php ?>張訂單</p>
+              <p class="flex-grow-1 m-0">共有<?= $count ?>張訂單</p>
               <div>
                 <form class="d-flex form-control border-0 m-0 p-0" style="height:33px;" action="user_order.php">
                   <input type="date" class="form-control" style="height:33px;" name="start">
@@ -56,7 +57,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <option value="2">已出貨</option>
                 <option value="3">取消訂單</option>
               </select>
-              <!-- <a id="filterSearch" class="btn btn-dark p-0 m-0 d-flex align-items-center justify-content-center ml-1 text-white" style="width:33px; height:33px;"><i class="fas fa-search"></i></a> -->
+
             </div>
 
             <div class="table-responsive">
@@ -76,8 +77,9 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     </th>
                     <th class="align-middle text-center">訂購人</th>
                     <th class="align-middle text-center">連絡電話</th>
-                    <th class="align-middle text-center">寄件地址</th>
+                    <th class="align-middle text-center">收件地址</th>
                     <th class="align-middle text-center">付款方式</th>
+                    <th class="align-middle text-center">運送方式</th>
                     <th class="align-middle text-center"><span class="nobr">訂單狀態</span>
                     <th class="align-middle text-center">發票號碼</th>
                     </th>
@@ -110,5 +112,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </div>
 
 <!-- /page content -->
+
+<!-- 彈跳視窗 -->
 
 <?= require_once('includes/footer.php') ?>

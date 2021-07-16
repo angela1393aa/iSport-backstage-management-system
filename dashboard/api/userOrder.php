@@ -21,11 +21,10 @@ try {
     $usersRows = $usersStmt->fetchAll(PDO::FETCH_ASSOC);
     $orderStatusRows = $orderStatusStmt->fetchAll(PDO::FETCH_ASSOC);
 
+    // 從users資料表撈account, address及phone
     $userArr = [];
     $userAddressArr = [];
     $userPhoneArr = [];
-
-    // 從users資料表撈account及address
     foreach ($usersRows as $row){
         $userArr[$row['id']] = $row['account'];
         $userAddressArr[$row['id']] = $row['address'];
@@ -33,11 +32,10 @@ try {
     }
     // print_r($userAddressArr);
 
-
-    $orderStatusArr = [];
-    $orderArr = [];
     
     // 從order_status資料表撈出狀態
+    $orderStatusArr = [];
+    $orderArr = [];
     foreach ($orderStatusRows as $row){
         $orderStatusArr[$row['id']] = $row['status'];
     }
@@ -49,25 +47,26 @@ try {
             'order_date' => $row['order_date'],
             'order_id' => $row['id'],
             'order_no' => $row['order_no'],
+            'recipient' => $row['recipient'],
             'user_id' => $row['user_id'],
             'user_account' => $userArr[$row['user_id']],
-            'phone' => "0".$userPhoneArr[$row['user_id']],
-            'address' => $userAddressArr[$row['user_id']],
+            // 'phone' => "0".$userPhoneArr[$row['user_id']],
+            'phone' => [$row['phone']],
+            // 'address' => $userAddressArr[$row['user_id']],
+            'address' => [$row['address']],
             'order_status' => $orderStatusArr[$row['order_status']],
             'invoice_no' => $row['invoice_no'],
             'paytype' => $row['paytype'],
+            'delivery' => $row['delivery'],
         ];
         array_push($orderArr, $arr);
     }
     // print_r($orderArr);
     echo json_encode($orderArr);
 
-
-
-
 } catch (PDOException $e) {
     echo '資料庫連結失敗<br>';
-    echo 'Eroor: ' . $e->getMessage() . '<br>';
+    echo 'Error: ' . $e->getMessage() . '<br>';
     exit;
 }
 
