@@ -13,15 +13,18 @@
   <script src="../vendors/jquery/dist/jquery.min.js"></script>
   <!-- Bootstrap -->
   <script src="../vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- FastClick -->
+<!-- FastClick -->
   <script src="../vendors/fastclick/lib/fastclick.js"></script>
   <!-- NProgress -->
+  <script src="../vendors/nprogress/nprogress.js"></script>
+  <!-- iCheck -->
+<!--  <script src="../vendors/iCheck/icheck.min.js"></script>-->
   <script src="vendors/nprogress/nprogress.js"></script>
-
   <!-- Custom Theme Scripts -->
   <script src="../build/js/custom.min.js"></script>
-
-
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="/project_01/dashboard/js/<?= $js ?>"></script>
+</body>
   <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="../vendors/jquery/dist/jquery.min.js"></script>
 <script src="../vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="../vendors/fastclick/lib/fastclick.js"></script>
@@ -44,6 +47,5 @@
 <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
 <script src="../build/js/custom.min.js"></script>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"rayId":"66997b599ede04e3","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2021.6.0","si":10}'></script>
-
 </body>
-</html>
+</html> 
