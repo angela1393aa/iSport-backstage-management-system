@@ -8,10 +8,11 @@ if(!isset($_GET["p"])){
 }else{
     $p=$_GET["p"];
 }
+$sql="SELECT * FROM users WHERE valid=1 LIMIT $star_item,$per_page";
 
 $per_page=9;
 $star_item=($p-1)*$per_page;
-$sql="SELECT * FROM users WHERE valid=1 LIMIT $star_item,$per_page";
+$sql="SELECT * FROM users WHERE valid=1 LIMIT 6";
 $sth=$db_host->prepare($sql);
 $sth->execute();   
 $rows=$sth->fetchAll(PDO::FETCH_ASSOC);
