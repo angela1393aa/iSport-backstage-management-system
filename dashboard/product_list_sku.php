@@ -1,6 +1,6 @@
 <?php
 $title = '商品列表';
-$style = 'product-list.css';
+$style = 'product-list-sku.css';
 $js = 'productListSku.js';
 require_once("includes/header.php");
 ?>

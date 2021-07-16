@@ -21,6 +21,7 @@ $typeStmt = $db_host->prepare($typeSql);
 
 
 
+
 try {
     $productSkuStmt->execute([$id]);
     $productSkuRows = $productSkuStmt->fetchAll(PDO::FETCH_ASSOC);
@@ -45,6 +46,7 @@ try {
     }
     // print_r($typeGroupArr);
 
+    
 
     $creatTimeArr = [];
     $productArr = [];
@@ -146,6 +148,7 @@ try {
         $product = [
             'product_id' => $row['id'],
             'category' => $categoryArr[$row['category']],
+            'category_id' => $row['category'],
             'product_name' => $row['name'],
             'product_brand' => $brandArr[$row['brand']],
             'product_intro' => $row['intro'],

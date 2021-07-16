@@ -24,71 +24,51 @@ require_once("includes/header.php");
                         <div class="col-12 p-3">
                             <div class="row">
                                 <div class="form-group col-6 p-0 pr-1">
-                                    <label for="" class="m-1 h6" id="editProductName">商品名稱</label>
-                                    <input type="text" class="form-control ">
+                                    <label for="" class="m-1 h6">商品名稱</label>
+                                    <input type="text" class="form-control " id="editProductName" name="editProductName">
                                 </div>
                                 <div class="col-3 p-0 pr-1">
                                     <label class="d-block" class="m-1 h6">品牌<span id="id"></span></label>
-                                    <input type="text" value="" name="id" class="form-control" list="editBrandList">
+                                    <input type="text" value="" name="editBrand" class="form-control" list="editBrandList" id="editBrand">
                                     <datalist id="editBrandList">
                                     </datalist>
                                 </div>
                                 <div class="col-3 p-0 pr-1">
                                     <label for="" class="m-1 h6">分類</label>
-                                    <select name="" id="productEditCategory" class="form-control">
+                                    <select name="" id="editProductCategory" class="form-control">
 
                                     </select>
                                 </div>
                                 <div class="col-12 p-0">
                                     <label for="">商品介紹</label>
-                                    <textarea name="" id="" cols="30" rows="10" class="form-control"></textarea>
+                                    <textarea name="" id="editProductIntro" cols="30" rows="10" class="form-control"></textarea>
                                 </div>
                             </div>
 
                             <h6 class="mt-3">規格</h6>
                             <hr>
-                            <div class="row mt-2">
-                                <label for="" class="col-auto m-1 h6">顏色</label>
-                                <input type="text" class="form-control col-2 mr-1">
-                                <input type="text" class="form-control col-2 mr-1">
-                                <input type="text" class="form-control col-2 mr-1">
-                                <input type="text" class="form-control col-2 mr-1">
-                                <input type="text" class="form-control col-2 mr-1">
+                            <div class="" id="editProductTypeBlock">
+                                <div class="row mt-2">
+                                    <select name="editProductType1" id="editProductType1" class="form-control col-12 m-0 editProductType text-center" disabled>
+
+                                    </select>
+
+                                    <div class="row col-12 m-0 p-0" id="editProductTypeValue1"></div>
+                                </div>
+                                <div class="row mt-2">
+                                    <select name="editProductType2" id="editProductType2" class="form-control col-12 m-0 editProductType" disabled>
+
+                                    </select>
+                                    <div class="row col-12 m-0 p-0" id="editProductTypeValue2"></div>
+                                </div>
                             </div>
-                            <div class="row mt-2">
-                                <label for="" class="col-auto m-1 h6">尺寸</label>
-                                <input type="text" class="form-control col-2 mr-1">
-                                <input type="text" class="form-control col-2 mr-1">
-                                <input type="text" class="form-control col-2 mr-1">
-                                <input type="text" class="form-control col-2 mr-1">
-                                <input type="text" class="form-control col-2 mr-1">
-                            </div>
+
 
 
                             <h6 class="mt-3">商品圖片</h6>
                             <hr>
                             <div class="col-12">
-                                <div class="row">
-                                    <div class="col-3 p-1">
-                                        <figure class="m-0  p-0 figure">
-                                            <img class="d-block img-thumbnail" src="../db_img/1001-1.png">
-                                        </figure>
-                                    </div>
-                                    <div class="col-3 p-1">
-                                        <figure class="m-0  p-0 figure">
-                                            <img class="d-block img-thumbnail" src="../db_img/1001-1.png">
-                                        </figure>
-                                    </div>
-                                    <div class="col-3 p-1">
-                                        <figure class="m-0  p-0 figure">
-                                            <img class="d-block img-thumbnail" src="../db_img/1001-1.png">
-                                        </figure>
-                                    </div>
-                                    <div class="col-3 p-1">
-                                        <figure class="m-0  p-0 figure">
-                                            <img class="d-block img-thumbnail" src="../db_img/1001-1.png">
-                                        </figure>
-                                    </div>
+                                <div class="row editProductImgBlock" id="editProductImgBlock">
                                 </div>
                             </div>
                             <h6 class="mt-3">單品</h6>
@@ -98,20 +78,26 @@ require_once("includes/header.php");
                                     <table class="table table-striped jambo_table bulk_action">
                                         <thead>
                                             <tr class="headings">
-                                                <th class="px-2 py-3 text-center">規格</th>
-                                                <th class="px-2 py-3 text-center">貨號</th>
-                                                <th class="px-2 py-3 text-center">庫存</th>
-                                                <th class="px-2 py-3 text-center">狀態</th>
-                                                <th class="px-2 py-3 text-center">操作</th>
+                                                <th class="col-3 px-2 py-3 text-center">規格</th>
+                                                <th class="col-4 px-2 py-3 text-center">貨號</th>
+                                                <th class="col-2 px-2 py-3 text-center">庫存</th>
+                                                <th class="col-2 px-2 py-3 text-center">狀態</th>
+                                                <th class="col-1 px-2 py-3 text-center">刪除</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="productSkuEditTbody">
                                             <tr class="even pointer p-0">
-                                                <td> <input type="text" value="" name="id" class="form-control" list="brandList"> </td>
+                                                <td> <input type="text" value="" name="id" class="form-control" list="brandList" readonly> </td>
                                                 <td><input type="text" value="" name="id" class="form-control" list="brandList"></td>
                                                 <td><input type="text" value="" name="id" class="form-control" list="brandList"></td>
-                                                <td><input type="text" value="" name="id" class="form-control" list="brandList"></td>
-                                                <td><input type="text" value="" name="id" class="form-control" list="brandList"></td>
+                                                <td>
+                                                    <select name="" id="" class="form-control">
+                                                        <option value="1">供貨中</option>
+                                                        <option value="2">缺貨中</option>
+                                                        <option value="3">已下架</option>
+                                                    </select>
+                                                </td>
+                                                <td><input type="checkbox" value="" name="id" class="form-control" list="brandList"></td>
                                             </tr>
                                         </tbody>
                                     </table>

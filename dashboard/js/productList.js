@@ -7,6 +7,7 @@ axios({
 }).then(function (response) {
     let categoryData = response.data.category;
     let brandData = response.data.brand;
+    let typeListData = response.data.typeList;
     let content = '';
     categoryData.forEach(item => {
         content += `
@@ -14,7 +15,7 @@ axios({
          `
     });
     $('#categoryFilter').append(content);
-    $('#productEditCategory').append(content);
+    $('#editProductCategory').append(content);
     content = '';
     brandData.forEach(item => {
         content += `
@@ -22,6 +23,16 @@ axios({
          `
     });
     $('#editBrandList').append(content);
+    content = '';
+    typeListData.forEach(item => {
+        content += `
+        <option value="${item.id}">${item.name_frontend}</option>
+         `
+    });
+    $('.editProductType').append(content);
+
+
+
 }).catch(function (error) {
     console.log(error);
 });
@@ -82,13 +93,86 @@ $('#productTbody').on('click', '#edit', function () {
     productFormData.append("product_id", id);
     axios.post('/project_01/dashboard/api/productListProductApi.php', productFormData)
         .then(function (response) {
-            console.log(response);
             let product = response.data.product;
             let productSku = response.data.productSku;
-            console.log(id);
-            console.log(product.product_name);
-            console.log(response.data);
+            let typeGroup = response.data.typeGroup;
+            let arr = Object.keys(typeGroup);
+            let len = arr.length;
+            let imgKeyArr = Object.keys(product['product_img']);
+            let imgKeyArrLen = imgKeyArr.length;
+            console.log(imgKeyArr);
+            console.log(imgKeyArr.length);
+            let content = '';
+            // console.log(id);
+            console.log(product);
+            console.log(productSku);
+            // console.log(typeGroup);
+
             $('#editProductName').val(product.product_name);
+            $('#editBrand').val(product.product_brand);
+            $('#editProductCategory1').val(product.category_id);
+            $('#editProductIntro').val(product.product_intro);
+
+            // console.log(len);
+            $(`#editProductTypeValue1`).empty();
+            $(`#editProductTypeValue2`).empty();
+            $(`#editProductType1`).val('');
+            $(`#editProductType2`).val('');
+
+            for (let i = 0; i < len; i++) {
+                let key = arr[i];
+                let keyArr = Object.keys(typeGroup[key]);
+                let keyArrLen = keyArr.length;
+                content = '';
+
+                // console.log(arr[i]);
+                // console.log(typeGroup[key]);
+                $(`#editProductType${i + 1}`).val(key);
+                for (let j = 0; j < keyArrLen; j++) {
+                    content += `
+                    <input type="text" class="form-control col-2 mr-0" value="${typeGroup[key][keyArr[j]]}" name"typeGroup[${keyArr[j]}]">
+                    `
+                }
+                $(`#editProductTypeValue${i + 1}`).append(content);
+            }
+
+            $('#editProductImgBlock').empty();
+            content = '';
+            for(let i = 0; i < imgKeyArrLen; i++){
+                content += `
+                <div class="col-3 p-1 mb-2 bd-change">
+                <div class="row p-0 m-0">
+                <input type="checkbox" name="editImg[]" value="${imgKeyArr[i]}" class="col-12 my-2 form-control-sm">
+                <figure class="m-0  p-0 figure ratio ratio-1x1 col-12">
+                    <img class="d-block img-thumbnail" src="../db_img/${product['product_img'][imgKeyArr[i]]}">
+                </figure>
+                </div>
+                </div>
+                `
+            }
+            $('#editProductImgBlock').append(content);
+
+            $('#productSkuEditTbody').empty();
+            content = '';
+            productSku.forEach(element => {
+                content += `
+                <tr class="even pointer p-0">
+                    <td> <input type="text" value="${element['sku_group']}" name="editSkuGroup" class="form-control" readonly> </td>
+                    <td><input type="text" value="${element['sku_code']}" name="editSkuCode" class="form-control" ></td>
+                    <td><input type="text" value="${element['stock']}" name="editStock" class="form-control" ></td>
+                    <td>
+                        <select name="editStatus" id="" class="form-control" value="${element['status_id']}">
+                            <option value="1">供貨中</option>
+                            <option value="2">缺貨中</option>
+                            <option value="3">已下架</option>
+                        </select>
+                    </td>
+                    <td class="productSkuValidCheckbox"><input type="checkbox" value="${element['product_sku_id']}" name="productSkuValid" class="" list="brandList"></td>
+                </tr>
+                `
+            })
+            $('#productSkuEditTbody').append(content);
+
 
 
         }).catch(function (error) {
