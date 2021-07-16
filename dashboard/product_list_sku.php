@@ -1,7 +1,7 @@
 <?php
 $title = '商品列表';
 $style = 'product-list.css';
-$js = 'productList.js';
+$js = 'productListSku.js';
 require_once("includes/header.php");
 ?>
 
@@ -27,12 +27,12 @@ require_once("includes/header.php");
         <div class="row">
             <div class="col-md-12 col-sm-12  ">
                 <div class="x_panel">
-                    <div class="x_title">
-                        <h2>商品列表<small>所有商品</small></h2>
-                        <div class="clearfix"></div>
+                    <div class="x_title d-flex justify-content-between">
+                        <h2>單品列表</h2>
+                        <a class="btn btn-dark text-nowrap m-0 border-0 text-white" style="border-radius:5px; font-size:14px" href="product_creat.php" type="submit"><i class="fas fa-plus mr-2"></i>新增商品</a>
                     </div>
                     <div class="x_content d-flex flex-column">
-                        <p>選擇商品檢視或編輯</p>
+                        <p>選擇單品檢視或編輯</p>
                         <div class="d-flex py-2 align-items-center">
                             <p class="flex-grow-1 m-0" id="dataCount"></p>
                             <p class="m-0 pr-2">價格區間</p>
