@@ -7,29 +7,29 @@ require_once('includes/config.php');
 
 $id=$_GET["id"];
 
-$userOrderSql = "SELECT * FROM user_order WHERE valid = 1";
+$userOrderSql = "SELECT * FROM user_order WHERE id =? AND valid = 1";
 $usersSql = "SELECT id, account, address, phone FROM users WHERE valid = 1";
 $userOrderStmt = $db_host->prepare($userOrderSql);
 $usersStmt = $db_host->prepare($usersSql);
 
 try{
-    $userOrderStmt->execute();
+    $userOrderStmt->execute([$id]);
     $usersStmt->execute();
     $userOrderRows = $userOrderStmt->fetchAll(PDO::FETCH_ASSOC);
     $usersRows = $usersStmt->fetchAll(PDO::FETCH_ASSOC);
 
     $userOrderArr = [];
     $usersArr = [];
-
-    // foreach ($userOrderRows as $userOrderRow) {
-    //     $userOrderArr[$userOrderRow[$id]] = $userOrderRow['user_id'];
-    //     $userOrderArr[$userOrderRow[$id]] = $userOrderRow['order_no'];
-    // }
     
     foreach ($userOrderRows as $userOrderRow) {
         if ($id == $userOrderRow['id']) {
             $userOrderArr[$userOrderRow['id']] = $userOrderRow['user_id'];
             $userOrderArr[$userOrderRow['id']] = $userOrderRow['order_no'];
+            $userOrderArr[$userOrderRow['id']] = $userOrderRow['address'];
+            $userOrderArr[$userOrderRow['id']] = $userOrderRow['phone'];
+            $userOrderArr[$userOrderRow['id']] = $userOrderRow['paytype'];
+            $userOrderArr[$userOrderRow['id']] = $userOrderRow['delivery'];
+            $userOrderArr[$userOrderRow['id']] = $userOrderRow['recipient'];
             break;
         }
     }
@@ -37,8 +37,6 @@ try{
     foreach ($usersRows as $usersRow){
         if ($userOrderRow['user_id'] == $usersRow['id']) {
             $usersArr[$usersRow['id']] = $usersRow['account'];
-            $usersArr[$usersRow['id']] = $usersRow['address'];
-            $usersArr[$usersRow['id']] = $usersRow['phone'];
             break;
         }
     }
@@ -87,6 +85,8 @@ try{
                         <br />
                         <h2 class="flex-grow-1 mb-2 mt-0">訂購人資料</h2>
                         <form action="userOrderUpdate.php" method="post" data-parsley-validate class="form-horizontal form-label-left">
+                        
+                        <input type="hidden" name="id" value="<?= $userOrderRow['id']?>"> <!-- 設定id為type="hidden", 給UPDATE抓id -->
                             <div class="item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="orderNum" >訂單編號
                                 </label>
@@ -102,17 +102,24 @@ try{
                                 </div>
                             </div>
                             <div class="item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="phone" required>連絡電話
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="recipient">收件人
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input type="tel" id="phone" name="phone" class="form-control" value="<?="0".$usersRow['phone']?>">
+                                    <input type="text" id="recipient" name="recipient" class="form-control" value="<?=$userOrderRow['recipient']?>">
                                 </div>
                             </div>
                             <div class="item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="address">寄件地址
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="phone" required>連絡電話
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input type="tel" id="address" name="address" class="form-control" value="<?=$usersRow['address']?>">
+                                    <input type="tel" id="phone" name="phone" class="form-control" value="<?=$userOrderRow['phone']?>">
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="address">收件地址
+                                </label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input type="tel" id="address" name="address" class="form-control" value="<?=$userOrderRow['address']?>">
                                 </div>
                             </div>
                             <!-- <h2 class="flex-grow-1 mb-2">商品資訊</h2> -->
@@ -154,7 +161,7 @@ try{
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="paytype">付款方式
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <select class="form-control form-select" name="paytype" id="paytype">
+                                    <select class="form-control form-select" name="paytype" id="paytype" value="<?=$userOrderRow['paytype']?>">
                                         <option value="1">ATM匯款</option>
                                         <option value="2">線上刷卡</option>
                                         <option value="3">貨到付款</option>
@@ -165,10 +172,10 @@ try{
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="delivery">運送方式
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <select class="form-control form-select" name="delivery" id="delivery" name="delivery">
+                                    <select class="form-control form-select" name="delivery" id="delivery" name="delivery" value="$userOrderRow['delivery']">
                                         <option value="1">郵寄</option>
-                                        <option value="2">宅即便</option>
-                                        <option value="3">貨到付款</option>
+                                        <option value="2">宅急便</option>
+                                        <option value="3">超商貨到付款</option>
                                     </select>
                                 </div>
                             </div>

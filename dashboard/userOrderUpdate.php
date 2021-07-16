@@ -1,35 +1,24 @@
 <?php
 require_once('includes/config.php');
 
-$address = $_POST['address'];
+$id = $_POST['id'];  //在user_order_update.php 設定input type="hidden" name="id"
+$recipient = $_POST['recipient'];
 $phone = $_POST['phone'];
-$name = $_POST['name'];
-$email = $_POST['email'];
+$address = $_POST['address'];
+$paytype = $_POST['paytype'];
+$delivery = $_POST['delivery'];
 
-$userOrderSql = "SELECT * FROM user_order ";
-$usersSql = "SELECT address FROM users";
+$userOrderSql = "UPDATE user_order SET recipient = ?, phone = ?, address = ?, paytype = ?, delivery = ? WHERE id = ?";
 
-$usersStmt = $db_host->prepare($usersSql);
+$userOrderStmt = $db_host->prepare($userOrderSql);
 
 try{
-    $userOrderStmt->execute();
-    $usersStmt->execute();
-    $userOrderRows = $userOrderStmt->fetchAll(PDO::FETCH_ASSOC);
-
-    $userOrderArr = [];
-
-    foreach ($userOrderRows as $row){
-        $userOrderArr[$row['id']] = $row['order_no'];
-    }
-
-    
-
+    $userOrderStmt->execute([$recipient, $phone, $address, $paytype, $delivery, $id]);
 
     header("location: user_order.php");
 
-
 }catch(PDOException $e){
-    echo "資料庫新增失敗<br>";
+    echo "資料庫修改失敗<br>";
     echo "Error: ".$e->getMessage(). "<br>";
     exit;
 }
