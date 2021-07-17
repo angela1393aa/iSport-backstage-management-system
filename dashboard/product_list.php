@@ -5,6 +5,22 @@ $js = 'productList.js';
 require_once("includes/header.php");
 ?>
 
+<div class="submit-mask">
+    <div class="py-4 rounded">
+        <div class="h3 h-auto text-center">確定更新商品資料嗎?</div>
+        <p class="h-auto text-center text-danger">*若有包含刪除的資料，則無法復原被刪除的資料</p>
+        <hr>
+        <div class="text-center text-danger">
+            <i class="fas fa-exclamation-circle"></i>
+        </div>
+        <hr>
+        <div class="d-flex justify-content-end mx-3">
+            <button type="button" class="btn btn-outline-info" id="cancelUpdate">取消更新</button>
+            <button type="button" class="btn btn-info" id="confirmUpdate">確定更新</button>
+        </div>
+    </div>
+</div>
+
 <!-- page content -->
 <div class="right_col" role="main">
 
@@ -14,16 +30,17 @@ require_once("includes/header.php");
         <div class="modal-dialog modal-dialog-centered modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+                    <h5 class="modal-title" id="productEditPageTitle"></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="#" method="post" class="row p-2">
+                    <form action="productListUpdate.php" method="post" class="row p-2">
                         <div class="col-12 p-3">
                             <div class="row">
-                                <div class="form-group col-6 p-0 pr-1">
+                                <input type="hidden" name="productId" id="productId">
+                                <div class="form-group col-7 p-0 pr-1">
                                     <label for="" class="m-1 h6">商品名稱</label>
                                     <input type="text" class="form-control " id="editProductName" name="editProductName">
                                 </div>
@@ -33,7 +50,7 @@ require_once("includes/header.php");
                                     <datalist id="editBrandList">
                                     </datalist>
                                 </div>
-                                <div class="col-3 p-0 pr-1">
+                                <div class="col-2 p-0 pr-1">
                                     <label for="" class="m-1 h6">分類</label>
                                     <select name="" id="editProductCategory" class="form-control">
 
@@ -70,6 +87,12 @@ require_once("includes/header.php");
                             <div class="col-12">
                                 <div class="row editProductImgBlock" id="editProductImgBlock">
                                 </div>
+
+                                <div class="mb-2 row">
+                                    <span class="text-danger">*</span><label for="">選擇檔案</label>
+                                    <input class="" id="productPhotoUpload" type="file" name="file[]" accept="image/gif, image/jpeg, image/png" multiple />
+                                </div>
+
                             </div>
                             <h6 class="mt-3">單品</h6>
                             <hr>
@@ -79,26 +102,15 @@ require_once("includes/header.php");
                                         <thead>
                                             <tr class="headings">
                                                 <th class="col-3 px-2 py-3 text-center">規格</th>
-                                                <th class="col-4 px-2 py-3 text-center">貨號</th>
+                                                <th class="col-3 px-2 py-3 text-center">貨號</th>
                                                 <th class="col-2 px-2 py-3 text-center">庫存</th>
+                                                <th class="col-1 px-2 py-3 text-center">價格</th>
                                                 <th class="col-2 px-2 py-3 text-center">狀態</th>
-                                                <th class="col-1 px-2 py-3 text-center">刪除</th>
+                                                <th class="col-1 px-2 py-3 text-center align-middle"> <input type="checkbox"> 刪除</th>
                                             </tr>
                                         </thead>
                                         <tbody id="productSkuEditTbody">
-                                            <tr class="even pointer p-0">
-                                                <td> <input type="text" value="" name="id" class="form-control" list="brandList" readonly> </td>
-                                                <td><input type="text" value="" name="id" class="form-control" list="brandList"></td>
-                                                <td><input type="text" value="" name="id" class="form-control" list="brandList"></td>
-                                                <td>
-                                                    <select name="" id="" class="form-control">
-                                                        <option value="1">供貨中</option>
-                                                        <option value="2">缺貨中</option>
-                                                        <option value="3">已下架</option>
-                                                    </select>
-                                                </td>
-                                                <td><input type="checkbox" value="" name="id" class="form-control" list="brandList"></td>
-                                            </tr>
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -107,8 +119,8 @@ require_once("includes/header.php");
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                    <button type="button" class="btn btn-success" id="submitUpdateBtn">更新商品資訊</button>
                 </div>
             </div>
         </div>

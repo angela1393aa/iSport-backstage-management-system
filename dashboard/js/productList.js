@@ -91,6 +91,7 @@ $('#productTbody').on('click', '#edit', function () {
     let id = $(this).data('id');
     let productFormData = new FormData();
     productFormData.append("product_id", id);
+    $('#productId').val(id);
     axios.post('/project_01/dashboard/api/productListProductApi.php', productFormData)
         .then(function (response) {
             let product = response.data.product;
@@ -107,7 +108,7 @@ $('#productTbody').on('click', '#edit', function () {
             console.log(product);
             console.log(productSku);
             // console.log(typeGroup);
-
+            $('#productEditPageTitle').text(product.product_name);
             $('#editProductName').val(product.product_name);
             $('#editBrand').val(product.product_brand);
             $('#editProductCategory1').val(product.category_id);
@@ -141,8 +142,8 @@ $('#productTbody').on('click', '#edit', function () {
             for(let i = 0; i < imgKeyArrLen; i++){
                 content += `
                 <div class="col-3 p-1 mb-2 bd-change">
-                <div class="row p-0 m-0">
-                <input type="checkbox" name="editImg[]" value="${imgKeyArr[i]}" class="col-12 my-2 form-control-sm">
+                <div class="row p-0 m-0 imgCheck">
+                <input type="checkbox" name="editImg[]" value="${imgKeyArr[i]}" class="col-12 my-2">
                 <figure class="m-0  p-0 figure ratio ratio-1x1 col-12">
                     <img class="d-block img-thumbnail" src="../db_img/${product['product_img'][imgKeyArr[i]]}">
                 </figure>
@@ -157,27 +158,75 @@ $('#productTbody').on('click', '#edit', function () {
             productSku.forEach(element => {
                 content += `
                 <tr class="even pointer p-0">
-                    <td> <input type="text" value="${element['sku_group']}" name="editSkuGroup" class="form-control" readonly> </td>
-                    <td><input type="text" value="${element['sku_code']}" name="editSkuCode" class="form-control" ></td>
-                    <td><input type="text" value="${element['stock']}" name="editStock" class="form-control" ></td>
+                    <td> <input type="text" value="${element['sku_group']}" class="form-control" readonly> </td>
+                    <td><input type="text" value="${element['sku_code']}" name="editSkuCode[]" class="form-control" ></td>
+                    <td><input type="text" value="${element['stock']}" name="editStock[]" class="form-control" ></td>
+                    <td><input type="text" value="${element['price']}" name="editStock[]" class="form-control" ></td>
                     <td>
-                        <select name="editStatus" id="" class="form-control" value="${element['status_id']}">
+                        <select name="editStatus[]" class="form-control" value="${element['status_id']}">
                             <option value="1">供貨中</option>
                             <option value="2">缺貨中</option>
                             <option value="3">已下架</option>
                         </select>
                     </td>
-                    <td class="productSkuValidCheckbox"><input type="checkbox" value="${element['product_sku_id']}" name="productSkuValid" class="" list="brandList"></td>
+                    <td class="productSkuValidCheckbox text-center align-middle position-relative">
+                        <div class="h-75 w-75 check-area"></div>
+                        <input type="checkbox" value="${element['product_sku_id']}" name="productSkuValid[]" class="col-12" list="brandList">
+                    </td>
                 </tr>
                 `
             })
             $('#productSkuEditTbody').append(content);
-
-
-
         }).catch(function (error) {
             console.log(error)
         })
+})
+
+$('#editProductImgBlock').on('click', 'figure',function(){
+    if($(this).closest('.imgCheck').find('input[type=checkbox]').prop('checked')){
+        $(this).closest('.imgCheck').find('input[type=checkbox]').prop('checked', false);
+        $(this).css('border', 'none');
+    }else{
+        $(this).closest('.imgCheck').find('input[type=checkbox]').prop('checked', true);
+        $(this).css('border', '1px solid #20c997');
+    }
+    // $('#editProductImgBlock').find(':checkbox').closest('.imgCheck').find('figure').css('border', 'none');
+    // $('#editProductImgBlock').find(':checked').closest('.imgCheck').find('figure').css('border', '1px solid #20c997');
+})
+
+$('#editProductImgBlock').on('click', ':checkbox',function(){
+    $(this).closest('.imgCheck').find('figure').css('border', 'none');
+    $('#editProductImgBlock').find(':checked').closest('.imgCheck').find('figure').css('border', '1px solid #20c997');
+})
+
+
+$('#productSkuEditTbody').on('click', '.check-area', function(){
+    if($(this).closest('td').find('input[type=checkbox]').prop('checked')){
+        $(this).closest('td').find('input[type=checkbox]').prop('checked', false);
+        $(this).closest('tr').css('background-color', '');
+    }else{
+        $(this).closest('td').find('input[type=checkbox]').prop('checked', true);
+        $(this).closest('tr').css('background-color', '#FFECF5');
+    }
+})
+
+$('#productSkuEditTbody').on('click', ':checkbox',function(){
+    $(this).closest('tr').css('background-color', '');
+    if($(this).prop('checked')){
+        $(this).closest('tr').css('background-color', '#FFECF5');
+    }
+})
+
+$('#submitUpdateBtn').click(function(){
+    $('.submit-mask').css('display', 'block');
+});
+
+$('#cancelUpdate').click(function(){
+    $('.submit-mask').css('display', 'none');
+})
+
+$('#confirmUpdate').click(function(){
+    $('form').submit();
 })
 
 //------------------------------------------------------------

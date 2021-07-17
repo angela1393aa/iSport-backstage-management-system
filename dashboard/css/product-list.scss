@@ -44,3 +44,29 @@ $teal: #20c997;
         border-radius: 5px;
     }
 }
+.check-area{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.submit-mask{
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    >div{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 400px;
+        height: auto;
+        background-color: white;
+    }
+    i{
+        font-size: 100px;
+    }
+}

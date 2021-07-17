@@ -40,4 +40,32 @@
 .bd-change:nth-child(2n) {
   background-color: #eeeeee;
   border-radius: 5px;
+}
+
+.check-area {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.submit-mask {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.submit-mask > div {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: auto;
+  background-color: white;
+}
+.submit-mask i {
+  font-size: 100px;
 }/*# sourceMappingURL=product-list.css.map */
