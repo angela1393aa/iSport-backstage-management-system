@@ -27,6 +27,8 @@ if(isset($_SESSION['userLoggedIn'])) {
 
   <!-- Bootstrap -->
   <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="<?= $bootstrapLink ?>" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
   <!-- Font Awesome -->
   <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
@@ -96,9 +98,8 @@ if(isset($_SESSION['userLoggedIn'])) {
                 </li>
                 <li><a><i class="fab fa-youtube"></i> 影片管理 <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                    <li><a href="tables.html">影片列表</a></li>
-                    <li><a href="tables_dynamic.html">影片上傳</a></li>
-                    <li><a href="tables_dynamic.html">影片統計</a></li>
+                    <li><a href="showVideoList.php">影片列表</a></li>
+                    <li><a href="uploadVideoFile.php">影片上傳</a></li>
                   </ul>
                 </li>
                 <li><a><i class="far fa-newspaper"></i> 文章管理 <span class="fa fa-chevron-down"></span></a>

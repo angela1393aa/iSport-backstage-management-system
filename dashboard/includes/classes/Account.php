@@ -130,7 +130,7 @@ class Account {
                 $query->bindParam(":code", $code);
                 $query->execute();
                 if($query) {
-                    array_push($this->messageArray, "新密碼設定完成！2秒後自動跳轉");
+                    array_push($this->messageArray, "新密碼設定完成！自動跳轉中");
                     return true;
                 } else {
                     exit("Something went wrong!");

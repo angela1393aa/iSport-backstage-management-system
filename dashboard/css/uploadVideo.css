@@ -1,0 +1,189 @@
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box; }
+
+#uploadForm label,
+#uploadForm input,
+#uploadForm textarea,
+#uploadForm select {
+  font-size: 17px; }
+
+#descriptionInput {
+  resize: none;
+  min-height: 130px; }
+
+#fileInputContainer {
+  position: relative;
+  color: #262626a9; }
+  #fileInputContainer .forFileInput {
+    position: absolute;
+    height: 100%;
+    z-index: 100;
+    cursor: pointer; }
+
+#videoPreview {
+  border: 1px solid #ced4da;
+  min-height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: #cccccc;
+  width: 100%; }
+  #videoPreview .video-preview__video {
+    display: none;
+    padding: 8px; }
+  #videoPreview .video-preview__default-image {
+    height: 80px; }
+  #videoPreview .video-preview__default-text {
+    font-weight: 500;
+    font-size: 32px; }
+
+.panel_toolbox {
+  min-width: 0; }
+
+.video-table .th-pic {
+  min-width: 248px;
+  max-width: 248px; }
+
+.video-table .td-pic {
+  min-width: 248px;
+  max-width: 248px; }
+
+.video-table .th-title {
+  min-width: 150px;
+  max-width: 200px; }
+
+.video-table .td-title {
+  min-width: 150px;
+  max-width: 200px; }
+
+.video-table .th-description {
+  min-width: 200px;
+  max-width: 300px; }
+
+.video-table .td-description {
+  min-width: 200px;
+  max-width: 300px; }
+
+.video-table .th-category {
+  min-width: 50px;
+  max-width: 90px; }
+
+.video-table .td-category {
+  min-width: 50px;
+  max-width: 90px; }
+
+.video-table .th-duration {
+  min-width: 86px;
+  max-width: 90px; }
+
+.video-table .td-duration {
+  min-width: 86px;
+  max-width: 90px; }
+
+.video-table .th-uploadTime {
+  min-width: 108px;
+  max-width: 130px; }
+
+.video-table .td-uploadTime {
+  min-width: 108px;
+  max-width: 130px; }
+
+.video-table .th-view {
+  min-width: 86px;
+  max-width: 90px; }
+
+.video-table .td-view {
+  min-width: 86px;
+  max-width: 90px; }
+
+.top_search .form-control {
+  padding: 0 26px;
+  border-radius: 25px; }
+
+.loadingModal {
+  overflow: hidden;
+  border-radius: 7px; }
+  .loadingModal .modal-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0; }
+    .loadingModal .modal-body h1 {
+      display: flex;
+      height: 100%;
+      width: 100%;
+      justify-content: center;
+      background-color: #34a0a4;
+      margin: 0;
+      padding: 20px 0;
+      z-index: 2; }
+    .loadingModal .modal-body img {
+      width: 400px;
+      height: 280px;
+      transform: scale(1.1); }
+
+.warningModal {
+  overflow: hidden;
+  border-radius: 7px;
+  position: relative; }
+  .warningModal .modal-header,
+  .warningModal .modal-footer {
+    transition: all 0.2s cubic-bezier(1, 0.65, 0.64, 1.03); }
+  .warningModal h3,
+  .warningModal .sp-warning {
+    transition: all 0.2s cubic-bezier(1, 0.65, 0.64, 1.03); }
+  .warningModal .botton-warning {
+    transition: all 0.2s cubic-bezier(1, 0.65, 0.64, 1.03); }
+  .warningModal .modal-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 8px;
+    transition: all 0.2s cubic-bezier(1, 0.65, 0.64, 1.03); }
+    .warningModal .modal-body img {
+      width: 200px;
+      height: 176px;
+      margin-bottom: 30px;
+      transition: all 0.2s cubic-bezier(1, 0.65, 0.64, 1.03); }
+    .warningModal .modal-body h5 {
+      display: flex;
+      height: 100%;
+      width: 100%;
+      justify-content: center;
+      z-index: 2;
+      font-size: 1.35rem;
+      transition: all 0.2s cubic-bezier(1, 0.65, 0.64, 1.03); }
+  .warningModal .modal-header.success {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateX(300px); }
+  .warningModal .modal-body.success {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    bottom: 72px;
+    left: 132px;
+    transform: translateX(300px); }
+  .warningModal .modal-footer.success {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    bottom: 0;
+    right: 0; }
+
+.titleLine {
+  display: flex;
+  justify-content: space-between; }
+  .titleLine span {
+    display: flex;
+    align-items: flex-end;
+    margin-left: auto;
+    font-size: 14px; }

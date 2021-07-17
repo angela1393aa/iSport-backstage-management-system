@@ -3,7 +3,7 @@ class VideoProcessor {
 
     private $con;
     private $sizeLimit = 500000000; // 500MB
-    private $allowedType = array("mp4", "flv", "webm", "mkv", "vob", "ogv", "ogg", "avi", "wmv", "mov", "mpeg", "mpg");
+    /// private $allowedType = array("mp4"); // 直接在js做////////////
     private $ffmpegPath = "ffmpeg/bin/ffmpeg";
     private $ffprobePath = "ffmpeg/bin/ffprobe";
 
@@ -14,31 +14,23 @@ class VideoProcessor {
     public function uploadVideoFile($videoUploadData) {
         $targetDir = "uploads/videos/";
         $videoData = $videoUploadData->videoDataArray;
+        // var_dump($videoData);
 
-        $tempFilePath = $targetDir . uniqid() . basename($videoData['name']);
-        $tempFilePath = str_replace(" ", "_", $tempFilePath);
+        $finalFilePath = $targetDir . uniqid() . ".mp4";
+        $finalFilePath = str_replace(" ", "_", $finalFilePath);
+        // var_dump($finalFilePath);
 
-        $isValidData = $this->processData($videoData, $tempFilePath);
+
+        $isValidData = $this->processData($videoData, $finalFilePath);
         if(!$isValidData) {
             return false;
         }
 
-        if(move_uploaded_file($videoData['tmp_name'], $tempFilePath)) {
+        if(move_uploaded_file($videoData['tmp_name'], $finalFilePath)) {
             //If you upload file, it get store on a temporary space
-            $finalFilePath = $targetDir . uniqid() . ".mp4";
 
             if(!$this->insertVideoData($videoUploadData, $finalFilePath)) {
                 echo "Insert query fialed!";
-                return false;
-            }
-
-            if(!$this->convertVideoToMp4($tempFilePath, $finalFilePath)) {
-                echo "Convert failed!";
-                return false;
-            }
-
-            if(!$this->deleteFile($tempFilePath)) {
-                echo "Delete failed!";
                 return false;
             }
 
@@ -47,24 +39,14 @@ class VideoProcessor {
                 return false;
             }
             return true;
-        }
+        } 
     }
-
-    // public function uploadVideoLink($videoUploadData) {
-
-    // }
 
     private function processData($videoData, $filePath) {
         $videoType = pathinfo($filePath, PATHINFO_EXTENSION);
 
         if(!$this->isValidSize($videoData)) {
             echo "File too large.";
-            return false;
-            ///////////////////////////////////Need more info//////////////////////////
-        }
-
-        if(!$this->isValidType($videoType)) {
-            echo "Invalid type.";
             return false;
             ///////////////////////////////////Need more info//////////////////////////
         }
@@ -79,12 +61,6 @@ class VideoProcessor {
     private function isValidSize($data) {
         return $data['size'] <= $this->sizeLimit;
         //The size of the data has to smaller than the limit size (500MB)
-    }
-
-    private function isValidType($type) {
-        $lowerCased = strtolower($type);
-        //To make sure the file is lowercased
-        return in_array($lowerCased, $this->allowedType);
     }
 
     private function hasError($data) {
@@ -107,32 +83,6 @@ class VideoProcessor {
         $query->bindParam(":category", $category);
 
         return $query->execute();
-    }
-
-    private function convertVideoToMp4($tempFilePath, $finalFilePath) {
-        $cmd = "$this->ffmpegPath -i $tempFilePath $finalFilePath 2>&1";
-
-        $outputLog = array();
-        //This contains the output of the array
-        exec($cmd, $outputLog, $returnCode);
-        //$returnCode is going to give us the value that returned
-
-        if($returnCode != 0) {
-            //Command failed
-            foreach($outputLog as $line) {
-                echo $line . "<br>";
-            }
-            return false;
-        }
-        return true;
-    }
-
-    private function deleteFile($filePath) {
-        if(!unlink($filePath)) {
-            echo "Could not delete file \n";
-            return false;
-        }
-        return true;
     }
 
     private function generateThumbnails($filePath) {
