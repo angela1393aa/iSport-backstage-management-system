@@ -1,5 +1,9 @@
-button:focus {
-    outline:0px !important;
-    -webkit-appearance: none;
-    box-shadow: none !important;
-  }
+button:focus, .page-link:focus {
+  outline: 0px !important;
+  -webkit-appearance: none;
+  box-shadow: none !important;
+}
+
+.active {
+  background: gray;
+}/*# sourceMappingURL=userOrder.css.map */

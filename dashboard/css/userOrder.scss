@@ -1,0 +1,24 @@
+button, .page-link {
+    &:focus {
+        outline: 0px !important;
+        -webkit-appearance: none;
+        box-shadow: none !important;
+    }
+}
+
+.active{
+        background: gray;
+}
+
+
+
+// button:focus,
+// .page-link:focus {
+//     outline: 0px !important;
+//     -webkit-appearance: none;
+//     box-shadow: none !important;
+// }
+
+// .active a{
+//     background: gray;
+// }
