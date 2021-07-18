@@ -1,23 +1,41 @@
 <?php 
+$title = '會員列表';
+$style = 'userlist.css';
 require_once("includes/header.php"); 
 require_once("UserCount.php"); 
-
 ?>
+
 <!-- page content -->
 <div class="right_col" role="main">
-    <div class="">
-        <div class="page-title row">
-            <div class="title_left col-10">
-                <h3>會員列表</h3>
-                <div class="h6">共有<?=$no?>位會員</div>
+  <div class="">
+    <div class="page-title">
+      <div class="title_left">
+        <h3>會員列表</h3>
+        <div class="h6">共有<?=$no?>位會員</div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+      <div class="col-md-12 col-sm-12">
+        <div class="x_panel">
+          <div class="x_title ">
+            <div style="display:flex; justify-content: space-between;">
+              <div>
+                <a class="btn btn-secondary" href="">首頁</a>
+              </div>
+              <div>
+                <a class="btn btn-secondary"  href="user_create.php"><i class="fa fa-plus"></i>新增會員</a>
+              </div>
             </div>
-            <div class="title_right col-2">
-            <a href="user_create.php"><button type="button" class="btn btn-info btn-lg" >新增會員</button></a>
-            </div>
-
-            <table id="datatable" class="table table-striped table-bordered " style="width:100%">
-            
-                <thead>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="card-box table-responsive">
+                  <div class="container">
+                    <table class="table table-striped table-bordered " style="width:100%" id="datatable">
+                    <thead>
                     <tr>
                         <th>姓名</th>
                         <th>帳號</th>
@@ -28,79 +46,59 @@ require_once("UserCount.php");
                     </tr>
                 </thead>
                 <tbody>
-                        
                 </tbody>
-            
-            </table>
-                        <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                    <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                    </li>
-                    <?php for($i=1; $i<=$pages ;$i++){?>
-                    <li class="page-item"><a class="page-link" href="axios_user_list.php?p=<?=$i?>"><?=$i?></a></li>
-                    <?php } ?>
-                    <a class="page-link" href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                    </li>
-                </ul>
-                </nav>
+                </table>
+              </div>
+                 <!--USER VIEW Modal -->
+<div class="modal fade" id="ViewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">會員詳情</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="UpdateUser.php" method="post">
+                <div class="modal-body">
+                    <label class="d-block mb-2">會員編號:<span id="id"></span></label>
+                    <input type="hidden" id="idInput" name="id" >
+
+                    <label class="d-block mb-2">帳號:<span id="account"></span></label>
+
+                    <label>姓名:</label>
+                    <input class="form-control mb-3" type="text" name="user_name" id="user_name_Input" value="">
+
+                    <label>密碼:</label>
+                    <input class="form-control mb-3" type="password" name="password" id="passwordInput" value="">
+                    
+
+                    <label>電話:</label>
+                    <input class="form-control mb-3" type="tel" name="phone"  id="phoneInput" data-validate-length-range="8,20">
+
+                    <label>Email:</label>
+                    <input class="form-control mb-3" name="email" type="email" id="emailInput">
+
+                    <label>生日:<span id="birthday"></span></label>
+                    <input class="form-control mb-3" type="date" name="birthday" id="birthdayInput" >
+                    <!-- required -->
+                    <label>地址:</label>
+                    <input class="form-control mb-3" type="tel" name="address" id="addressInput">
+
+                    <label>會員備註:</label>
+                    <textarea  name='intro' class="d-block mb-3" id="introInput"></textarea>
+                    <!-- 暫時用不到
+                    <label class="d-block mb-2">文章數:<span id="article_count"></span></label>
+                    <label class="d-block mb-2">影片數:<span id="video_count"></span></label> -->
+                    <label class="d-block mb-2">註冊時間:<span id="create_time"></span></label>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger mx-auto" id="updatebutten">更新</button>
+                    <button type="button" class="btn btn-secondary mx-auto" data-dismiss="modal">取消</button>
+                </div>    
+            </form> 
         </div>
     </div>
-</div>
-<!--USER VIEW Modal -->
-<div class="modal fade" id="ViewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">會員詳情</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form action="UpdataUser.php" method="post">
-                <label class="d-block mb-2">會員編號:<span id="id"></span></label>
-                <input type="hidden" value="<?=$value["id"]?>" name="id" id="idInput">
-
-                <label class="d-block mb-2">帳號:<span id="account"></span></label>
-
-                <label>姓名:</label>
-                <input class="form-control mb-3" type="text" name="user_name" id="user_name_Input" value="">
-
-                <label>密碼:</label>
-                <input class="form-control  mb-3" type="password" id="passwordInput" name="password"  value=""> 
-
-
-                <label>電話:</label>
-                <input class="form-control mb-3" type="tel" name="phone" id="phoneInput" data-validate-length-range="8,20">
-
-                <label>Email:</label>
-                <input class="form-control mb-3" name="email" type="email" id="emailInput">
-
-                <label>生日:<span id="birthday"></span></label>
-                <input class="form-control mb-3" type="date" name="birthday" id="birthdayInput">
-
-                <label>地址:</label>
-                <input class="form-control mb-3" type="tel" name="address" id="addressInput">
-
-                <label>會員備註:</label>
-                <textarea  name='intro' class="d-block mb-3" id="introInput"></textarea>
-
-                <label class="d-block mb-2">文章數:<span id="article_count"></span></label>
-                <label class="d-block mb-2">影片數:<span id="video_count"></span></label>
-                <label class="d-block mb-2">註冊時間:<span id="create_time"></span></label>
-          </div>
-                <div class="modal-footer">
-                <button type="submit" class="btn btn-danger mx-auto" data-dismiss="modal">更新</button>
-                <button type="button" class="btn btn-secondary mx-auto" data-dismiss="modal">取消</button>
-            </div>    
-       </form> 
-    </div>
-  </div>
 </div>
 <!--USER DELETE Modal -->
 <div class="modal fade" id="DeleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -118,12 +116,11 @@ require_once("UserCount.php");
                     <input type="hidden" id="Deletemeber" name="Deletemeber" value="<?=$value["id"]?>" >
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-danger" id="Deletebutton">確定</button>
+                    <button type="submit" class="btn btn-danger mx-auto" id="Deletebutton">確定</button>
                     <button type="button" class="btn btn-secondary mx-auto" data-dismiss="modal">取消</button>
                 </div>    
             </form>
-
-            
+          
         
         </div>
     </div>
@@ -163,9 +160,7 @@ require_once("UserCount.php");
             formdata.append("id",id);
             axios.post('api/ViewUser.php',formdata)
             .then(function(response){
-                // console.log(response)
                 let user=response.data;
-                // console.log(user)
                 $("#id").text(user.id)
                 $("#account").text(user.account)
                 $("#email").text(user.email)
@@ -182,7 +177,6 @@ require_once("UserCount.php");
                 $("#user_name_Input").val(user.user_name)
                 $("#phoneInput").val(user.phone)
                 $("#addressInput").val(user.address)
-                $("#birthdayInput").val(user.birthday)
                 $("#birthdayInput").val(user.birthday)
                 $("#introInput").val(user.intro)
 
@@ -211,6 +205,23 @@ require_once("UserCount.php");
             })
 
         })
+        function hideshow(){
+			var password = document.getElementById("password1");
+			var slash = document.getElementById("slash");
+			var eye = document.getElementById("eye");
+			
+			if(password.type === 'password'){
+				password.type = "text";
+				slash.style.display = "block";
+				eye.style.display = "none";
+			}
+			else{
+				password.type = "password";
+				slash.style.display = "none";
+				eye.style.display = "block";
+			}
+
+		}
 
         // $("#Deletebutton").click(setTimeout(function(){
         //     alert('刪除完成');},2000);

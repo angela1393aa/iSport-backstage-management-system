@@ -10,7 +10,9 @@ if(!isset($_GET["p"])){
 }
 $per_page=7;
 $star_item=($p-1)*$per_page;
-$stmt=$db_host->prepare("SELECT * FROM users WHERE valid=1 LIMIT $star_item,$per_page");
+$stmt=$db_host->prepare("SELECT * FROM users WHERE valid=1");
+// $stmt=$db_host->prepare("SELECT * FROM users WHERE valid=1 LIMIT $star_item,$per_page");
+// 已使用datatable 模板
 
 try{
     $stmt->execute();

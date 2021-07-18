@@ -1,4 +1,5 @@
-<?require_once('../includes/config.php');
+<?php
+require_once('../includes/config.php');
 
 // $account="joe";
 $account=$_POST["account"];
