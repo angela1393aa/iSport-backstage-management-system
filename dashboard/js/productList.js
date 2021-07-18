@@ -66,7 +66,7 @@ axios({
                     <td class="align-middle text-right p-2">${product[i].totalStock}</td>
                     <td class="align-middle text-center p-2"><span class="badge badge-${product[i].totalSale}">${product[i].totalSale}</span></td>
                     <td class="align-middle p-2">${product[i].create_time}</td>
-                    <td class="align-middle p-2">${product[i].maxUpdateTime}</td>
+                    <td class="align-middle p-2">${product[i].last_update_time}</td>
                     <td class="align-middle p-2">
                         <div class="d-flex justify-content-center">
                             <a href="#"
@@ -131,7 +131,7 @@ $('#productTbody').on('click', '#edit', function () {
                 $(`#editProductType${i + 1}`).val(key);
                 for (let j = 0; j < keyArrLen; j++) {
                     content += `
-                    <input type="text" class="form-control col-2 mr-0" value="${typeGroup[key][keyArr[j]]}" name"typeGroup[${keyArr[j]}]">
+                    <input type="text" class="form-control col-2 mr-0" value="${typeGroup[key][keyArr[j]]}" name="typeGroupEdit[${keyArr[j]}]">
                     `
                 }
                 $(`#editProductTypeValue${i + 1}`).append(content);
@@ -158,10 +158,11 @@ $('#productTbody').on('click', '#edit', function () {
             productSku.forEach(element => {
                 content += `
                 <tr class="even pointer p-0">
+                <input type="hidden" value="${element['product_sku_id']}" name="idOfEditProductSku[]" class="form-control" readonly>
                     <td> <input type="text" value="${element['sku_group']}" class="form-control" readonly> </td>
                     <td><input type="text" value="${element['sku_code']}" name="editSkuCode[]" class="form-control" ></td>
                     <td><input type="text" value="${element['stock']}" name="editStock[]" class="form-control" ></td>
-                    <td><input type="text" value="${element['price']}" name="editStock[]" class="form-control" ></td>
+                    <td><input type="text" value="${element['price']}" name="editPrice[]" class="form-control" ></td>
                     <td>
                         <select name="editStatus[]" class="form-control" value="${element['status_id']}">
                             <option value="1">供貨中</option>

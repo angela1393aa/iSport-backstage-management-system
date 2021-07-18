@@ -156,7 +156,8 @@ try {
             'totalStock' => $totalArr[$row['id']][0]['totalStock'],
             'totalSale' => $totalArr[$row['id']][0]['totalSale'],
             'create_time' => $row['creat_time'],
-            'maxUpdateTime' => $totalArr[$row['id']][0]['maxUpdateTime'],
+            'last_update_time' => $row['update_time'],
+            // 'maxUpdateTime' => $totalArr[$row['id']][0]['maxUpdateTime'],
             'product_img' => $imgArr[$row['id']]
         ];
         array_push($product, $arr);

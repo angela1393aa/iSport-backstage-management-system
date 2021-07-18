@@ -36,7 +36,7 @@ require_once("includes/header.php");
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="productListUpdate.php" method="post" class="row p-2">
+                    <form action="productListUpdate.php" method="post" enctype="multipart/form-data" class="row p-2" >
                         <div class="col-12 p-3">
                             <div class="row">
                                 <input type="hidden" name="productId" id="productId">
@@ -46,19 +46,19 @@ require_once("includes/header.php");
                                 </div>
                                 <div class="col-3 p-0 pr-1">
                                     <label class="d-block" class="m-1 h6">品牌<span id="id"></span></label>
-                                    <input type="text" value="" name="editBrand" class="form-control" list="editBrandList" id="editBrand">
+                                    <input type="text" name="editBrand" class="form-control" list="editBrandList" id="editBrand">
                                     <datalist id="editBrandList">
                                     </datalist>
                                 </div>
                                 <div class="col-2 p-0 pr-1">
                                     <label for="" class="m-1 h6">分類</label>
-                                    <select name="" id="editProductCategory" class="form-control">
+                                    <select name="editProductCategory" id="editProductCategory" class="form-control">
 
                                     </select>
                                 </div>
                                 <div class="col-12 p-0">
                                     <label for="">商品介紹</label>
-                                    <textarea name="" id="editProductIntro" cols="30" rows="10" class="form-control"></textarea>
+                                    <textarea name="editProductIntro" id="editProductIntro" cols="30" rows="10" class="form-control"></textarea>
                                 </div>
                             </div>
 
@@ -106,7 +106,7 @@ require_once("includes/header.php");
                                                 <th class="col-2 px-2 py-3 text-center">庫存</th>
                                                 <th class="col-1 px-2 py-3 text-center">價格</th>
                                                 <th class="col-2 px-2 py-3 text-center">狀態</th>
-                                                <th class="col-1 px-2 py-3 text-center align-middle"> <input type="checkbox"> 刪除</th>
+                                                <th class="col-1 px-2 py-3 text-center align-middle">刪除</th>
                                             </tr>
                                         </thead>
                                         <tbody id="productSkuEditTbody">
