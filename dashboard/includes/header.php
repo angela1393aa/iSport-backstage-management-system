@@ -77,8 +77,8 @@ if(isset($_SESSION['userLoggedIn'])) {
               <ul class="nav side-menu">
                 <li><a><i class="fas fa-user"></i> 會員管理 <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                    <li><a href="index.html">會員列表</a></li>
-                    <li><a href="index2.html">會員新增</a></li>
+                    <li><a href="/project_01/dashboard/axios_user_list.php">會員列表</a></li>
+                    <li><a href="/project_01/dashboard/user_create.php">會員新增</a></li>
                   </ul>
                 </li>
                 <li><a><i class="fas fa-shopping-bag"></i> 商品管理 <span class="fa fa-chevron-down"></span></a>
