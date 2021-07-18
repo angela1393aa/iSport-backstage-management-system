@@ -182,7 +182,7 @@ require_once("includes/header.php");
                                     <tr class="headings">
                                         
                                         <th class="px-2 py-3 text-center">分類</th>
-                                        <th class="px-2 py-3">商品名稱</th>
+                                        <th class="px-2 py-3 text-center">商品名稱</th>
                                         <th class="px-2 py-3 text-center">品牌</th>
                                         <th class="px-2 py-3 text-center">簡介</th>
                                         <th class="px-2 py-3" data-sort="price" id="price">價格區間</th>

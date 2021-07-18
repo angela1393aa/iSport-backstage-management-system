@@ -84,9 +84,7 @@ if(isset($_SESSION['userLoggedIn'])) {
                 <li><a><i class="fas fa-shopping-bag"></i> 商品管理 <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                     <li><a href="/project_01/dashboard/product_list.php">商品列表</a></li>
-                    <li><a href="/project_01/dashboard/product_list_sku.php">單品列表</a></li>
                     <li><a href="/project_01/dashboard/product_creat.php">新增商品</a></li>
-                    <li><a href="form_validation.html">商品分類</a></li>
                   </ul>
                 </li>
                 <li><a><i class="far fa-list-alt"></i> 訂單管理 <span class="fa fa-chevron-down"></span></a>

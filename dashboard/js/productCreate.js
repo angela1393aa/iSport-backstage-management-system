@@ -105,16 +105,11 @@ typeTotalCalc = () => {
 
 newSkuType = () => {
     console.log(typeInputeCount2, typeInputeCount1);
+    let newSkuTypeListContent = '';
     $('.newSkuTypeList').empty();
-    if (typeInputeCount1 <= 0) {
+    if (typeInputeCount1 <= 0 && typeInputeCount2 <= 0) {
+        console.log('123466752');
         newSkuTypeListContent = '<option value="0">無</option>'
-        console.log(typeInputeCount1Length)
-        for (i = 0; i < typeInputeCount2Length; i++) {
-            newSkuTypeListContent += `
-                <option value="${i}">${typeInputeCount2[i]}</option>
-            `
-        }
-        $('.newSkuTypeList').append(newSkuTypeListContent);
     } else if (typeInputeCount2 <= 0) {
         newSkuTypeListContent = '<option value="0">無</option>'
         console.log(typeInputeCount1Length)
@@ -124,8 +119,15 @@ newSkuType = () => {
             `
         }
         $('.newSkuTypeList').append(newSkuTypeListContent);
-    } else if (typeInputeCount1 <= 0 && typeInputeCount2 <= 0) {
-        $('.newSkuTypeList').empty();
+    } else if (typeInputeCount1 <= 0) {
+        newSkuTypeListContent = '<option value="0">無</option>'
+        console.log(typeInputeCount1Length)
+        for (i = 0; i < typeInputeCount2Length; i++) {
+            newSkuTypeListContent += `
+                <option value="${i}">${typeInputeCount2[i]}</option>
+            `
+        }
+        $('.newSkuTypeList').append(newSkuTypeListContent);
     } else {
         newSkuTypeListContent = '<option value="0">無</option>'
         console.log(typeInputeCount1Length, typeInputeCount2Length)
@@ -234,7 +236,7 @@ $('#typeConfig').on('change', function () {
         $('.typeListSelect').attr("disabled", "disabled");
         $('.typeInput').attr('readonly');
         $('.typeInput').val('');
-        $('.typeListSelect').val('');
+        $('.typeListSelect').val('0');
     } else {
         $('.typeListSelect').removeAttr("disabled", "disabled");
         $('.typeInput').removeAttr('readonly');
@@ -331,7 +333,7 @@ $('#submitBtn').click(function (e) {
     if (productNameValue == '') {
         alert += '<p class="p-1 m-0">*請輸入商品名稱</p>';
         verify = false;
-    }else if(productNameValue.indexOf(' ') >= 0){
+    } else if (productNameValue.indexOf(' ') >= 0) {
         alert += '<p class="p-1 m-0">*商品名稱不能包含空格</p>';
         verify = false;
     } else if (productNameCount > 100) {
@@ -375,11 +377,11 @@ $('#submitBtn').click(function (e) {
         verify = false;
     }
     $('.submitAlert').append(alert);
-    if(verify){
+    if (verify) {
         $('.typeListSelect').removeAttr("disabled", "disabled");
         $('.typeInput').removeAttr('readonly');
         $("form").submit();
     }
-    
+
 });
 

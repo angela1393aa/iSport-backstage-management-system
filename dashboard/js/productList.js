@@ -57,9 +57,9 @@ axios({
                 <tr class="even pointer p-0">
                     
                     <td class="align-middle text-center p-2">${product[i].category}</td>
-                    <td class="align-middle p-2 text-truncate" style="max-width: 200px;">${product[i].product_name}</td>
+                    <td class="align-middle p-2" style="max-width: 200px;">${product[i].product_name}</td>
                     <td class="align-middle  text-center p-2" >${product[i].product_brand}</td>
-                    <td class="align-middle px-2 p-1 text-truncate" style="max-width: 200px;">${product[i].product_intro}</td>
+                    <td class="align-middle px-2 p-1 text-truncate" style="max-width: 300px;">${product[i].product_intro}</td>
                     <td class="align-middle text-right p-2">${product[i].price}</td>
                     <td class="align-middle text-right p-2">${product[i].totalStock}</td>
                     <td class="align-middle text-center p-2">${product[i].totalSale}</td>
