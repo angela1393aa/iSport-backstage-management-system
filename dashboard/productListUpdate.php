@@ -186,3 +186,6 @@ try {
     echo 'database connection error : <br>' . $e->getMessage() . '<br>';
     exit();
 }
+
+$db_host = null;
+header('location: product_list.php');

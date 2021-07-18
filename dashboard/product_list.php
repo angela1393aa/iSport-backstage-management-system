@@ -180,18 +180,16 @@ require_once("includes/header.php");
                             <table class="table table-striped jambo_table bulk_action">
                                 <thead>
                                     <tr class="headings">
-                                        <th class="text-center align-middle">
-                                            <input type="checkbox" id="" class="">
-                                        </th>
+                                        
                                         <th class="px-2 py-3 text-center">分類</th>
                                         <th class="px-2 py-3">商品名稱</th>
                                         <th class="px-2 py-3 text-center">品牌</th>
                                         <th class="px-2 py-3 text-center">簡介</th>
-                                        <th class="px-2 py-3" data-sort="price" id="price">價格區間 <i class="fas fa-sort"></i></th>
-                                        <th class="px-2 py-3" data-sort="stock" id="stock">總庫存 <i class="fas fa-sort"></i></th>
-                                        <th class="px-2 py-3" data-sort="stock" id="stock">總銷量 <i class="fas fa-sort"></i></th>
-                                        <th class="px-2 py-3" data-sort="upload_time" id="uploadTime">上架時間 <i class="fas fa-sort"></i></th>
-                                        <th class="px-2 py-3" data-sort="upload_time" id="updateTime">最後更新時間 <i class="fas fa-sort"></i></th>
+                                        <th class="px-2 py-3" data-sort="price" id="price">價格區間</th>
+                                        <th class="px-2 py-3" data-sort="stock" id="stock">總庫存</th>
+                                        <th class="px-2 py-3" data-sort="stock" id="stock">總銷量</th>
+                                        <th class="px-2 py-3 text-center" data-sort="upload_time" id="uploadTime">上架時間</th>
+                                        <th class="px-2 py-3 text-center" data-sort="upload_time" id="updateTime">最後更新時間<i class="fas fa-sort"></i></th>
                                         <th class="px-2 py-3 text-center">操作</th>
                                     </tr>
                                 </thead>

@@ -228,4 +228,4 @@ try{
     exit();
 }
 $db_host = null;
-header('location: product_list_sku.php');
+header('location: product_list.php');
