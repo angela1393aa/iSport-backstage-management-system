@@ -8,35 +8,77 @@ if(isset($_POST["id"])){
     exit;
 }
 
-if($_POST["birthday"]=="0000-00-00 00:00:00"){
-    $birthday=$birthday;
-}else{
+$birthday=$_POST["birthday"];
+    $password=$_POST["password"];
+    $email=$_POST["email"];
+    $user_name=$_POST["user_name"];
+    $intro=$_POST["intro"];
+    $phone=$_POST["phone"];
+    $address=$_POST["address"];
+    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
     $birthday=$_POST["birthday"];
+
+if($_POST["birthday"] ===""&& $_POST["password"] ===""){ 
+    $sql ="UPDATE users SET  email=?,user_name=?,intro=?,phone=?,address=?WHERE id=?";
+    $stmt = $db_host->prepare($sql);
+    
+    try{
+        $stmt->execute([$email,$user_name,$intro,$phone,$address,$id]);
+        echo "修改資料成功";
+    }catch(PDOException $e){
+        echo "修改資料失敗<br>";
+        echo "Eroor: ".$e->getMessage(). "<br>";
+        exit;
+    }
+    
+    header('location: axios_user_list.php');
+}else if($_POST["password"] ===""&& $_POST["birthday"]!==""){
+    $sql ="UPDATE users SET email=?,user_name=?,intro=?,phone=?,address=?,birthday=? WHERE id=?";
+    $stmt = $db_host->prepare($sql);
+    try{
+        $stmt->execute([$email,$user_name,$intro,$phone,$address,$birthday,$id]);
+        echo "修改資料成功";
+    }catch(PDOException $e){
+        echo "修改資料失敗<br>";
+        echo "Eroor: ".$e->getMessage(). "<br>";
+        exit;
+    }
+    header('location: axios_user_list.php');
+
+}else if($_POST["password"] !=="" && $_POST["birthday"] ==""){
+    $sql ="UPDATE users SET password=?, email=?,user_name=?,intro=?,phone=?,address=? WHERE id=?";
+    $stmt = $db_host->prepare($sql);
+    try{
+        $stmt->execute([$hashed_password,$email,$user_name,$intro,$phone,$address,$id]);
+        echo "修改資料成功";
+    }catch(PDOException $e){
+        echo "修改資料失敗<br>";
+        echo "Eroor: ".$e->getMessage(). "<br>";
+        exit;
+    }
+    header('location: axios_user_list.php');
+
+}else{
+    $sql ="UPDATE users SET  password=?,email=?,user_name=?,intro=?,phone=?,address=?,birthday=? WHERE id=?";
+    $stmt = $db_host->prepare($sql);
+    
+    try{
+        $stmt->execute([$hashed_password,$email,$user_name,$intro,$phone,$address,$id,$birthday]);
+        echo "修改資料成功";
+    }catch(PDOException $e){
+        echo "修改資料失敗<br>";
+        echo "Eroor: ".$e->getMessage(). "<br>";
+        exit;
+    }
+    
+    header('location: axios_user_list.php');
 }
 
-$password=$_POST["password"];
-$email=$_POST["email"];
-$user_name=$_POST["user_name"];
-$intro=$_POST["intro"];
-$phone=$_POST["phone"];
-$address=$_POST["address"];
-// $birthday=$_POST["birthday"];
-$hashed_password = password_hash($password, PASSWORD_DEFAULT);
+// if(!isset($_POST["birthday"])){
+//     $birthday=$_POST["birthday"];
+// }
 
 
 
-$sql ="UPDATE users SET  password=?,email=?,user_name=?,intro=?,phone=?,address=?,birthday=? WHERE id=?";
-$stmt = $db_host->prepare($sql);
-
-try{
-    $stmt->execute([$hashed_password,$email,$user_name,$intro,$phone,$address,$birthday,$id]);
-    echo "修改資料成功";
-}catch(PDOException $e){
-    echo "修改資料失敗<br>";
-    echo "Eroor: ".$e->getMessage(). "<br>";
-    exit;
-}
-
-header('location: axios_user_list.php');
 
 ?>

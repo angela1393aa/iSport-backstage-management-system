@@ -177,7 +177,6 @@ require_once("UserCount.php");
                 $("#user_name_Input").val(user.user_name)
                 $("#phoneInput").val(user.phone)
                 $("#addressInput").val(user.address)
-                $("#birthdayInput").val(user.birthday)
                 $("#introInput").val(user.intro)
 
 

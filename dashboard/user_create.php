@@ -66,7 +66,7 @@
                                 <label class="col-form-label col-md-3 col-sm-3  label-align">再次確認密碼<span class="required text-red"><code>*</code></span></label>
                                 <div class="col-md-6 col-sm-6">
                                     <input class="form-control" type="password" name="repassword" data-validate-linked='password' required id="repassword">
-                                    <small class="text-danger WorMsg" id="repasswordMsg"></small>
+                                    <small class="text-danger WorMsg" id="CheckpasswordMsg"></small>
                                 </div>
                             </div>
                             <div class="field item form-group">
@@ -172,27 +172,23 @@
             })
 
             $("#repassword").on({
-                "keyup": function(){
-                    $("#repasswordMsg").text("");
+                "change": function(){
+                    $("#CheckpasswordMsg").text("");
                     let passContent=$("#password1").val();
                     let repassContent=$("#repassword").val();
                             if(passContent !== repassContent){
                             //     $("#repasswordMsg").text("確認密碼一致。")
                             // }else
-                            $("#repasswordMsg").text("密碼不一致。")}
+                            $("#CheckpasswordMsg").text("密碼不一致。")}
                         }})
             $("#submitBtn").on({
                 "click":function(){
-                    $(".WorMsg").text("");
-                    let WorMsg=$(".WorMsg").text("");
+                    let WorMsg=$(".WorMsg").text();
                     if(WorMsg !==""){
                         alert("請檢查紅字錯誤部分");
                         return false;
-                    }else{
-                        alert("已建立會員");
                     }
-                }
-            })
+            }})
 
             
 
