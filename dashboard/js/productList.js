@@ -1,6 +1,3 @@
-let statusFilter, categoryFilter, costFilterMax, costFilterMin;
-
-
 axios({
     method: 'post',
     url: '/project_01/dashboard/api/productCreat.php',
@@ -9,14 +6,34 @@ axios({
     let brandData = response.data.brand;
     let typeListData = response.data.typeList;
     let content = '';
+
+    //列表品牌選項產生
+    brandData.forEach(item => {
+        content += `
+        <option value="${item.name}">${item.name}</option>
+         `
+    });
+    $('#brandFilter').append(content);
+    content = '';
+
+    //列表與編輯之分類選項產生
+    categoryData.forEach(item => {
+        content += `
+        <option value="${item.name}">${item.name}</option>
+         `
+    });
+    $('#categoryFilter').append(content);
+
+    content = '';
     categoryData.forEach(item => {
         content += `
         <option value="${item.id}">${item.name}</option>
          `
     });
-    $('#categoryFilter').append(content);
     $('#editProductCategory').append(content);
     content = '';
+
+    //編輯品牌選項產生
     brandData.forEach(item => {
         content += `
         <option value="${item.name}"></option>
@@ -24,18 +41,140 @@ axios({
     });
     $('#editBrandList').append(content);
     content = '';
+
+    //編輯規格選項產生
     typeListData.forEach(item => {
         content += `
         <option value="${item.id}">${item.name_frontend}</option>
          `
     });
     $('.editProductType').append(content);
-
-
-
 }).catch(function (error) {
     console.log(error);
 });
+
+//show all of products
+//function for filters
+
+/**
+ * 品牌篩選器
+ * @param {array} data 欲處理陣列
+ * @param {string} brandValue 篩選品牌
+ * @returns {array} 符合條件之陣列
+ */
+let brandFilter = (data, brandValue) => {
+    let brandFilterArr = $.grep(data, (row) => {
+        return row.product_brand == brandValue;
+    })
+    return brandFilterArr;
+}
+
+
+/**
+ * 分類篩選器
+ * @param {array} data 欲處理陣列
+ * @param {string} categoryValue 篩選分類
+ * @returns {array} 符合條件之陣列
+ */
+let categoryFilter = (data, categoryValue) => {
+    let categoryFilterArr = $.grep(data, (row) => {
+        return row.category == categoryValue;
+    })
+    // console.log(categoryFilterArr);
+    return categoryFilterArr;
+}
+
+//function for search
+
+/**
+ * 搜尋篩選器
+ * @param {array} data 欲處理陣列
+ * @param {string} keyWord 搜尋的關鍵字
+ * @returns {array} 搜尋結果之陣列
+ */
+let productNameSearch = (data, keyWord) => {
+    let productNameSearchArr = $.grep(data, (row) => {
+        return row.product_name.includes(keyWord);
+    })
+    return productNameSearchArr;
+}
+
+
+/**
+ * 字串之空格與空白判斷
+ * @param {string} str 
+ * @returns {boolean} 
+ */
+let strIsSpace = (str) => {
+    if (str == "") return true;
+    let regRule = "^[ ]+$";
+    let re = new RegExp(regRule);
+    return re.test(str);
+}
+
+/**
+ * 分頁按鈕
+ * @param {array} data 將被呈現的資料
+ */
+let createPageBtn = (data) => {
+    let maxPage = Math.ceil(data.length / 15);
+    let pageBtn = `<button type="button" class="btn btn-secondary flex-grow-0" id="btnPrevious"> < </button>`;
+    console.log(data.length / 15);
+    for (i = 1; i <= maxPage; i++) {
+        pageBtn += `
+                <button type="button" class="pageBtn btn btn-secondary flex-grow-0" data-page="${i}">${i}</button>
+            `;
+    }
+    pageBtn += `<button type="button" class="btn btn-secondary flex-grow-0" id="btnNext"> > </button>`
+    $('#pageBtnGroup').empty();
+    $('#pageBtnGroup').append(pageBtn);
+}
+
+
+/**
+ * 表格顯示
+ * @param {number} startNum 資料起始筆數
+ * @param {number} endNum 資料最後筆數
+ * @param {array} data 資料陣列
+ */
+let tableShowLoop = (startNum, endNum, data) => {
+    let content = '';
+    $('#dataCount').text(`共有${data.length}件商品`);
+    console.log($('#dataCount').text());
+    for (let i = startNum; i < endNum; i++) {
+        if (!data[i]) break;
+        content += `
+                <tr class="even pointer p-0">
+                    <td class="align-middle text-center p-2">${data[i].category}</td>
+                    <td class="align-middle p-2" style="max-width: 200px;">${data[i].product_name}</td>
+                    <td class="align-middle  text-center p-2" >${data[i].product_brand}</td>
+                    <td class="align-middle px-2 p-1 text-truncate" style="max-width: 300px;">${data[i].product_intro}</td>
+                    <td class="align-middle text-right p-2">${data[i].price}</td>
+                    <td class="align-middle text-right p-2">${data[i].totalStock}</td>
+                    <td class="align-middle text-center p-2">${data[i].totalSale}</td>
+                    <td class="align-middle text-center p-2">${data[i].create_time}</td>
+                    <td class="align-middle text-center p-2">${data[i].last_update_time}</td>
+                    <td class="align-middle p-2">
+                        <div class="d-flex justify-content-center">
+                            <a href="#"
+                               class="btn btn-round btn-info d-flex justify-content-center align-items-center "
+                               style="width: 30px;height: 30px;" data-id="${data[i].product_id}" id="info"><i class="fas fa-info"></i></a>
+                            <a href="#"
+                               class="btn btn-round btn-secondary d-flex justify-content-center align-items-center "
+                               style="width: 30px;height: 30px;" data-toggle="modal" data-target=".bd-example-modal-xl" data-id="${data[i].product_id}" id="edit"><i class="fas fa-edit"></i></a>
+                            <a href="#"
+                               class="btn btn-round btn-danger d-flex justify-content-center align-items-center "
+                               style="width: 30px;height: 30px;" data-id="${data[i].product_id}" id="delete"><i class="fas fa-trash-alt"></i></a>
+                        </div>
+                    </td>
+                </tr>
+            `
+    }
+    $('tbody').empty();
+    $('tbody').append(content);
+}
+
+
 
 
 axios({
@@ -46,44 +185,62 @@ axios({
         let originData = response.data;
         let product = response.data.product;
         let productSku = response.data.productSku;
+        let treatedProduct = response.data.product;
         let content;
+        //-------------------category and brand filter---------------------
 
-        $('#dataCount').text(`共有${product.length}件商品`);
-        console.log($('#dataCount').text());
+        $('#filterSearch').click(function () {
+            let categoryValue = $('#categoryFilter').val();
+            let brandValue = $('#brandFilter').val();
+            // console.log(categoryValue);
+            // 1.分類過濾
+            let firstFilterArr = (categoryValue != 0) ? categoryFilter(product, categoryValue) : product;
+            // console.log(firstFilterArr);
+            // 2.品牌過濾
+            let lastFilterArr = (brandValue != 0) ? brandFilter(firstFilterArr, brandValue) : firstFilterArr;
+            // console.log(lastFilterArr);
 
-        for (let i = 0; i < 20; i++) {
+            treatedProduct = lastFilterArr;
+            console.log(treatedProduct);
+            tableShowLoop(0, 15, treatedProduct);
+            createPageBtn(treatedProduct);
+        })
 
-            content += `
-                <tr class="even pointer p-0">
-                    
-                    <td class="align-middle text-center p-2">${product[i].category}</td>
-                    <td class="align-middle p-2" style="max-width: 200px;">${product[i].product_name}</td>
-                    <td class="align-middle  text-center p-2" >${product[i].product_brand}</td>
-                    <td class="align-middle px-2 p-1 text-truncate" style="max-width: 300px;">${product[i].product_intro}</td>
-                    <td class="align-middle text-right p-2">${product[i].price}</td>
-                    <td class="align-middle text-right p-2">${product[i].totalStock}</td>
-                    <td class="align-middle text-center p-2">${product[i].totalSale}</td>
-                    <td class="align-middle text-center p-2">${product[i].create_time}</td>
-                    <td class="align-middle text-center p-2">${product[i].last_update_time}</td>
-                    <td class="align-middle p-2">
-                        <div class="d-flex justify-content-center">
-                            <a href="#"
-                               class="btn btn-round btn-info d-flex justify-content-center align-items-center "
-                               style="width: 30px;height: 30px;" data-id="${product[i].product_id}" id="info"><i class="fas fa-info"></i></a>
-                            <a href="#"
-                               class="btn btn-round btn-secondary d-flex justify-content-center align-items-center "
-                               style="width: 30px;height: 30px;" data-toggle="modal" data-target=".bd-example-modal-xl" data-id="${product[i].product_id}" id="edit"><i class="fas fa-edit"></i></a>
-                            <a href="#"
-                               class="btn btn-round btn-danger d-flex justify-content-center align-items-center "
-                               style="width: 30px;height: 30px;" data-id="${product[i].product_id}" id="delete"><i class="fas fa-trash-alt"></i></a>
-                        </div>
-                    </td>
-                </tr>
-            `
-        }
-        $('#productTbody').append(content);
+        //----------------product name search-----------------------------
+        $('#keyWordsSearchBtn').click(function () {
+            let keyWord = $('#keyWordsSearchInput').val();
+            if (strIsSpace(keyWord)) {
+                alert('請輸入關鍵字且不得為空格');
+            } else {
+                // console.log(keyWord);
+                //關鍵字搜尋結果
+                let productNameSearchArr = productNameSearch(product, keyWord);
+                // console.log(productNameSearchArr);
+
+                treatedProduct = productNameSearchArr;
+                console.log(treatedProduct);
+                tableShowLoop(0, 15, treatedProduct);
+                createPageBtn(treatedProduct);
+            }
+        })
+
+        //-------------------------------change page--------------------------------------
+        $('#pageBtnGroup').on('click', '.pageBtn', function () {
+            let page = $(this).data("page");
+            let startNum = (page - 1) * 15;
+            let endNum = page * 15;
+            $(this).addClass('active').siblings().removeClass('active');
+            console.log(page);
+            tableShowLoop(startNum, endNum, treatedProduct);
+        });
+        //-------------------------
+        tableShowLoop(0, 15, treatedProduct);
+        createPageBtn(treatedProduct);
+
     }).catch();
 
+
+//edit
 $('#productTbody').on('click', '#edit', function () {
     $('#myModal').modal({ backdrop: 'static', keyboard: false });
     let id = $(this).data('id');
@@ -137,7 +294,7 @@ $('#productTbody').on('click', '#edit', function () {
 
             $('#editProductImgBlock').empty();
             content = '';
-            for(let i = 0; i < imgKeyArrLen; i++){
+            for (let i = 0; i < imgKeyArrLen; i++) {
                 content += `
                 <div class="col-3 p-1 mb-2 bd-change">
                 <div class="row p-0 m-0 imgCheck">
@@ -181,11 +338,11 @@ $('#productTbody').on('click', '#edit', function () {
         })
 })
 
-$('#editProductImgBlock').on('click', 'figure',function(){
-    if($(this).closest('.imgCheck').find('input[type=checkbox]').prop('checked')){
+$('#editProductImgBlock').on('click', 'figure', function () {
+    if ($(this).closest('.imgCheck').find('input[type=checkbox]').prop('checked')) {
         $(this).closest('.imgCheck').find('input[type=checkbox]').prop('checked', false);
         $(this).css('border', 'none');
-    }else{
+    } else {
         $(this).closest('.imgCheck').find('input[type=checkbox]').prop('checked', true);
         $(this).css('border', '1px solid #20c997');
     }
@@ -193,38 +350,38 @@ $('#editProductImgBlock').on('click', 'figure',function(){
     // $('#editProductImgBlock').find(':checked').closest('.imgCheck').find('figure').css('border', '1px solid #20c997');
 })
 
-$('#editProductImgBlock').on('click', ':checkbox',function(){
+$('#editProductImgBlock').on('click', ':checkbox', function () {
     $(this).closest('.imgCheck').find('figure').css('border', 'none');
     $('#editProductImgBlock').find(':checked').closest('.imgCheck').find('figure').css('border', '1px solid #20c997');
 })
 
 
-$('#productSkuEditTbody').on('click', '.check-area', function(){
-    if($(this).closest('td').find('input[type=checkbox]').prop('checked')){
+$('#productSkuEditTbody').on('click', '.check-area', function () {
+    if ($(this).closest('td').find('input[type=checkbox]').prop('checked')) {
         $(this).closest('td').find('input[type=checkbox]').prop('checked', false);
         $(this).closest('tr').css('background-color', '');
-    }else{
+    } else {
         $(this).closest('td').find('input[type=checkbox]').prop('checked', true);
         $(this).closest('tr').css('background-color', '#FFECF5');
     }
 })
 
-$('#productSkuEditTbody').on('click', ':checkbox',function(){
+$('#productSkuEditTbody').on('click', ':checkbox', function () {
     $(this).closest('tr').css('background-color', '');
-    if($(this).prop('checked')){
+    if ($(this).prop('checked')) {
         $(this).closest('tr').css('background-color', '#FFECF5');
     }
 })
 
-$('#submitUpdateBtn').click(function(){
+$('#submitUpdateBtn').click(function () {
     $('.submit-mask').css('display', 'block');
 });
 
-$('#cancelUpdate').click(function(){
+$('#cancelUpdate').click(function () {
     $('.submit-mask').css('display', 'none');
 })
 
-$('#confirmUpdate').click(function(){
+$('#confirmUpdate').click(function () {
     $('form').submit();
 })
 

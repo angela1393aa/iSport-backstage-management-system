@@ -135,9 +135,9 @@ require_once("includes/header.php");
             <div class="title_right">
                 <div class="col-md-5 col-sm-5   form-group pull-right top_search">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="搜尋關鍵字...">
+                        <input type="text" class="form-control" placeholder="搜尋商品關鍵字..." id="keyWordsSearchInput">
                         <span class="input-group-btn">
-                            <button class="btn btn-default" type="button">Go!</button>
+                            <button class="btn btn-default" type="button" id="keyWordsSearchBtn">Go!</button>
                         </span>
                     </div>
                 </div>
@@ -155,7 +155,7 @@ require_once("includes/header.php");
                         <p>選擇商品檢視或編輯</p>
                         <div class="d-flex py-2 align-items-center">
                             <p class="flex-grow-1 m-0" id="dataCount"></p>
-                            <p class="m-0 pr-2">價格區間</p>
+                            <!-- <p class="m-0 pr-2">價格區間</p>
                             <div class="cost-filter input-group input-group-sm m-0 p-0">
                                 <input id="costFilterMax" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="MAX">
                                 <div class="input-group-prepend">
@@ -164,12 +164,9 @@ require_once("includes/header.php");
                             </div>
                             <div class="cost-filter-2 input-group input-group-sm m-0 pr-2">
                                 <input id="costFilterMin" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="MIN">
-                            </div>
-                            <select id="statusFilter" class="category-filter form-control form-control-sm text-white ml-1" style="width: 120px; background-color:#2A3F54;border:none;border-radius:5px;">
-                                <option value="0">所有狀態</option>
-                                <option value="1">供貨中</option>
-                                <option value="2">已下架</option>
-                                <option value="3">缺貨中</option>
+                            </div> -->
+                            <select id="brandFilter" class="category-filter form-control form-control-sm text-white ml-1" style="width: 200px; background-color:#2A3F54;border:none;border-radius:5px;">
+                                <option value="0">所有品牌</option>
                             </select>
                             <select id="categoryFilter" class="form-control form-control-sm text-white ml-1" style="width: 120px; background-color:#2A3F54;border:none;border-radius:5px;">
                                 <option value="0">所有分類</option>
@@ -199,9 +196,6 @@ require_once("includes/header.php");
 
                         </div>
                         <div id="pageBtnGroup" class="btn-group mr-2 align-self-center" role="group" aria-label="First group">
-                            <button type="button" class="btn btn-secondary flex-grow-0" id="btnPrevious">
-                                < </button>
-                                    <button type="button" class="btn btn-secondary flex-grow-0" id="btnNext"> > </button>
                         </div>
                     </div>
                 </div>

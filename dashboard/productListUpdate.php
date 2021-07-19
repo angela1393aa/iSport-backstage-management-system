@@ -52,10 +52,12 @@ foreach ($brandRows as $row) {
 
 //價格的顯示
 if (count($editPrice) > 1 &&  min($editPrice) != max($editPrice)) {
-    $productPrice = min($editPrice) . '~' . max($editPrice);
+    $editProductPrice = min($editPrice) . '~' . max($editPrice);
 } else {
     $editProductPrice = $editPrice[0];
 }
+ 
+print_r($editProductPrice);
 
 # 取得上傳檔案數量
 $fileCount = count($_FILES['file']['name']);

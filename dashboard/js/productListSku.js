@@ -86,14 +86,14 @@ axios({
             let pageChange = page*20;
             console.log(page, maxPage)
 
-            if(page == maxPage){
-                pageChange = ((page-1)*20) + data.length % 20;
-            }
+            // if(page == maxPage){
+            //     pageChange = ((page-1)*20) + data.length % 20;
+            // }
             
 
 
             for (let i = page*20-20; i < pageChange; i++) {
-                
+                if(!data[i]) break;
                 content += `
                     <tr class="even pointer p-0">
                         <td class="text-center align-middle">
