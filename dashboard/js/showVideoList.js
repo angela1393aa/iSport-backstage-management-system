@@ -380,15 +380,26 @@ function pageButtons() {
     });
 
     pagination.innerHTML = '';
-    pagination.innerHTML += '<li class=""><button id="lastButton" type="button" class="btn btn-danger" onclick="changeButton(this.id)"><span aria-hidden="true"><i class="fas fa-caret-left"></i></span></button></li>';
-    for (let i = 1; i <= pages; i++) {
-        if (i > 3) {
-            pagination.innerHTML += `<li class="page-item numberButton"><button type="button" class="btn btn-warning" onclick="show(this)" data-num="${i}">${i}</button></li>`;
-        } else {
+    if (pages > 3) {
+        pagination.innerHTML += '<li class=""><button id="lastButton" type="button" class="btn btn-danger" onclick="changeButton(this.id)"><span aria-hidden="true"><i class="fas fa-caret-left"></i></span></button></li>';
+        for (let i = 1; i <= pages; i++) {
+            if (i > 3) {
+                pagination.innerHTML += `<li class="page-item numberButton"><button type="button" class="btn btn-warning" onclick="show(this)" data-num="${i}">${i}</button></li>`;
+            } else {
+                pagination.innerHTML += `<li class="page-item numberButton show"><button type="button" class="btn btn-warning" onclick="show(this)" data-num="${i}">${i}</button></li>`;
+            }
+        }
+        pagination.innerHTML += '<li class=""><button id="nextButton" type="button" class="btn btn-danger" onclick="changeButton(this.id)"><span aria-hidden="true"><i class="fas fa-caret-right"></i></span></button></li>';
+    } else {
+        for (let i = 1; i <= pages; i++) {
             pagination.innerHTML += `<li class="page-item numberButton show"><button type="button" class="btn btn-warning" onclick="show(this)" data-num="${i}">${i}</button></li>`;
         }
     }
-    pagination.innerHTML += '<li class=""><button id="nextButton" type="button" class="btn btn-danger" onclick="changeButton(this.id)"><span aria-hidden="true"><i class="fas fa-caret-right"></i></span></button></li>';
+
+
+
+
+
 }
 
 let currentPage = 0;
@@ -424,16 +435,21 @@ function changeButton(buttonId) {
         numberButton[currentMax].nextSibling.classList.add('show');
         numberButton[currentMin].classList.remove('show');
         if (currentMax < (numberButton.length - 2)) {
+            lastButton.disabled = false;
             currentMax++;
             currentMin++;
-            console.log(currentMax);
+        } else {
+            nextButton.disabled = true;
         }
     } else {
         numberButton[currentMax + 1].classList.remove('show');
         numberButton[currentMin + 1].previousSibling.classList.add('show');
         if (currentMin > 0) {
+            nextButton.disabled = false;
             currentMax--;
             currentMin--;
+        } else {
+            lastButton.disabled = true;
         }
     }
 }
