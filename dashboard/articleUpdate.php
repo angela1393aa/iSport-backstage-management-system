@@ -1,5 +1,5 @@
 <?php
-require_once("config.php");
+require_once("includes/config.php");
 if (
     empty($_POST['article_name']) || empty($_POST['added_by']) || empty($_POST['content'])
  ) {

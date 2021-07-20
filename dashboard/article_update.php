@@ -1,6 +1,6 @@
 <?php 
-require_once("header.php");
-require_once("config.php");
+require_once("includes/header.php");
+require_once("includes/config.php");
 $id=$_GET["id"];
 $stmt = $db_host->prepare("SELECT * FROM article WHERE id='$id'");//顯示
 try{
@@ -69,4 +69,4 @@ try{
                 ?>
               </form>
             </div>
-            <?php require_once("footer.php"); ?>
+            <?php require_once("includes/footer.php"); ?>

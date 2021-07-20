@@ -1,6 +1,6 @@
 <?php 
-require_once("header.php"); 
-require_once("config.php");
+require_once("includes/header.php"); 
+require_once("includes/config.php");
 $stmt = $db_host->prepare("SELECT * FROM article where valid =1 ");
 try{
 	$stmt->execute();
@@ -108,4 +108,4 @@ try{
     </div>
   </div>
 </div>
-<?php require_once("footer.php"); ?>
+<?php require_once("includes/footer.php"); ?>
