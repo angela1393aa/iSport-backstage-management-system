@@ -91,7 +91,6 @@ if(isset($_SESSION['userLoggedIn'])) {
                   <ul class="nav child_menu">
                     <li><a href="user_order.php">訂單列表</a></li>
                     <li><a href="user_order_create.php">新增訂單</a></li>
-                    <li><a href="typography.html">訂單統計</a></li>
                   </ul>
                 </li>
                 <li><a><i class="fab fa-youtube"></i> 影片管理 <span class="fa fa-chevron-down"></span></a>
