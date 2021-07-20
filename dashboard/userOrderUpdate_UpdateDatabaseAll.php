@@ -36,7 +36,7 @@ try{
                     $usersAddressArr[$usersRow["id"]] = $usersRow["address"];
                     $usersRecipientArr[$usersRow["id"]] = $usersRow["account"];
                     
-                    $phone = "0".$usersPhoneArr[$usersRow["id"]];
+                    $phone = $usersPhoneArr[$usersRow["id"]];
                     $address = $usersAddressArr[$usersRow["id"]];
                     $recipient = $usersRecipientArr[$usersRow["id"]];
                     

@@ -9,7 +9,7 @@ $userOrderStmt->execute([$id]);
 
 try{
     header("location: user_order.php");
-
+    
 }catch (PDOException $e){
     echo "資料庫連結失敗<br>";
     echo "Error: ".$e -> getMessage(). "<br>";

@@ -6,10 +6,12 @@ button, .page-link {
     }
 }
 
-.active{
-        background: gray;
+.page-item.active .page-link {
+    z-index: 1;
+    color: #fff;
+    background-color: rgba(52,73,94,0.94);
+    border-color: transparent;
 }
-
 
 
 // button:focus,
