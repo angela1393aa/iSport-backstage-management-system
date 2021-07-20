@@ -24,7 +24,100 @@ require_once("includes/header.php");
 <!-- page content -->
 <div class="right_col" role="main">
 
-    <!-- Extra large modal -->
+    <!--info Modal -->
+    <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="infoModalTitle">商品詳細資訊</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row px-3">
+                        <div class="col-5 mb-4">
+                            <div class="info-img-big">
+                                <figure>
+                                    <img src="../db_img/1001-1.png" alt="">
+                                </figure>
+                            </div>
+                            <div class="info-img-small row">
+                                <figure>
+                                    <img src="../db_img/1001-1.png" alt="">
+                                </figure>
+                                <figure>
+                                    <img src="../db_img/1001-2.png" alt="">
+                                </figure>
+                                <figure>
+                                    <img src="../db_img/1001-3.png" alt="">
+                                </figure>
+                                <figure>
+                                    <img src="../db_img/1001-4.png" alt="">
+                                </figure>
+                                <figure>
+                                    <img src="../db_img/1001-4.png" alt="">
+                                </figure>
+                            </div>
+
+                        </div>
+                        <div class="col-7 mb-4 text-config">
+                            <h4 id="infoProductName"></h4>
+                            <hr>
+                            <div class="row">
+                                <div class="col-4">
+                                    <h5>品牌：
+                                        <span class=" h5 d-inline" id="infoBrand"></span>
+                                    </h5>
+                                    <h5>分類：
+                                        <span class=" h5" id="infoCategory"></span>
+                                    </h5>
+                                </div>
+                                <div class="col-8">
+                                    <h5>上架時間：
+                                        <span class=" h5" id="infoCreateTime"></span>
+                                    </h5>
+                                    <h5>最後更新時間：
+                                        <span class=" h5" id="infoUpdateTime"></span>
+                                    </h5>
+                                </div>
+                            </div>
+                            <hr>
+                            <h5>商品介紹</h5>
+                            <div class=" overflow-auto" id="infoIntro">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="table-responsive">
+                                    <table class="table table-striped jambo_table bulk_action">
+                                        <thead>
+                                            <tr class="headings">
+                                                <th class="col-2 px-2 py-3 text-center">貨號</th>
+                                                <th class="col-2 px-2 py-3 text-center">規格</th>
+                                                <th class="col-2 px-2 py-3 text-center">價格</th>
+                                                <th class="col-2 px-2 py-3 text-center">庫存</th>
+                                                <th class="col-2 px-2 py-3 text-center">銷售</th>
+                                                <th class="col-2 px-2 py-3 text-center">狀態</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="productSkuInfoTbody">
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">關閉</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Extra large modal edit-->
 
     <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true" id="myModal">
         <div class="modal-dialog modal-dialog-centered modal-xl">
@@ -36,7 +129,7 @@ require_once("includes/header.php");
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="productListUpdate.php" method="post" enctype="multipart/form-data" class="row p-2" >
+                    <form action="productListUpdate.php" method="post" enctype="multipart/form-data" class="row p-2">
                         <div class="col-12 p-3">
                             <div class="row">
                                 <input type="hidden" name="productId" id="productId">
@@ -127,6 +220,29 @@ require_once("includes/header.php");
     </div>
 
 
+
+    <!-- Modal of delete-->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" id="deleteModal">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header row">
+                    <h3 class="modal-title col-12 text-center font-weight-bold" id="exampleModalCenterTitle">確定刪除此項商品?</h3>
+                    <p class="modal-title col-12 text-center text-danger">商品：<span id="deleteAlert" class="font-weight-bold"></span><br>
+                        與其底下所有項目刪除後將無法復原!</p>
+                </div>
+                <div class="modal-body p-0">
+                    <div class="text-center text-danger" style="font-size: 100px;">
+                        <i class="fas fa-exclamation-circle"></i>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">取消</button>
+                    <a type="button" class="btn btn-danger" id="deleteProductBtn">刪除</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ----------------------------------- -->
     <div class="">
         <div class="page-title">
             <div class="title_left">
@@ -177,7 +293,7 @@ require_once("includes/header.php");
                             <table class="table table-striped jambo_table bulk_action">
                                 <thead>
                                     <tr class="headings">
-                                        
+
                                         <th class="px-2 py-3 text-center">分類</th>
                                         <th class="px-2 py-3 text-center">商品名稱</th>
                                         <th class="px-2 py-3 text-center">品牌</th>

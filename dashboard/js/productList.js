@@ -157,20 +157,20 @@ let tableShowLoop = (startNum, endNum, data) => {
                         <div class="d-flex justify-content-center">
                             <a href="#"
                                class="btn btn-round btn-info d-flex justify-content-center align-items-center "
-                               style="width: 30px;height: 30px;" data-id="${data[i].product_id}" id="info"><i class="fas fa-info"></i></a>
+                               style="width: 30px;height: 30px;" data-toggle="modal" data-target="#infoModal" data-id="${data[i].product_id}" id="info"><i class="fas fa-info"></i></a>
                             <a href="#"
                                class="btn btn-round btn-secondary d-flex justify-content-center align-items-center "
                                style="width: 30px;height: 30px;" data-toggle="modal" data-target=".bd-example-modal-xl" data-id="${data[i].product_id}" id="edit"><i class="fas fa-edit"></i></a>
                             <a href="#"
-                               class="btn btn-round btn-danger d-flex justify-content-center align-items-center "
-                               style="width: 30px;height: 30px;" data-id="${data[i].product_id}" id="delete"><i class="fas fa-trash-alt"></i></a>
+                               class="btn btn-round btn-danger d-flex justify-content-center align-items-center"
+                               style="width: 30px;height: 30px;" data-toggle="modal" data-target="#exampleModalCenter" data-index="${i}" id="delete"><i class="fas fa-trash-alt"></i></a>
                         </div>
                     </td>
                 </tr>
             `
     }
-    $('tbody').empty();
-    $('tbody').append(content);
+    $('#productTbody').empty();
+    $('#productTbody').append(content);
 }
 
 
@@ -236,10 +236,18 @@ axios({
         tableShowLoop(0, 15, treatedProduct);
         createPageBtn(treatedProduct);
 
+
+        //-----------------------------delete---------------------------------
+        $('#productTbody').on('click', '#delete', function () {
+            // console.log(this)
+            let index = $(this).data('index');
+            $('#deleteAlert').text(treatedProduct[index].product_name);
+            $('#deleteProductBtn').attr('href', `productDelete.php?id=${treatedProduct[index].product_id}`);
+        })
     }).catch();
 
 
-//edit
+//-------------------------edit-------------------------------------------
 $('#productTbody').on('click', '#edit', function () {
     $('#myModal').modal({ backdrop: 'static', keyboard: false });
     let id = $(this).data('id');
@@ -332,7 +340,7 @@ $('#productTbody').on('click', '#edit', function () {
                 `
             })
             $('#productSkuEditTbody').append(content);
-            productSku.forEach( element =>{
+            productSku.forEach(element => {
                 $(`.editSkuCategory${element['product_sku_id']}`).val(element['status_id']);
             })
 
@@ -388,6 +396,71 @@ $('#confirmUpdate').click(function () {
     $('form').submit();
 })
 
+//---------------------info----------------------------------
+$('#productTbody').on('click', '#info', function () {
+    let id = $(this).data('id');
+    let infoFormData = new FormData();
+    let content = '';
+    infoFormData.append("product_id", id);
+    axios.post('/project_01/dashboard/api/productListProductApi.php', infoFormData)
+        .then(function (response) {
+            console.log(response);
+            let product = response.data.product;
+            let productSku = response.data.productSku;
+            let img = product['product_img'];
+            let imgArr = Object.values(img);
+
+            // $('#infoModalTitle').text(product.product_name);
+            $('#infoProductName').text(product.product_name);
+            $('#infoBrand').text(product.product_brand);
+            $('#infoCategory').text(product.category);
+            $('#infoCreateTime').text(product.create_time);
+            $('#infoUpdateTime').text(product.maxUpdateTime);
+            $('#infoIntro').text(product.product_intro);
+
+            productSku.forEach(element => {
+                content += `
+                <tr class="even pointer p-0">
+                    <td class="text-center">${element['sku_code']}</td>
+                    <td class="text-center">${element['sku_group']}</td>
+                    <td class="text-center">${element['price']}</td>
+                    <td class="text-center">${element['stock']}</td>
+                    <td class="text-center">${element['sale']}</td>
+                    <td class="text-center"><span class="badge badge-${element.stytusStyle}">${element['status']}</span></td>
+
+                </tr>
+                `
+            })
+            $('#productSkuInfoTbody').empty();
+            $('#productSkuInfoTbody').append(content);
+
+            content = '';
+            imgArr.forEach(element => {
+                content += `
+                <figure>
+                    <img src="../db_img/${element}" alt="">
+                </figure>
+                `
+            })
+            $('.info-img-small').empty();
+            $('.info-img-small').append(content);
+
+            let startImg = $('.info-img-small figure').eq(0).find('img').attr('src');
+            console.log(startImg);
+            $('.info-img-big img').attr('src', startImg)
+            $('.info-img-small figure').eq(0).css('border', '2px solid #20c997');
+
+        }).catch(function (error) {
+            console.log(error)
+        })
+})
+
+$('.info-img-small').on('click', 'figure', function(){
+    let imgSrc = $(this).find('img').attr('src');
+    $(this).siblings().css('border', '2px solid transparent');
+    $(this).css('border', '2px solid #20c997')
+    $('.info-img-big img').attr('src', imgSrc)
+})
 
 
 //------------------------------------------------------------
