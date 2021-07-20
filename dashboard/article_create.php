@@ -1,5 +1,6 @@
-<?php require_once("includes/header.php"); ?>
-<!-- page content -->
+<?php 
+require_once("header.php"); 
+?>
 <div class="right_col" role="main">
   <div class="">
     <div class="page-title">
@@ -18,9 +19,9 @@
             <div class="clearfix"></div>
           </div>
           <div class="x_content">
+            <!-- required -->
             <div class="container">
-              <form action="articleCreate.php" method="post">
-                <!-- userCreate.php -->
+              <form action="articleCreate.php" method="post" enctype="multipart/form-data">
                 <div class="mb-2">
                   <label for="article_name">作者</label>
                   <input type="text" class="form-control" name="article_name" id="article_name">
@@ -40,6 +41,10 @@
                   <input type="text" class="form-control" name="added_by" id="added_by">
                 </div>
                 <div class="mb-2">
+                    <label for="">上傳圖片</label>
+                    <input class="form-control" type="file" name="file" id="file">
+                </div>
+                <div class="mb-2">
                   <label for="content">內容:</label>
                   <textarea class="form-control" rows="30" name="content" id="content"></textarea>
                 </div>
@@ -48,5 +53,4 @@
                 </div>
               </form>
             </div>
-            <!-- /page content -->
-            <?php require_once("includes/footer.php"); ?>
+            <?php require_once("footer.php"); ?>

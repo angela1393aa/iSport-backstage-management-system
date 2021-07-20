@@ -1,15 +1,22 @@
 <?php 
-require_once("includes/header.php");
+require_once("header.php"); 
+require_once("config.php");
+$stmt = $db_host->prepare("SELECT * FROM article where valid =1 ");
+try{
+	$stmt->execute();
+	$rows=$stmt->fetchAll(PDO::FETCH_ASSOC);
+}catch(PDOException $e){
+	echo "資料庫連結失敗";
+}
 ?>
-<!-- page content -->
 <style>
-  .dataTables_filter {
+    .dataTables_filter {
     text-align: end;
   }
 </style>
 <div class="right_col" role="main">
   <div class="">
-    <div class="page-title">
+    <div class="page-title" style="display:flex; justify-content: space-between;">
       <div class="title_left">
         <h3>文章</h3>
       </div>
@@ -33,71 +40,64 @@ require_once("includes/header.php");
             <div class="row">
               <div class="col-sm-12">
                 <div class="card-box table-responsive">
-                  <div class="container">
-                    <table class="table table-striped table-bordered " style="width:100%" id="datatable">
-                      <thead>
-                        <tr>
-                          <th>序號</th>
-                          <th>作者</th>
-                          <th>分類</th>
-                          <th>標題</th>
-                          <th>time</th>
-                          <th> </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                      </tbody>
-                    </table>
-                  </div>
-                  <!-- jquery -->
-                  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-                    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-                  <!-- axios -->
-                  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-                  <script>
-                    axios({
-                      method: 'post',
-                      url: '/project_01-master/dashboard/api/articleList.php',//改這裡
-                    })
-                      .then(function (response) {
-                        // console.log(response);
-                        let data = response.data;
-                        //console.log(data);
-                        let content = "";
-                        let category = "";
-                        let getCategory = (cgy) => {
-                          cgy == '1' ? cgy = '有氧' : '';
-                          cgy == '2' ? cgy = '重訓' : '';
-                          cgy == '3' ? cgy = 'tabata' : '';
-                          cgy == '4' ? cgy = '核心' : '';
-                          cgy == '5' ? cgy = '飲食' : '';
-                          return cgy;
-                        }
-                        data.forEach((article) => {
-                          article.category = getCategory(article.category);
-                          content += `
-            <tr>
-                <td>${article.id}</td>
-                <td>${article.article_name}</td>
-                <td>
-                ${article.category}
-                </td>
-                <td>${article.added_by}</td>
-                <td>${article.upload_date}</td>
-                <td>
-                <a class="close-link" href="article_onelist.php?id=${article.id}"><i class="fa fa-search"></i>瀏覽</a>
-                <a class="close-link" href="article_update.php?id=${article.id}"><i class="fa fa-pencil-square-o"></i>修改</a>
-                <a class="close-link" href="article_delete.php?id=${article.id}"><i class="fa fa-trash"></i>刪除</a>
-                </td>
-            </tr>`
-                        })
-                        $("tbody").append(content)
-                      })
-                      .catch(function (error) {
-                        console.log(error);
-                      });
-                  </script>
-                  </tbody>
+                  <table class="table table-striped table-bordered dataTables_filter" style="width:100%" id="datatable"><!-- id="datatable" -->
+                    <thead>
+                      <tr>
+                        <th style="width: 12px;">序號</th>
+                        <th style="width: 12px;">作者</th>
+                        <th style="width: 12px;">分類</th>
+                        <th style="width: 12px;">標題</th>
+                        <th style="width: 12px;">time</th>
+                        <th style="width: 12px;"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <?php
+                      foreach($rows as $value){
+                        ?>
+                      <tr>
+                        <td>
+                          <?php echo $value["id"] ?>
+                        </td>
+                        <td>
+                          <?php echo $value["article_name"]?>
+                        </td>
+                        <td>
+                          <?php 
+                            switch($value["category"]){
+                                case('1'):
+                                    echo '有氧';
+                                break;
+                                case('2'):
+                                    echo '重訓';
+                                break;
+                                case('3'):
+                                    echo 'tabata';
+                                break;
+                                case('4'):
+                                    echo '飲食';
+                                break;
+                                case('5'):
+                                    echo '核心';
+                                break;
+                            }
+                        ?>
+                        </td>
+                        <td>
+                          <?php echo $value["added_by"]?>
+                        </td>
+                        <!-- <td><?php echo $value["content"]?></td> -->
+                        <td>
+                          <?php echo $value["upload_date"]?>
+                        </td>
+                        <td>
+                        <a class="close-link" href="article_onelist.php?id=<?php echo $value["id"]?>"><i class="fa fa-search"></i>瀏覽</a><!-- user.php -->
+                        <a class="close-link" href="article_update.php?id=<?php echo $value["id"]?>"><i class="fa fa-pencil-square-o"></i>修改</a><!-- updateUser.php -->
+                        <a class="close-link" href="article_delete.php?id=<?php echo $value["id"]?>"><i class="fa fa-trash"></i>刪除</a>  
+                        </td>
+                      </tr>
+                      <?php }?>
+                    </tbody>
                   </table>
                 </div>
               </div>
@@ -108,5 +108,4 @@ require_once("includes/header.php");
     </div>
   </div>
 </div>
-<!-- /page content -->
-<?php require_once("includes/footer.php"); ?>
+<?php require_once("footer.php"); ?>

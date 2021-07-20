@@ -1,10 +1,8 @@
 <?php 
-require_once("includes/header.php");
-require_once("includes/config.php");
-
+require_once("header.php");
+require_once("config.php");
 $id=$_GET["id"];
-$stmt = $db_host->prepare("SELECT * FROM article WHERE id='$id'");
-
+$stmt = $db_host->prepare("SELECT * FROM article WHERE id='$id'");//顯示
 try{
 	$stmt->execute();
 	$rows=$stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -12,7 +10,6 @@ try{
 	echo "資料庫連結失敗";
 }
 ?>
-<!-- page content -->
 <div class="right_col" role="main">
   <div class="">
     <div class="page-title">
@@ -28,20 +25,18 @@ try{
             <h2>
               <a class="btn btn-secondary" href="article_list.php">文章列表</a>修改文章:
             </h2>
-            <div style="text-align: end;">
-            </div>
             <div class="clearfix"></div>
           </div>
           <div class="x_content">
             <div class="container">
               <form action="articleUpdate.php" method="post">
-                <?php
+              <?php
                   foreach($rows as $value){
-                ?>
-                <input type="hidden" name="id" value="<?=$value[" id"]?>">
+              ?>
+                <input type="hidden" name="id" value="<?=$value["id"]?>">
                 <div class="mb-2">
                   <label for="article_name">作者:</label>
-                  <input type="text" class="form-control " name="article_name" value="<?=$value[" article_name"]?>">
+                  <input type="text" class="form-control " name="article_name" value="<?=$value["article_name"]?>">
                 </div>
                 <div class="mb-2">
                   <label for="category">分類:</label>
@@ -55,7 +50,11 @@ try{
                 </div>
                 <div class="mb-2">
                   <label for="added_by">標題:</label>
-                  <input type="text" class="form-control" name="added_by" value="<?=$value[" added_by"]?>">
+                  <input type="text" class="form-control" name="added_by" value="<?=$value["added_by"]?>">
+                </div>
+                <div class="mb-2">
+                  <label>圖片:</label><br>
+                  <img class="img-fluid" src="upload/<?=$value["photos"]?>" alt="photos">
                 </div>
                 <div class="mb-2">
                   <label for="content">內容:</label>
@@ -66,9 +65,8 @@ try{
                   <button class="btn btn-secondary" type="article_list.php">修改</button>
                 </div>
                 <?php
-                  } 
+                    } 
                 ?>
               </form>
             </div>
-            <!-- /page content -->
-            <?php require_once("includes/footer.php"); ?>
+            <?php require_once("footer.php"); ?>
