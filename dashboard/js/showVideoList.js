@@ -380,15 +380,15 @@ function pageButtons() {
     });
 
     pagination.innerHTML = '';
-    pagination.innerHTML += '<li class=""><button id="lastButton" type="button" class="btn btn-danger" onclick="changeButton(this.id)"><span aria-hidden="true"><i class="fas fa-caret-left"></i></span></button></li>';
+    // pagination.innerHTML += '<li class=""><button id="lastButton" type="button" class="btn btn-danger" onclick="changeButton(this.id)"><span aria-hidden="true"><i class="fas fa-caret-left"></i></span></button></li>';
     for (let i = 1; i <= pages; i++) {
-        if (i > 3) {
-            pagination.innerHTML += `<li class="page-item numberButton"><button type="button" class="btn btn-warning" onclick="show(this)" data-num="${i}">${i}</button></li>`;
-        } else {
-            pagination.innerHTML += `<li class="page-item numberButton show"><button type="button" class="btn btn-warning" onclick="show(this)" data-num="${i}">${i}</button></li>`;
-        }
+        // if (i > 3) {
+        //     pagination.innerHTML += `<li class="page-item numberButton"><button type="button" class="btn btn-warning" onclick="show(this)" data-num="${i}">${i}</button></li>`;
+        // } else {
+        pagination.innerHTML += `<li class="page-item numberButton show"><button type="button" class="btn btn-warning" onclick="show(this)" data-num="${i}">${i}</button></li>`;
+        // }
     }
-    pagination.innerHTML += '<li class=""><button id="nextButton" type="button" class="btn btn-danger" onclick="changeButton(this.id)"><span aria-hidden="true"><i class="fas fa-caret-right"></i></span></button></li>';
+    // pagination.innerHTML += '<li class=""><button id="nextButton" type="button" class="btn btn-danger" onclick="changeButton(this.id)"><span aria-hidden="true"><i class="fas fa-caret-right"></i></span></button></li>';
 }
 
 let currentPage = 0;
@@ -414,16 +414,16 @@ function show(page) {
     });
 
 }
-let currentMax = 2;
-let currentMin = 0;
-function changeButton(buttonId) {
-    let numberButton = document.querySelectorAll('.numberButton');
+// let currentMax = 2;
+// let currentMin = 0;
+// function changeButton(buttonId) {
+//     let numberButton = document.querySelectorAll('.numberButton');
 
 
-    if (buttonId === 'nextButton') {
-        numberButton[currentMax].nextSibling.classList.add('show');
-        numberButton[currentMin].classList.remove('show');
-        currentMax++;
-        currentMin++;
-    }
-}
+//     if (buttonId === 'nextButton') {
+//         numberButton[currentMax].nextSibling.classList.add('show');
+//         numberButton[currentMin].classList.remove('show');
+//         currentMax++;
+//         currentMin++;
+//     }
+// }
