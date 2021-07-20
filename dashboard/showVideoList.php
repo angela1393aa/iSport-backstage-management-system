@@ -1,7 +1,7 @@
 <?php
 // $bootstrapLink = "https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css";
 $title = "影片列表";
-$style = "uploadVideo";
+$style = "uploadVideo.css";
 $js = "showVideoList.js";
 require_once("includes/header.php");
 require_once("includes/classes/Video.php");
