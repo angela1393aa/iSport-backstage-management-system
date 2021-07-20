@@ -8,7 +8,7 @@ if (
    exit(); 
 }
 if($_FILES["file"]["error"]==0){
-    if(move_uploaded_file($_FILES["file"]["tmp_name"], "./upload/". $_FILES["file"]["name"])){
+    if(move_uploaded_file($_FILES["file"]["tmp_name"], "images/article_upload/". $_FILES["file"]["name"])){
         echo "Upload success!<br>";
     }else{
         echo "Upload fail!!<br>";

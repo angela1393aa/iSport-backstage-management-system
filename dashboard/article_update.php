@@ -54,7 +54,7 @@ try{
                 </div>
                 <div class="mb-2">
                   <label>圖片:</label><br>
-                  <img class="img-fluid" src="upload/<?=$value["photos"]?>" alt="photos">
+                  <img class="img-fluid" src="images/article_upload/<?=$value["photos"]?>" alt="photos">
                 </div>
                 <div class="mb-2">
                   <label for="content">內容:</label>
