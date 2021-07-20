@@ -81,28 +81,28 @@ if(isset($_SESSION['userLoggedIn'])) {
                     <li><a href="/project_01/dashboard/user_create.php">會員新增</a></li>
                   </ul>
                 </li>
-                <li><a><i class="fas fa-shopping-bag"></i> 商品管理 <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu">
-                    <li><a href="/project_01/dashboard/product_list.php">商品列表</a></li>
-                    <li><a href="/project_01/dashboard/product_creat.php">新增商品</a></li>
-                  </ul>
-                </li>
                 <li><a><i class="far fa-list-alt"></i> 訂單管理 <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                     <li><a href="user_order.php">訂單列表</a></li>
                     <li><a href="user_order_create.php">新增訂單</a></li>
                   </ul>
                 </li>
-                <li><a><i class="fab fa-youtube"></i> 影片管理 <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu">
-                    <li><a href="showVideoList.php">影片列表</a></li>
-                    <li><a href="uploadVideoFile.php">影片上傳</a></li>
-                  </ul>
-                </li>
                 <li><a><i class="far fa-newspaper"></i> 文章管理 <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                     <li><a href="article_list.php">文章列表</a></li>
                     <li><a href="article_create.php">新增文章</a></li>
+                  </ul>
+                </li>
+                <li><a><i class="fas fa-shopping-bag"></i> 商品管理 <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu">
+                    <li><a href="/project_01/dashboard/product_list.php">商品列表</a></li>
+                    <li><a href="/project_01/dashboard/product_creat.php">新增商品</a></li>
+                  </ul>
+                </li>
+                <li><a><i class="fab fa-youtube"></i> 影片管理 <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu">
+                    <li><a href="showVideoList.php">影片列表</a></li>
+                    <li><a href="uploadVideoFile.php">影片上傳</a></li>
                   </ul>
                 </li>
               </ul>
