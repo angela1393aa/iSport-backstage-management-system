@@ -1,5 +1,5 @@
 <?php 
-require_once("includes/header.php"); 
+require_once("header.php"); 
 ?>
 <div class="right_col" role="main">
   <div class="">
@@ -24,7 +24,7 @@ require_once("includes/header.php");
               <form action="articleCreate.php" method="post" enctype="multipart/form-data">
                 <div class="mb-2">
                   <label for="article_name">作者</label>
-                  <input type="text" class="form-control" name="article_name" id="article_name">
+                  <input type="text" class="form-control" name="article_name" id="article_name" placeholder="必填，最多50字">
                 </div>
                 <div class="mb-2">
                   <label for="category">分類</label>
@@ -38,7 +38,7 @@ require_once("includes/header.php");
                 </div>
                 <div class="mb-2">
                   <label for="added_by">標題</label>
-                  <input type="text" class="form-control" name="added_by" id="added_by">
+                  <input type="text" class="form-control" name="added_by" id="added_by" placeholder="必填，最多100字">
                 </div>
                 <div class="mb-2">
                     <label for="">上傳圖片</label>
@@ -46,11 +46,11 @@ require_once("includes/header.php");
                 </div>
                 <div class="mb-2">
                   <label for="content">內容:</label>
-                  <textarea class="form-control" rows="30" name="content" id="content"></textarea>
+                  <textarea class="form-control" rows="30" name="content" id="content" placeholder="必填"></textarea>
                 </div>
                 <div style="text-align: end;">
                   <button class="btn btn-secondary" type="submit">新增</button>
                 </div>
               </form>
             </div>
-            <?php require_once("includes/footer.php"); ?>
+            <?php require_once("footer.php"); ?>
