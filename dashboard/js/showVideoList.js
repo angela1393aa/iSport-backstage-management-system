@@ -1,12 +1,21 @@
 /////////////////////// showVideoList.php //////////////////////////////
+let uploadSuccessMessage = document.getElementById('uploadSuccessMessage');
+uploadSuccessMessage = new bootstrap.Modal(uploadSuccessMessage);
+
+// If come from uploadVideo, this will show
+if ($('.show-popup').length > 0) {
+    uploadSuccessMessage.show();
+}
+
 let table = document.getElementById('videoTableItems');
 let searchInput = document.getElementById('searchInput');
 let totalVideos = document.getElementById('totalVideos');
 let categorySelect = document.getElementById('categorySelect');
+let rowCountSelect = document.getElementById('rowCountSelect');
 let thead = document.querySelector('.thead');
 let thCategory = document.querySelector('th-category');
 
-// Execute to get videos and options
+// // Execute to get videos and options
 getVideos();
 
 // Get the promise from axios and put into table
@@ -26,7 +35,7 @@ async function getVideos() {
 
         // Create tbody interval
         let videoItem = `<tr onclick = 'document.location="showVideo.php?id=${video.id}";'
-        style = 'cursor:pointer; background-color: aliceblue;' class='videoItem'>
+        style = 'cursor:pointer; background-color: aliceblue;' class='videoItem' data-show='true' data-page=''>
             <td class='px-3 py-3 td-pic'>
                 <img class='pic' src='${video.thumbnail}'>
                                     </td>
@@ -81,9 +90,10 @@ async function getVideos() {
 
     // Update the number of the videos
     totalVideos.innerText = `共有 ${total} 部影片`;
+    pageButtons();
 }
 
-// When executing getVideo(), the videos data will be pass into this function and execute it immideiately
+// When executing getVideo(), the videos data will be pass into this function and execute it immediately
 function showOptions(videos) {
     let categories = [];
     let ids = [];
@@ -102,7 +112,7 @@ function showOptions(videos) {
                         所有分類
                     </option>`;
 
-    // Sort the options, put the options into a temperary array
+    // Sort the options, put the options into a temporary array
     let tpmArr = [];
 
     for (let i = 0; i < categories.length; i++) {
@@ -142,21 +152,25 @@ searchInput.addEventListener('keyup', () => {
     videoItems.forEach(video => {
         thead.style.opacity = "1";
         categorySelect.style.opacity = "1";
+        rowCountSelect.style.opacity = "1";
         noVideo.style.display = "none";
 
         if (value === '0') {
             if (video.innerText.indexOf(keyword) > -1) {
                 // InnerText contains this keyword
                 video.style.display = "";
+                video.setAttribute('data-show', 'true');
 
             } else {
                 video.style.display = "none";
+                video.setAttribute('data-show', 'false');
                 hiddenVideo++;
 
                 // When the hiddenVideos equal all videos
                 if (hiddenVideo === videoItems.length) {
                     thead.style.opacity = ".7";
                     categorySelect.style.opacity = ".7";
+                    rowCountSelect.style.opacity = ".7";
                     noVideo.style.display = "table-row";
 
                 }
@@ -166,15 +180,18 @@ searchInput.addEventListener('keyup', () => {
             if (video.innerText.indexOf(keyword) > -1 && video.childNodes[7].dataset.id === value) {
                 // InnerText contains this keyword & category is selected
                 video.style.display = "";
+                video.setAttribute('data-show', 'true');
 
             } else {
                 video.style.display = "none";
+                video.setAttribute('data-show', 'false');
                 hiddenVideo++;
 
                 // When the hiddenVideos equal all videos
                 if (hiddenVideo === videoItems.length) {
                     thead.style.opacity = ".7";
                     categorySelect.style.opacity = ".7";
+                    rowCountSelect.style.opacity = ".7";
                     noVideo.style.display = "table-row";
 
                 }
@@ -183,8 +200,8 @@ searchInput.addEventListener('keyup', () => {
     });
     // Update the number of the videos
     totalVideos.innerText = `共有 ${total - hiddenVideo} 部影片`;
+    pageButtons();
 });
-
 
 
 // Sorting function (onclick)
@@ -260,21 +277,25 @@ function selectOption() {
     videoItems.forEach(video => {
         thead.style.opacity = "1";
         categorySelect.style.opacity = "1";
+        rowCountSelect.style.opacity = "1";
         noVideo.style.display = "none";
 
         if (value === '0') {
             if (video.innerText.indexOf(keyword) > -1) {
                 // InnerText contains this keyword
                 video.style.display = "";
+                video.setAttribute('data-show', 'true');
 
             } else {
                 video.style.display = "none";
+                video.setAttribute('data-show', 'false');
                 hiddenVideo++;
 
                 // When the hiddenVideos equal all videos
                 if (hiddenVideo === videoItems.length) {
                     thead.style.opacity = ".7";
                     categorySelect.style.opacity = ".7";
+                    rowCountSelect.style.opacity = ".7";
                     noVideo.style.display = "table-row";
 
                 }
@@ -284,15 +305,18 @@ function selectOption() {
             if (video.innerText.indexOf(keyword) > -1 && video.childNodes[7].dataset.id === value) {
                 // InnerText contains this keyword & category is selected
                 video.style.display = "";
+                video.setAttribute('data-show', 'true');
 
             } else {
                 video.style.display = "none";
+                video.setAttribute('data-show', 'false');
                 hiddenVideo++;
 
                 // When the hiddenVideos equal all videos
                 if (hiddenVideo === videoItems.length) {
                     thead.style.opacity = ".7";
                     categorySelect.style.opacity = ".7";
+                    rowCountSelect.style.opacity = ".7";
                     noVideo.style.display = "table-row";
 
                 }
@@ -301,8 +325,105 @@ function selectOption() {
     });
     // Update the number of the videos
     totalVideos.innerText = `共有 ${total - hiddenVideo} 部影片`;
+    pageButtons();
 }
 
+// Row count set as 5 at first
+let size = 5;
+// Change row count when selected
+function selectRowCount(value) {
+    size = value;
+    pageButtons();
+}
+
+let pagination = document.getElementById('pagination');
+
+// When executing getVideo(), the videos data will be pass into this function and execute it immediately
+function pageButtons() {
+    // Get amount of data
+    let videoItems = document.querySelectorAll('.videoItem');
+    // Make a container
+    let videoShow = [];
+    videoItems.forEach(video => {
+        if (video.getAttribute('data-show') === 'true') {
+            videoShow.push(video);
+        }
+    });
+
+    // How many page
+    let pages = Math.ceil(videoShow.length / size);
+
+    // Set data-page
+    for (let i = 1; i <= pages; i++) {
+        numStart = (i - 1) * size;
+        numEnd = i * size;
+
+        let j = numStart;
+        while (j < numEnd) {
+            if (videoShow[j] === undefined) {
+                // When there are not enough videos in the last page
+                break;
+            }
+            videoShow[j].setAttribute('data-page', i);
+            j++;
+        }
+    }
+
+    // Show page 1 at first
+    videoShow.forEach(video => {
+        // console.log(video.getAttribute('data-page'));
+        if (video.getAttribute('data-page') === '1') {
+            video.style.display = '';
+        } else {
+            video.style.display = 'none';
+        }
+    });
+
+    pagination.innerHTML = '';
+    pagination.innerHTML += '<li class=""><button id="lastButton" type="button" class="btn btn-danger" onclick="changeButton(this.id)"><span aria-hidden="true"><i class="fas fa-caret-left"></i></span></button></li>';
+    for (let i = 1; i <= pages; i++) {
+        if (i > 3) {
+            pagination.innerHTML += `<li class="page-item numberButton"><button type="button" class="btn btn-warning" onclick="show(this)" data-num="${i}">${i}</button></li>`;
+        } else {
+            pagination.innerHTML += `<li class="page-item numberButton show"><button type="button" class="btn btn-warning" onclick="show(this)" data-num="${i}">${i}</button></li>`;
+        }
+    }
+    pagination.innerHTML += '<li class=""><button id="nextButton" type="button" class="btn btn-danger" onclick="changeButton(this.id)"><span aria-hidden="true"><i class="fas fa-caret-right"></i></span></button></li>';
+}
+
+let currentPage = 0;
+function show(page) {
+    currentPage = page.getAttribute('data-num');
+
+    // Get amount of data
+    let videoItems = document.querySelectorAll('.videoItem');
+    // Make a container
+    let videoShow = [];
+    videoItems.forEach(video => {
+        if (video.getAttribute('data-show') === 'true') {
+            videoShow.push(video);
+        }
+    });
+
+    videoShow.forEach(video => {
+        if (video.getAttribute('data-page') === currentPage) {
+            video.style.display = '';
+        } else {
+            video.style.display = 'none';
+        }
+    });
+
+}
+let currentMax = 2;
+let currentMin = 0;
+function changeButton(buttonId) {
+    let numberButton = document.querySelectorAll('.numberButton');
 
 
-
+    if (buttonId === 'nextButton') {
+        numberButton[currentMax].nextSibling.classList.add('show');
+        numberButton[currentMin].classList.remove('show');
+        currentMax++;
+        currentMin++;
+    }
+}

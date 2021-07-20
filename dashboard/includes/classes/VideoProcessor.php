@@ -161,7 +161,6 @@ class VideoProcessor {
             return true;
         }
     }
-
 }
 
 ?>

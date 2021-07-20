@@ -1,14 +1,24 @@
 <?php
 // $bootstrapLink = "https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css";
 $title = "影片列表";
-$style = "uploadVideo.css";
+$style = "uploadVideo";
 $js = "showVideoList.js";
 require_once("includes/header.php");
 require_once("includes/classes/Video.php");
 require_once("includes/classes/VideoTableProvider.php");
+
 ?>
 
 <!-- page content -->
+<!-- For popup -->
+<div class='<?php
+if(isset($_GET['show_popup'])){
+	if($_GET['show_popup'] == 'true'){
+		echo 'show-popup';
+	}
+}?>'></div>
+<!-- For popup -->
+
 <div class="right_col" role="main">
 	<div class="page-title">
 		<div class="title_left">
@@ -35,17 +45,36 @@ require_once("includes/classes/VideoTableProvider.php");
                     <div class="x_content d-flex flex-column">
 						<h6 class="text-muted" style="font-weight: 400; font-size: 15px;">點擊影片檢視或編輯</h6>
                         <div class="d-flex py-2 align-items-center justify-content-end">
+
+							<?php
+								echo $videoTable->createRowCountSelect();
+							?>
 							<?php
 								echo $videoTable->createSelect();
 							?>
                         </div>
+
                         <?php
 							echo $videoTable->createTable();
 						?>
 
+						<nav aria-label="Page navigation example">
+							<ul class="pagination" id="pagination">
+								
+							</ul>
+						</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
 						
 <!-- page content -->
-
+<!-- Upload Successful Popup -->
+<?php
+	echo $videoTable->createUploadSuccessMessage();
+?>
 
 
 <?php require_once("includes/footer.php"); ?>

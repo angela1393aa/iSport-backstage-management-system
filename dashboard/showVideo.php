@@ -1,7 +1,7 @@
 <?php
 $bootstrapLink = "https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css";
 $title = "編輯影片";
-$style = "uploadVideo.css";
+$style = "uploadVideo";
 $js = "showVideo.js";
 require_once("includes/header.php");
 require_once("includes/classes/VideoFormProvider.php");
@@ -29,12 +29,14 @@ if(!isset($_GET['id'])) {
 					<div class="clearfix"></div>
 				</div>
 				<div class="x_content">
+					<h6 class="text-muted" style="font-weight: 400; font-size: 15px;">點擊檢視影片或編輯欄位</h6>
+
 
 					<?php
 						$formProvider = new VideoFormProvider($db_host);
 						echo $formProvider->createUpdateFileForm();
 					?>
-
+				
 
 				</div>
 			</div>
@@ -44,8 +46,9 @@ if(!isset($_GET['id'])) {
 
 
 
-      <!-- page content -->
+<!-- page content -->
 <!--/////////////popup-modal/////////////////////////popup-modal//////////////////////////popup-modal/////////////////-->
+<!-- Delete message -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">
 	<div class="modal-dialog modal-dialog-centered" role="document">
 		<div class="modal-content warningModal">
@@ -72,6 +75,28 @@ if(!isset($_GET['id'])) {
 			</div>
 			<div class="modal-footer success">
 				<button type="button" class="btn btn-primary" onclick="location.href='showVideoList.php'">完成</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Update success message -->
+<div class="modal fade" id="updateSuccessMessage" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content warningModal">
+			<div class="modal-header warning">
+				<h3 class="modal-title text-dark h3-warning" id="exampleModalLongTitle">更新成功</h3>
+				<button type="button" class="close sp-warning" data-dismiss="modal" aria-label="Close">
+					<span class="" aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body warning">
+				<img src="images/success.png" alt="Success!">
+				<h5 class="text-dark h5-warning">已更新完成！</h5>
+			</div>
+			<div class="modal-footer warning">
+				<button type="button" class="btn btn-light" data-dismiss="modal">確定</button>
+				<button class='btn btn-primary' type='button' onclick='location.href="showVideoList.php"'>回列表</button>
 			</div>
 		</div>
 	</div>

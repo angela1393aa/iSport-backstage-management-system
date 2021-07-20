@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 17, 2021 at 05:15 PM
+-- Generation Time: Jul 20, 2021 at 07:47 AM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 8.0.6
 
@@ -39,8 +39,8 @@ CREATE TABLE `video_file_thumbnails` (
 --
 
 INSERT INTO `video_file_thumbnails` (`id`, `videoId`, `filePath`, `selected`) VALUES
-(1, 1, 'uploads/videos/thumbnails/1-60e71187bcc7a.jpg', 1),
-(2, 1, 'uploads/videos/thumbnails/1-60e7118dc3891.jpg', 0),
+(1, 1, 'uploads/videos/thumbnails/1-60e71187bcc7a.jpg', 0),
+(2, 1, 'uploads/videos/thumbnails/1-60e7118dc3891.jpg', 1),
 (3, 1, 'uploads/videos/thumbnails/1-60e71199adc8b.jpg', 0),
 (4, 2, 'uploads/videos/thumbnails/2-60e713aa797e6.jpg', 1),
 (5, 2, 'uploads/videos/thumbnails/2-60e713af5ebd7.jpg', 0),
@@ -60,15 +60,15 @@ INSERT INTO `video_file_thumbnails` (`id`, `videoId`, `filePath`, `selected`) VA
 (19, 7, 'uploads/videos/thumbnails/7-60e72016a4832.jpg', 1),
 (20, 7, 'uploads/videos/thumbnails/7-60e7201a53733.jpg', 0),
 (21, 7, 'uploads/videos/thumbnails/7-60e7202133bcd.jpg', 0),
-(22, 8, 'uploads/videos/thumbnails/8-60e72150bf287.jpg', 1),
-(23, 8, 'uploads/videos/thumbnails/8-60e7215681c57.jpg', 0),
+(22, 8, 'uploads/videos/thumbnails/8-60e72150bf287.jpg', 0),
+(23, 8, 'uploads/videos/thumbnails/8-60e7215681c57.jpg', 1),
 (24, 8, 'uploads/videos/thumbnails/8-60e7215e7449e.jpg', 0),
 (25, 9, 'uploads/videos/thumbnails/9-60ecfd08c78e8.jpg', 1),
 (26, 9, 'uploads/videos/thumbnails/9-60ecfd272bf68.jpg', 0),
 (27, 9, 'uploads/videos/thumbnails/9-60ecfd4716b93.jpg', 0),
-(28, 10, 'uploads/videos/thumbnails/10-60ed01b1eb033.jpg', 1),
+(28, 10, 'uploads/videos/thumbnails/10-60ed01b1eb033.jpg', 0),
 (29, 10, 'uploads/videos/thumbnails/10-60ed01b6b83fa.jpg', 0),
-(30, 10, 'uploads/videos/thumbnails/10-60ed01c1199c5.jpg', 0),
+(30, 10, 'uploads/videos/thumbnails/10-60ed01c1199c5.jpg', 1),
 (31, 11, 'uploads/videos/thumbnails/11-60ed050391b24.jpg', 1),
 (32, 11, 'uploads/videos/thumbnails/11-60ed05095a456.jpg', 0),
 (33, 11, 'uploads/videos/thumbnails/11-60ed0517cf1ea.jpg', 0),
@@ -84,14 +84,14 @@ INSERT INTO `video_file_thumbnails` (`id`, `videoId`, `filePath`, `selected`) VA
 (43, 15, 'uploads/videos/thumbnails/15-60ed182f1935c.jpg', 1),
 (44, 15, 'uploads/videos/thumbnails/15-60ed183de3b60.jpg', 0),
 (45, 15, 'uploads/videos/thumbnails/15-60ed185b484af.jpg', 0),
-(52, 16, 'uploads/videos/thumbnails/16-60f2628df3c4e.jpg', 1),
-(53, 16, 'uploads/videos/thumbnails/16-60f2629444378.jpg', 0),
+(52, 16, 'uploads/videos/thumbnails/16-60f2628df3c4e.jpg', 0),
+(53, 16, 'uploads/videos/thumbnails/16-60f2629444378.jpg', 1),
 (54, 16, 'uploads/videos/thumbnails/16-60f262a030eef.jpg', 0),
 (55, 17, 'uploads/videos/thumbnails/17-60f26337ec7e9.jpg', 1),
 (56, 17, 'uploads/videos/thumbnails/17-60f2633b95275.jpg', 0),
 (57, 17, 'uploads/videos/thumbnails/17-60f26341e596b.jpg', 0),
-(58, 18, 'uploads/videos/thumbnails/18-60f26459cee8e.jpg', 1),
-(59, 18, 'uploads/videos/thumbnails/18-60f2645ab6c0d.jpg', 0),
+(58, 18, 'uploads/videos/thumbnails/18-60f26459cee8e.jpg', 0),
+(59, 18, 'uploads/videos/thumbnails/18-60f2645ab6c0d.jpg', 1),
 (60, 18, 'uploads/videos/thumbnails/18-60f2645c42161.jpg', 0),
 (61, 19, 'uploads/videos/thumbnails/19-60f2651ee7818.jpg', 1),
 (62, 19, 'uploads/videos/thumbnails/19-60f265214af86.jpg', 0),
@@ -99,15 +99,33 @@ INSERT INTO `video_file_thumbnails` (`id`, `videoId`, `filePath`, `selected`) VA
 (64, 20, 'uploads/videos/thumbnails/20-60f27228bd6d7.jpg', 1),
 (65, 20, 'uploads/videos/thumbnails/20-60f2722dc1a49.jpg', 0),
 (66, 20, 'uploads/videos/thumbnails/20-60f272351bc22.jpg', 0),
-(67, 21, 'uploads/videos/thumbnails/21-60f27487754a5.jpg', 1),
-(68, 21, 'uploads/videos/thumbnails/21-60f27489b1219.jpg', 0),
+(67, 21, 'uploads/videos/thumbnails/21-60f27487754a5.jpg', 0),
+(68, 21, 'uploads/videos/thumbnails/21-60f27489b1219.jpg', 1),
 (69, 21, 'uploads/videos/thumbnails/21-60f2748d31298.jpg', 0),
-(70, 22, 'uploads/videos/thumbnails/22-60f2760245166.jpg', 1),
-(71, 22, 'uploads/videos/thumbnails/22-60f2760d65133.jpg', 0),
+(70, 22, 'uploads/videos/thumbnails/22-60f2760245166.jpg', 0),
+(71, 22, 'uploads/videos/thumbnails/22-60f2760d65133.jpg', 1),
 (72, 22, 'uploads/videos/thumbnails/22-60f2762340384.jpg', 0),
 (73, 23, 'uploads/videos/thumbnails/23-60f299560eeba.jpg', 1),
 (74, 23, 'uploads/videos/thumbnails/23-60f299587fa98.jpg', 0),
-(75, 23, 'uploads/videos/thumbnails/23-60f2995d683b0.jpg', 0);
+(75, 23, 'uploads/videos/thumbnails/23-60f2995d683b0.jpg', 0),
+(79, 25, 'uploads/videos/thumbnails/25-60f3077c0c65b.jpg', 1),
+(80, 25, 'uploads/videos/thumbnails/25-60f3077f52c5c.jpg', 0),
+(81, 25, 'uploads/videos/thumbnails/25-60f30785489e6.jpg', 0),
+(82, 26, 'uploads/videos/thumbnails/26-60f3097e27dc8.jpg', 1),
+(83, 26, 'uploads/videos/thumbnails/26-60f309846d920.jpg', 0),
+(84, 26, 'uploads/videos/thumbnails/26-60f3099033a44.jpg', 0),
+(85, 27, 'uploads/videos/thumbnails/27-60f30a71d20df.jpg', 1),
+(86, 27, 'uploads/videos/thumbnails/27-60f30a72ca067.jpg', 0),
+(87, 27, 'uploads/videos/thumbnails/27-60f30a74857c7.jpg', 0),
+(88, 28, 'uploads/videos/thumbnails/28-60f4ef0500e47.jpg', 0),
+(89, 28, 'uploads/videos/thumbnails/28-60f4ef0c47fa8.jpg', 0),
+(90, 28, 'uploads/videos/thumbnails/28-60f4ef1b226aa.jpg', 1),
+(91, 29, 'uploads/videos/thumbnails/29-60f4f0127c19d.jpg', 1),
+(92, 29, 'uploads/videos/thumbnails/29-60f4f017a4a0f.jpg', 0),
+(93, 29, 'uploads/videos/thumbnails/29-60f4f01e09cfb.jpg', 0),
+(94, 30, 'uploads/videos/thumbnails/30-60f4fc90095ac.jpg', 0),
+(95, 30, 'uploads/videos/thumbnails/30-60f4fc956d252.jpg', 0),
+(96, 30, 'uploads/videos/thumbnails/30-60f4fc9f42932.jpg', 1);
 
 --
 -- Indexes for dumped tables
@@ -127,7 +145,7 @@ ALTER TABLE `video_file_thumbnails`
 -- AUTO_INCREMENT for table `video_file_thumbnails`
 --
 ALTER TABLE `video_file_thumbnails`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

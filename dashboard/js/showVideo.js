@@ -1,11 +1,39 @@
 /////////////////////// showVideo.php //////////////////////////////
+function _(element) {
+    return document.getElementById(element);
+}
+
+// Main
 let searchParams = new URLSearchParams(window.location.search);
 let id = searchParams.get('id');
-let updateForm = document.getElementById('updateForm');
-let titleInput = document.getElementById('titleInput');
-let fileInput = document.getElementById('fileInput');
-let descriptionInput = document.getElementById('descriptionInput');
+
+let updateForm = _('updateForm');
+
+let titleInput = _('titleInput');
+let titleInvalid = _('titleInvalid');
+let titleInvalidMessage = _('titleInvalidMessage');
+let titleValid = _('titleValid');
+
+let fileInput = _('fileInput');
+
+let descriptionInput = _('descriptionInput');
+let descriptionInvalid = _('descriptionInvalid');
+let descriptionValid = _('descriptionValid');
+let descriptionInvalidMessage = _('descriptionInvalidMessage');
+
 let categoryInput = document.querySelectorAll('.categoryInput');
+
+let updateBtn = _('updateBtn');
+
+// Video Input
+let previewVideo = document.querySelector('.video-preview__video');
+let videoPreview = _('videoPreview');
+
+// Thumbnails
+let selectedThumbnailPreview = _('selectedThumbnailPreview');
+let thumbnailImage1 = _('thumbnailImage-1');
+let thumbnailImage2 = _('thumbnailImage-2');
+let thumbnailImage3 = _('thumbnailImage-3');
 
 // Get the promise from axios
 async function getOneVideo() {
@@ -13,9 +41,36 @@ async function getOneVideo() {
     let video = promise.data;
 
     titleInput.value = `${video.title}`;
-    // fileInput.value = `${video.filePath}`;
+
+    // Video
+    previewVideo.src = `${video.filePath}`;
+
+    // Thumbnails
+    let selected;
+    let selectedId;
+    let notSelected = [];
+    video.thumbnails.forEach(thumbnail => {
+        if (thumbnail.selected == 1) {
+            selected = thumbnail.filePath;
+            selectedId = thumbnail.id;
+        } else {
+            notSelected.push(thumbnail.filePath);
+        }
+    });
+    selectedThumbnailPreview.src = selected;
+    selectedThumbnailPreview.setAttribute('data-id', selectedId);
+
+    thumbnailImage1.src = `${video.thumbnails[0].filePath}`;
+    thumbnailImage1.setAttribute('data-id', `${video.thumbnails[0].id}`);
+    thumbnailImage2.src = `${video.thumbnails[1].filePath}`;
+    thumbnailImage2.setAttribute('data-id', `${video.thumbnails[1].id}`);
+    thumbnailImage3.src = `${video.thumbnails[2].filePath}`;
+    thumbnailImage3.setAttribute('data-id', `${video.thumbnails[2].id}`);
+
+    // Description
     descriptionInput.value = `${video.description}`;
 
+    // Category
     categoryInput.forEach(option => {
         if (option.value == `${video.category_id}`) {
             option.selected = true;
@@ -26,6 +81,85 @@ async function getOneVideo() {
 };
 getOneVideo();
 
+thumbnailImage1.addEventListener('click', function () {
+    selectedThumbnailPreview.src = this.src;
+    selectedThumbnailPreview.setAttribute('data-id', this.getAttribute('data-id'));
+
+});
+thumbnailImage2.addEventListener('click', function () {
+    selectedThumbnailPreview.src = this.src;
+    selectedThumbnailPreview.setAttribute('data-id', this.getAttribute('data-id'));
+});
+thumbnailImage3.addEventListener('click', function () {
+    selectedThumbnailPreview.src = this.src;
+    selectedThumbnailPreview.setAttribute('data-id', this.getAttribute('data-id'));
+});
+
+// Title Input
+titleInput.addEventListener('keyup', function () {
+    // Title
+    let title = titleInput.value;
+    title = title.trim();
+
+    // Description
+    let description = descriptionInput.value;
+    description = description.trim();
+
+    if (title.length < 5 || title.length > 41) {
+        titleInput.style.border = '2px solid #9d0208';
+        titleValid.style.display = 'none';
+        titleInvalid.style.display = 'flex';
+        titleInvalidMessage.style.display = 'flex';
+
+        updateBtn.disabled = true;
+    } else {
+        titleInput.style.border = '2px solid #52b69a';
+        titleInvalid.style.display = 'none';
+        titleInvalidMessage.style.display = 'none';
+        titleValid.style.display = 'flex';
+
+        // Check description input & file input
+        if (description.length < 10 || description.length > 201) {
+            updateBtn.disabled = true;
+        } else {
+            updateBtn.disabled = false;
+        }
+    }
+});
+
+// Description Input
+descriptionInput.addEventListener('keyup', () => {
+    // Description
+    let description = descriptionInput.value;
+    description = description.trim();
+
+    // Title
+    let title = titleInput.value;
+    title = title.trim();
+
+    if (description.length < 10 || description.length > 201) {
+        descriptionInput.style.border = '2px solid #9d0208';
+        descriptionValid.style.display = 'none';
+        descriptionInvalid.style.display = 'flex';
+        descriptionInvalidMessage.style.display = 'flex';
+
+        updateBtn.disabled = true;
+    } else {
+        descriptionInput.style.border = '2px solid #52b69a';
+        descriptionInvalid.style.display = 'none';
+        descriptionInvalidMessage.style.display = 'none';
+        descriptionValid.style.display = 'flex';
+
+        // Check title input
+        if (title.length < 5 || title.length > 41) {
+            updateBtn.disabled = true;
+        } else {
+            updateBtn.disabled = false;
+        }
+    }
+});
+
+// Delete
 function deleteVideo() {
     axios.put('api/Video/deleteVideo.php', {
         id: `${id}`
@@ -36,49 +170,7 @@ function deleteVideo() {
             }, 200)
         );
 }
-
-function updateVideo() {
-    // title = titleInput.value;
-    // filePath = fileInput.value;
-    // description = descriptionInput.value;
-    // category = categoryInput.value;
-
-    // console.log(title);
-    // console.log(filePath);
-    // console.log(description);
-    // console.log(category);
-
-
-
-
-    // let config = {
-    //     'Content-Type': 'multipart/form-data'
-    // };
-    // axios.put('api/Video/updateVideo.php', {
-    //     id: `${id}`,
-    //     title: `${title}`,
-    //     filePath: `${filePath}`,
-    //     description: `${description}`,
-    //     category: `${category}`,
-    // }, config)
-    //     // .then(location.href = 'showVideoList.php');
-    //     .then(
-    //         res => console.log(res)
-    //     );
-}
-
-updateForm.addEventListener('submit', function (e) {
-    let formData = new FormData(updateForm);
-    // console.log(updateForm.files);
-    for (let [key, value] of formData.entries()) {
-        console.log(key, value);
-    }
-    // console.log(data);
-    e.preventDefault();
-
-});
-
-
+// Delete Button Content
 function changeModalContent() {
     let h3Warning = document.querySelector('.h3-warning');
     let spWarning = document.querySelector('.sp-warning');
@@ -122,4 +214,32 @@ function changeModalContent() {
 
     modalFooterSuccess.style.opacity = "1";
     modalFooterSuccess.style.visibility = "visible";
+}
+
+let updateSuccessMessage = _('updateSuccessMessage');
+updateSuccessMessage = new bootstrap.Modal(updateSuccessMessage);
+function updateVideo() {
+    let thumbnailId;
+    thumbnailId = selectedThumbnailPreview.getAttribute('data-id');
+    title = titleInput.value;
+    description = descriptionInput.value;
+
+    let category;
+    categoryInput.forEach(option => {
+        if (option.selected == true) {
+            category = option.value;
+        }
+    });
+
+    axios.put('api/Video/updateVideo.php', {
+        id: `${id}`,
+        thumbnailId: `${thumbnailId}`,
+        title: `${title}`,
+        description: `${description}`,
+        category: `${category}`,
+    })
+        // .then(location.href = 'showVideoList.php');
+        .then(
+            updateSuccessMessage.show()
+        );
 }

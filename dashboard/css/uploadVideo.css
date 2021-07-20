@@ -9,20 +9,28 @@
 #uploadForm input,
 #uploadForm textarea,
 #uploadForm select {
-  font-size: 17px; }
+  font-size: 16px; }
+
+#updateForm label,
+#updateForm input,
+#updateForm textarea,
+#updateForm select {
+  font-size: 16px; }
 
 #descriptionInput {
   resize: none;
   min-height: 130px; }
 
 #fileInputContainer {
-  position: relative;
-  color: #262626a9; }
+  position: relative; }
   #fileInputContainer .forFileInput {
     position: absolute;
     height: 100%;
     z-index: 100;
     cursor: pointer; }
+  #fileInputContainer video {
+    padding: 5px;
+    border: 3px solid #262626; }
 
 #videoPreview {
   border: 1px solid #ced4da;
@@ -41,6 +49,67 @@
   #videoPreview .video-preview__default-text {
     font-weight: 500;
     font-size: 32px; }
+  #videoPreview .video-preview__default-warning {
+    font-weight: 400;
+    font-size: 16px;
+    color: #9d0208;
+    display: none; }
+  #videoPreview .video-preview__default-necessary {
+    font-weight: 400;
+    font-size: 16px;
+    color: #9d0208;
+    display: none; }
+
+.thumbnailsContainer {
+  width: 100%;
+  border: 1px solid #ced4da;
+  height: 180px;
+  display: flex;
+  align-items: center; }
+  .thumbnailsContainer #selectedThumbnailContainer {
+    height: 100%;
+    border: 5px solid #262626;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0; }
+    .thumbnailsContainer #selectedThumbnailContainer #selectedThumbnailPreview {
+      height: 100%;
+      width: 100%;
+      padding: 3px; }
+  .thumbnailsContainer #thumbnails {
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 180px;
+    transition: all .2s ease-in; }
+    .thumbnailsContainer #thumbnails span {
+      width: 100%;
+      margin-left: 10px;
+      font-size: 14px; }
+    .thumbnailsContainer #thumbnails .thumbnailImage-img {
+      height: 110px;
+      transition: all .2s ease-in;
+      cursor: pointer;
+      align-self: flex-start; }
+      .thumbnailsContainer #thumbnails .thumbnailImage-img-1 {
+        z-index: 10;
+        margin-right: 10px; }
+      .thumbnailsContainer #thumbnails .thumbnailImage-img-2 {
+        z-index: 6;
+        margin-right: 10px; }
+      .thumbnailsContainer #thumbnails .thumbnailImage-img-3 {
+        z-index: 2; }
+      .thumbnailsContainer #thumbnails .thumbnailImage-img:hover {
+        transform: scale(1.4);
+        z-index: 100;
+        border: 3px solid #ffffff;
+        outline: 5px solid #4d4d4d; }
+    .thumbnailsContainer #thumbnails:hover .thumbnailImage-img:not(:hover) {
+      transform: scale(0.99); }
 
 .panel_toolbox {
   min-width: 0; }
@@ -113,17 +182,17 @@
     flex-direction: column;
     align-items: center;
     padding: 0; }
-    .loadingModal .modal-body h1 {
+    .loadingModal .modal-body h3 {
       display: flex;
       height: 100%;
       width: 100%;
       justify-content: center;
       background-color: #34a0a4;
       margin: 0;
-      padding: 20px 0;
+      padding: 16px 0;
       z-index: 2; }
     .loadingModal .modal-body img {
-      width: 400px;
+      width: 300px;
       height: 280px;
       transform: scale(1.1); }
 
@@ -187,3 +256,9 @@
     align-items: flex-end;
     margin-left: auto;
     font-size: 14px; }
+
+.numberButton {
+  display: none; }
+
+.numberButton.show {
+  display: flex; }
