@@ -395,11 +395,6 @@ function pageButtons() {
             pagination.innerHTML += `<li class="page-item numberButton show"><button type="button" class="btn btn-warning" onclick="show(this)" data-num="${i}">${i}</button></li>`;
         }
     }
-
-
-
-
-
 }
 
 let currentPage = 0;
