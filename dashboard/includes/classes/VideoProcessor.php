@@ -4,11 +4,17 @@ class VideoProcessor {
     private $con;
     private $sizeLimit = 500000000; // 500MB
     /// private $allowedType = array("mp4"); // 直接在js做////////////
-    private $ffmpegPath = "ffmpeg/bin/ffmpeg";
-    private $ffprobePath = "ffmpeg/bin/ffprobe";
+    private $ffmpegPath;
+    private $ffprobePath;
+    //= "ffmpeg/bin/ffprobe.exe";
+    //= "ffmpeg/bin/ffmpeg.exe";
 
     public function __construct($con) {
         $this->con = $con;
+
+        $this->ffmpegPath = realpath("ffmpeg/bin/ffmpeg.exe");
+        $this->ffprobePath = realpath("ffmpeg/bin/ffprobe.exe");
+
     }
 
     public function uploadVideoFile($videoUploadData) {

@@ -15,7 +15,7 @@ if(isset($_POST['submitButton'])) {
         //success
         //direct user to name.php
         $_SESSION['userLoggedIn'] = $user;
-        header("Location: name.php");
+        header("Location: axios_user_list.php");
         exit();
     }
 }

@@ -43,7 +43,7 @@ async function getVideos() {
                     ${video.title}
                 </td>
                 <td class='px-3 py-3 td-description'>
-                    <div style='max-height: 118px; overflow: scroll;'>
+                    <div style='max-height: 118px; overflow-x: hidden;'>
                         ${description}
                     </div>
                 </td>
@@ -72,7 +72,7 @@ async function getVideos() {
                                         <td class='px-2 py-3 td-title'>
                                         </td>
                                         <td class='px-3 py-3 td-description'>
-                                        <div style='max-height: 118px; overflow: scroll;'>
+                                        <div style='max-height: 118px; overflow: hidden;'>
                                             沒有影片資料，試試其他關鍵字
                                         </div>
                                         </td>
@@ -381,7 +381,7 @@ function pageButtons() {
 
     pagination.innerHTML = '';
     if (pages > 3) {
-        pagination.innerHTML += '<li class=""><button id="lastButton" type="button" class="btn btn-danger" onclick="changeButton(this.id)"><span aria-hidden="true"><i class="fas fa-caret-left"></i></span></button></li>';
+        pagination.innerHTML += '<li class=""><button id="lastButton" type="button" class="btn btn-danger" onclick="changeButton(this.id)" disabled="true"><span aria-hidden="true"><i class="fas fa-caret-left"></i></span></button></li>';
         for (let i = 1; i <= pages; i++) {
             if (i > 3) {
                 pagination.innerHTML += `<li class="page-item numberButton"><button type="button" class="btn btn-warning" onclick="show(this)" data-num="${i}">${i}</button></li>`;
@@ -395,6 +395,8 @@ function pageButtons() {
             pagination.innerHTML += `<li class="page-item numberButton show"><button type="button" class="btn btn-warning" onclick="show(this)" data-num="${i}">${i}</button></li>`;
         }
     }
+    currentMax = 2;
+    currentMin = 0;
 }
 
 let currentPage = 0;
@@ -421,6 +423,27 @@ function show(page) {
 
 }
 
+function changePage(page) {
+    // Get amount of data
+    let videoItems = document.querySelectorAll('.videoItem');
+    // Make a container
+    let videoShow = [];
+    videoItems.forEach(video => {
+        if (video.getAttribute('data-show') === 'true') {
+            videoShow.push(video);
+        }
+    });
+
+    videoShow.forEach(video => {
+        if (video.getAttribute('data-page') == page) {
+            video.style.display = '';
+        } else {
+            video.style.display = 'none';
+        }
+    });
+
+}
+
 let currentMax = 2;
 let currentMin = 0;
 function changeButton(buttonId) {
@@ -429,22 +452,39 @@ function changeButton(buttonId) {
     if (buttonId === 'nextButton') {
         numberButton[currentMax].nextSibling.classList.add('show');
         numberButton[currentMin].classList.remove('show');
+        lastButton.disabled = false;
+        changePage(currentMax + 2);
+
         if (currentMax < (numberButton.length - 2)) {
-            lastButton.disabled = false;
+            nextButton.disabled = false;
             currentMax++;
             currentMin++;
+
         } else {
+            if(currentMax < (numberButton.length - 1)) {
+                currentMax++;
+                currentMin++;
+
+            }
             nextButton.disabled = true;
+
         }
     } else {
-        numberButton[currentMax + 1].classList.remove('show');
-        numberButton[currentMin + 1].previousSibling.classList.add('show');
+        numberButton[currentMax].classList.remove('show');
+        numberButton[currentMin].previousSibling.classList.add('show');
+        currentMax--;
+        currentMin--;
+        nextButton.disabled = false;
+        changePage(currentMin + 1);
+
         if (currentMin > 0) {
-            nextButton.disabled = false;
-            currentMax--;
-            currentMin--;
+            lastButton.disabled = false;
+
         } else {
             lastButton.disabled = true;
+
         }
     }
+    //console.log(currentMax)
+    //console.log(currentMin)
 }

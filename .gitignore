@@ -30,3 +30,5 @@ vendors/fontawesome/scss/font-awesome.css
 vendors/fontawesome/scss/font-awesome.css.map
 vendors/select2/src/scss/theme/classic/layout.css
 vendors/select2/src/scss/theme/classic/layout.css.map
+dashboard/images/article_upload/
+dashboard/uploads/

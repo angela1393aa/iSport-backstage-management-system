@@ -63,7 +63,6 @@
 .thumbnailsContainer {
   width: 100%;
   border: 1px solid #ced4da;
-  height: 180px;
   display: flex;
   align-items: center; }
   .thumbnailsContainer #selectedThumbnailContainer {
@@ -262,3 +261,4 @@
 
 .numberButton.show {
   display: flex; }
+
