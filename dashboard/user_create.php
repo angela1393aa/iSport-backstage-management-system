@@ -37,7 +37,7 @@
                             <div class="field item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3  label-align" for="user_name">姓名<span class="required"><code>*</code></span></label>
                                 <div class="col-md-6 col-sm-6">
-                                    <input class="form-control" name="user_name" id="user_name" placeholder="請輸入姓名" required>
+                                    <input class="form-control" name="user_name"  title="請輸入姓名" id="user_name" placeholder="請輸入姓名" required>
                                 </div>
                             </div>
                             <div class="field item form-group">
@@ -45,7 +45,7 @@
                                        
 
                                 <div class="col-md-6 col-sm-6">
-                                    <input class="form-control" type="text" class='account' name="account" id="account" placeholder="請輸入 4~8 碼帳號"
+                                    <input class="form-control"  type="text" title="請輸入 4~8 碼帳號" class='account' name="account" id="account" placeholder="請輸入 4~8 碼帳號"
                                     required> <small class="text-danger WorMsg" id="accountMsg"></small>
                                 </div>
                             </div>
@@ -65,33 +65,33 @@
                             <div class="field item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3  label-align" for="repassword">再次確認密碼<span class="required text-red"><code>*</code></span></label>
                                 <div class="col-md-6 col-sm-6">
-                                    <input class="form-control" type="password" name="repassword" data-validate-linked='password' required id="repassword">
+                                    <input class="form-control" type="password" name="repassword" title="再次確認密碼" data-validate-linked='password' required id="repassword">
                                     <small class="text-danger WorMsg" id="CheckpasswordMsg"></small>
                                 </div>
                             </div>
                             <div class="field item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3  label-align" for="email">聯絡信箱<span><code>*</code></span></label>
                                 <div class="col-md-6 col-sm-6">
-                                    <input class="form-control" name="email" class='email' required  type="email" id="email">
+                                    <input class="form-control" name="email" class='email' title="請輸入聯絡信箱" required  type="email" id="email">
                                 </div>
                             </div>
                             <div class="field item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3  label-align" for="phone" >手機<span><code>*</code></span></label>
                                 <div class="col-md-6 col-sm-6">
-                                    <input class="form-control" type="tel" class='tel' name="phone" required="required" id="phone"
+                                    <input class="form-control" type="tel" class='tel' name="phone"  title="請輸入手機" required="required" id="phone"
                                         data-validate-length-range="8,20" />
                                 </div>
                             </div>
                             <div class="field item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3  label-align" for="address" >地址</label>
                                 <div class="col-md-6 col-sm-6">
-                                    <input class="form-control" type="tel" class='text' name="address" id="address">
+                                    <input class="form-control" type="tel"  title="請輸入地址" class='text' name="address" id="address">
                                 </div>
                             </div>
                             <div class="field item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3  label-align" for="birthdate">生日</label>
                                 <div class="col-md-6 col-sm-6">
-                                    <input class="form-control" class='birthdate' type="date" name="birthdate" id="birthdate">
+                                    <input class="form-control" class='birthdate' title="請輸入生日" type="date" name="birthdate" id="birthdate">
                                 </div>
                             </div>
                             <div class="field item form-group">
