@@ -4,10 +4,14 @@ $style = 'userOrder.css';
 $js = 'userOrderCreate.js';
 require_once('includes/header.php');
 
-// 帶出品名
-// $productSql = 'SELECT id FROM user_order';
-// $stmt = $db_host->prepare($sql);
-// $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$id = 2;
+
+$productSql = "SELECT * FROM product";
+$productStmt = $db_host->prepare($productSql);
+$productStmt->execute();
+$rows = $productStmt->fetchAll(PDO::FETCH_ASSOC);
+
+
 ?>
 
 <div class="right_col" role="main">
@@ -16,16 +20,15 @@ require_once('includes/header.php');
             <div class="title_left">
                 <h3>訂單</h3>
             </div>
-
             <div class="title_right">
-                <div class="col-md-5 col-sm-5   form-group pull-right top_search">
+                <!-- <div class="col-md-5 col-sm-5   form-group pull-right top_search">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for...">
+                        <input type="text" class="form-control" placeholder="請輸入關鍵字" name="search">
                         <span class="input-group-btn">
                             <button class="btn btn-default" type="button">Go!</button>
                         </span>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
 
@@ -49,7 +52,9 @@ require_once('includes/header.php');
                                     <span class="text-danger">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input type="text" id="account" name="account" class="form-control">
+                                    <input list="userAccount" id="account" name="account" class="form-control" placeholder="請選擇會員帳號">
+                                    <datalist id="userAccount">
+                                    </datalist>
                                     <small class="text-danger align-middle m-0 py-2" id="accountMsg"></small>
                                 </div>
                             </div>
@@ -58,7 +63,7 @@ require_once('includes/header.php');
                                     <span class="text-danger">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input type="email" id="email" name="email" class="form-control">
+                                    <input type="email" id="email" name="email" class="form-control" placeholder="james@isport.com">
                                 </div>
                             </div>
                             <div class="item form-group">
@@ -66,11 +71,11 @@ require_once('includes/header.php');
                                     <span class="text-danger">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input type="tel" id="phone" name="phone" class="form-control">
+                                    <input type="tel" id="phone" name="phone" class="form-control" placeholder="0955000123">
                                 </div>
                             </div>
                             <div class="item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="address" required>寄件地址
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="address" required>收件地址
                                     <span class="text-danger">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
@@ -83,11 +88,12 @@ require_once('includes/header.php');
                                     <span class="text-danger">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input type="text" id="productId" name="productId" class="form-control">
-                                    <p class="align-middle m-0 py-2" id="">自動帶出品名</p>
+                                    <input list="productId" id="skuCode" name="skuCode" class="form-control" placeholder="請選擇商品編號">
+                                    <datalist id="productId">
+                                    </datalist>
                                 </div>
                             </div>
-                            <div class="item form-group">
+                            <!-- <div class="item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="color">顏色
                                     <span class="text-danger">*</span>
                                 </label>
@@ -102,7 +108,7 @@ require_once('includes/header.php');
                                 <div class="col-md-6 col-sm-6 ">
                                     <input type="text" id="size" name="size" class="form-control" required>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="qty">數量
                                     <span class="text-danger">*</span>
@@ -131,8 +137,8 @@ require_once('includes/header.php');
                                 <div class="col-md-6 col-sm-6 ">
                                     <select class="form-control form-select" name="delivery" id="delivery" name="delivery">
                                         <option value="1">郵寄</option>
-                                        <option value="2">宅即便</option>
-                                        <option value="3">貨到付款</option>
+                                        <option value="2">宅急便</option>
+                                        <option value="3">超商貨到付款</option>
                                     </select>
                                 </div>
                             </div>

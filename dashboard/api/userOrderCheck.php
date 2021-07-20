@@ -1,6 +1,10 @@
 <?php
 require_once('../includes/config.php');
+
+// 判斷帳號是否存在
+
 $account=$_POST["account"];
+
 $usersSql = "SELECT account FROM users WHERE account = ? AND valid = 1";
 $usersStmt = $db_host->prepare($usersSql);
 $usersStmt->execute([$account]);

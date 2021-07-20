@@ -8,7 +8,8 @@ require_once('includes/config.php');
 // }
 
 //寫入user_order
-$sql = "INSERT INTO user_order (user_id, order_date, order_no, paytype, order_status, valid) VALUES (?, ?, ?, ?, ?, ?)";
+$sql = "INSERT INTO user_order (user_id, recipient, phone, address, order_date, order_no, paytype, order_status, valid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
 $usersSql = "SELECT id, account, address FROM users WHERE valid = 1";
 
 //寫入user_order_detail
@@ -29,22 +30,23 @@ try{
         $userArr[$row["account"]] = $row["id"];
     };
     // print_r($userArr);
-
-    $account = $_POST["account"];
-    $user_id = $userArr["$account"];
-    // $invoice_no = $_POST["invoice"];
+    $recipient = $_POST["account"];
+    $phone = $_POST["phone"];
+    $address = $_POST["address"];
+    $user_id = $userArr["$recipient"];
     $order_date = date("Y-m-d H:i:s");
     $order_id = $db_host->lastInsertId($sql);
     $order_no = "";
     $paytype = $_POST["paytype"];
     $order_status = $_POST["order_status"];
     $valid = 1;
+    // $invoice_no = $_POST["invoice"]; invoice no出貨時同時建立
     
     //先$stmt->execute, 才能抓到lastInsertId(), 但是我的$order_no變數需要抓$order_id的值
-    $stmt->execute([$user_id, $order_date, $order_no, $paytype, $order_status, $valid]);
+    $stmt->execute([$user_id, $recipient, $phone, $address, $order_date, $order_no, $paytype, $order_status, $valid]);
     $order_id = $db_host->lastInsertId($sql);  //PDO 取得上一筆新增的序號(user_order資料表的id), 必須execute後才可以產生
     
-    $product_id = $_POST["productId"];
+    $product_id = $_POST["skuCode"];
     $qty = $_POST["qty"];
     $orderDetailStmt->execute([$order_id, $product_id, $qty]);
 
