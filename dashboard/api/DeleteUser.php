@@ -15,14 +15,14 @@ $stmt = $db_host->prepare($sql);
 
 try{
     $stmt->execute([$id]);
-    echo "修改資料成功";
+    echo "刪除資料成功";
 }catch(PDOException $e){
-    echo "修改資料失敗<br>";
+    echo "刪除資料失敗<br>";
     echo "Eroor: ".$e->getMessage(). "<br>";
     exit;
 }
 
-header('location: ../axios_user_list.php');
+header('Refresh:1;url=../axios_user_list.php');
 
 ?>
 
