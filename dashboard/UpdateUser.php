@@ -63,7 +63,7 @@ if($_POST["birthday"] ===""&& $_POST["password"] ===""){
     $stmt = $db_host->prepare($sql);
     
     try{
-        $stmt->execute([$hashed_password,$email,$user_name,$intro,$phone,$address,$id,$birthday]);
+        $stmt->execute([$hashed_password,$email,$user_name,$intro,$phone,$address,$birthday,$id]);
         echo "修改資料成功";
     }catch(PDOException $e){
         echo "修改資料失敗<br>";
