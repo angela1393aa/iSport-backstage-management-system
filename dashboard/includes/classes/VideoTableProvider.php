@@ -34,8 +34,10 @@ class VideoTableProvider {
 
         return "<select id='rowCountSelect' aria-label='Default select example' class='form-select form-control-sm mr-2' onchange='selectRowCount(this.value)' style='width: 120px; background-color:#2A3F54;border:none;border-radius:5px; color: white;'>
                     <option value='5' selected>顯示 5 筆</option>
+                    <option value='8'>顯示 8 筆</option>
                     <option value='10'>顯示 10 筆</option>
-                    <option value='20'>顯示 20 筆</option>
+                    <option value='12'>顯示 12 筆</option>
+                    <option value='15'>顯示 15 筆</option>
                 </select>";
     }
 
