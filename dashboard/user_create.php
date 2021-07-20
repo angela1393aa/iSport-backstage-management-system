@@ -35,13 +35,13 @@
                         <h2>注意事項</h2>
                             <p>填寫會員註冊資料，標記有 <code>*</code> 請務必填寫 </a></p>
                             <div class="field item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3  label-align">姓名<span class="required"><code>*</code></span></label>
+                                <label class="col-form-label col-md-3 col-sm-3  label-align" for="user_name">姓名<span class="required"><code>*</code></span></label>
                                 <div class="col-md-6 col-sm-6">
-                                    <input class="form-control" name="user_name" placeholder="請輸入姓名" required>
+                                    <input class="form-control" name="user_name" id="user_name" placeholder="請輸入姓名" required>
                                 </div>
                             </div>
                             <div class="field item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3  label-align">會員帳號 <span><code>*</code></span></label>
+                                <label class="col-form-label col-md-3 col-sm-3  label-align" for="account">會員帳號 <span><code>*</code></span></label>
                                        
 
                                 <div class="col-md-6 col-sm-6">
@@ -50,7 +50,7 @@
                                 </div>
                             </div>
                             <div class="field item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3  label-align">密碼<span><code>*</code></span></label>
+                                <label class="col-form-label col-md-3 col-sm-3  label-align" for="password1">密碼<span><code>*</code></span></label>
                                 <div class="col-md-6 col-sm-6">
                                     <input class="form-control" type="password" id="password1" name="password"
                                         title="請輸入密碼"
@@ -63,41 +63,41 @@
                                 </div>
                             </div>
                             <div class="field item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3  label-align">再次確認密碼<span class="required text-red"><code>*</code></span></label>
+                                <label class="col-form-label col-md-3 col-sm-3  label-align" for="repassword">再次確認密碼<span class="required text-red"><code>*</code></span></label>
                                 <div class="col-md-6 col-sm-6">
                                     <input class="form-control" type="password" name="repassword" data-validate-linked='password' required id="repassword">
                                     <small class="text-danger WorMsg" id="CheckpasswordMsg"></small>
                                 </div>
                             </div>
                             <div class="field item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3  label-align">聯絡信箱<span><code>*</code></span></label>
+                                <label class="col-form-label col-md-3 col-sm-3  label-align" for="email">聯絡信箱<span><code>*</code></span></label>
                                 <div class="col-md-6 col-sm-6">
-                                    <input class="form-control" name="email" class='email' required  type="email">
+                                    <input class="form-control" name="email" class='email' required  type="email" id="email">
                                 </div>
                             </div>
                             <div class="field item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3  label-align">手機<span><code>*</code></span></label>
+                                <label class="col-form-label col-md-3 col-sm-3  label-align" for="phone" >手機<span><code>*</code></span></label>
                                 <div class="col-md-6 col-sm-6">
-                                    <input class="form-control" type="tel" class='tel' name="phone" required="required"
+                                    <input class="form-control" type="tel" class='tel' name="phone" required="required" id="phone"
                                         data-validate-length-range="8,20" />
                                 </div>
                             </div>
                             <div class="field item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3  label-align">地址</label>
+                                <label class="col-form-label col-md-3 col-sm-3  label-align" for="address" >地址</label>
                                 <div class="col-md-6 col-sm-6">
-                                    <input class="form-control" type="tel" class='text' name="address"/>
+                                    <input class="form-control" type="tel" class='text' name="address" id="address">
                                 </div>
                             </div>
                             <div class="field item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3  label-align">生日</label>
+                                <label class="col-form-label col-md-3 col-sm-3  label-align" for="birthdate">生日</label>
                                 <div class="col-md-6 col-sm-6">
-                                    <input class="form-control" class='birthdate' type="date" name="birthdate">
+                                    <input class="form-control" class='birthdate' type="date" name="birthdate" id="birthdate">
                                 </div>
                             </div>
                             <div class="field item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3  label-align">其他訊息</label>
+                                <label class="col-form-label col-md-3 col-sm-3  label-align" for="intro">其他訊息</label>
                                 <div class="col-md-6 col-sm-6">
-                                    <textarea  name='intro'></textarea>
+                                    <textarea  name='intro' id="intro"></textarea>
                                 </div>
                             </div>
                             <div class="ln_solid">
