@@ -16,9 +16,8 @@
 
     // Set id to Update
     $video->id = $data->id;
-
+    $video->thumbnailId = $data->thumbnailId;
     $video->title = $data->title;
-    $video->filePath = $data->filePath;
     $video->description = $data->description;
     $video->category = $data->category;
 

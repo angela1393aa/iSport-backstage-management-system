@@ -17,7 +17,7 @@
     // Create array
     $videoArr = array(
         'id' => $video->id,
-        'thumbnail' => $video->thumbnail_path,
+        'thumbnails' => $video->thumbnail_path,
         'title' => $video->title,
         'filePath' => $video->filePath,
         'description' => $video->description,
@@ -29,6 +29,5 @@
     );
 
     // Turn to JSON & output
-    echo json_encode($videoArr, JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES); 
-
+    echo json_encode($videoArr, JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
 ?>
