@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2021-07-18 22:59:07
+-- 產生時間： 2021-07-20 08:44:01
 -- 伺服器版本： 10.4.18-MariaDB
 -- PHP 版本： 8.0.3
 
@@ -103,7 +103,7 @@ ALTER TABLE `product`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -118,14 +118,13 @@ let strIsSpace = (str) => {
  */
 let createPageBtn = (data) => {
     let maxPage = Math.ceil(data.length / 15);
-    let pageBtn = `<button type="button" class="btn btn-secondary flex-grow-0" id="btnPrevious"> < </button>`;
+    let pageBtn = '';
     console.log(data.length / 15);
     for (i = 1; i <= maxPage; i++) {
         pageBtn += `
                 <button type="button" class="pageBtn btn btn-secondary flex-grow-0" data-page="${i}">${i}</button>
             `;
     }
-    pageBtn += `<button type="button" class="btn btn-secondary flex-grow-0" id="btnNext"> > </button>`
     $('#pageBtnGroup').empty();
     $('#pageBtnGroup').append(pageBtn);
 }

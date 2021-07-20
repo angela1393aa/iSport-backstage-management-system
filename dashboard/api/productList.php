@@ -95,6 +95,7 @@ try {
         $totalRows = $totalStmt->fetchAll(PDO::FETCH_ASSOC);
         $totalArr[$i] = $totalRows;
     }
+    // echo count($productRows);
     // print_r($totalArr);
 
     $imgArr = [];

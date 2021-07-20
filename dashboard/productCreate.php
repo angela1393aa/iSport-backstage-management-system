@@ -199,11 +199,11 @@ if (true) {
             echo '暫存名稱: ' . $_FILES['file']['tmp_name'][$i] . '<br/>';
 
             # 檢查檔案是否已經存在
-            if (file_exists('../upload/' . $_FILES['file']['name'][$i])) {
+            if (file_exists('../db_img/' . $_FILES['file']['name'][$i])) {
                 echo '檔案已存在。<br/>';
             } else {
                 $file = $_FILES['file']['tmp_name'][$i];
-                $dest = '../upload/' . $_FILES['file']['name'][$i];
+                $dest = '../db_img/' . $_FILES['file']['name'][$i];
 
                 # 將檔案移至指定位置
                 move_uploaded_file($file, $dest);
