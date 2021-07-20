@@ -31,7 +31,7 @@ if($_POST["birthday"] ===""&& $_POST["password"] ===""){
         exit;
     }
     
-    header('location: axios_user_list.php');
+    header('Refresh:1;url=axios_user_list.php');
 }else if($_POST["password"] ===""&& $_POST["birthday"]!==""){
     $sql ="UPDATE users SET email=?,user_name=?,intro=?,phone=?,address=?,birthday=? WHERE id=?";
     $stmt = $db_host->prepare($sql);
@@ -43,7 +43,7 @@ if($_POST["birthday"] ===""&& $_POST["password"] ===""){
         echo "Eroor: ".$e->getMessage(). "<br>";
         exit;
     }
-    header('location: axios_user_list.php');
+    header('Refresh:1;url=axios_user_list.php');
 
 }else if($_POST["password"] !=="" && $_POST["birthday"] ==""){
     $sql ="UPDATE users SET password=?, email=?,user_name=?,intro=?,phone=?,address=? WHERE id=?";
@@ -56,8 +56,7 @@ if($_POST["birthday"] ===""&& $_POST["password"] ===""){
         echo "Eroor: ".$e->getMessage(). "<br>";
         exit;
     }
-    header('location: axios_user_list.php');
-
+  header('Refresh:1;url=axios_user_list.php');
 }else{
     $sql ="UPDATE users SET  password=?,email=?,user_name=?,intro=?,phone=?,address=?,birthday=? WHERE id=?";
     $stmt = $db_host->prepare($sql);
@@ -71,13 +70,8 @@ if($_POST["birthday"] ===""&& $_POST["password"] ===""){
         exit;
     }
     
-    header('location: axios_user_list.php');
+   header('Refresh:1;url=axios_user_list.php');
 }
-
-// if(!isset($_POST["birthday"])){
-//     $birthday=$_POST["birthday"];
-// }
-
 
 
 
