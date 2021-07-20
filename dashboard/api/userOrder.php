@@ -3,21 +3,6 @@ require_once('../includes/config.php');
 
 // 用PDO將資料庫資料提取 -> 轉成json檔 -> 再以js方式取得json檔裡的資訊
 
-// if (isset($_GET["search"])) {
-//     $search = $_GET["search"];
-
-//     $userOrderSql = "SELECT * FROM user_order WHERE CONCAT(recipient, phone, address, invoice_no, order_date, order_no, paytype, delivery) LIKE :search AND valid = 1";
-//     $usersSql = "SELECT id, account, phone, address FROM users WHERE valid = 1";
-//     $orderStatusSql = "SELECT * FROM order_status";
-
-//     $userOrderStmt = $db_host->prepare($userOrderSql);
-//     $search = "%".$search."%";
-//     $userOrderStmt->bindParam(':search', $search);
-
-//     $usersStmt = $db_host->prepare($usersSql);
-//     $orderStatusStmt = $db_host->prepare($orderStatusSql);
-
-// } else {
     $userOrderSql = "SELECT * FROM user_order WHERE valid = 1";
     $usersSql = "SELECT id, account, phone, address FROM users WHERE valid = 1";
     $orderStatusSql = "SELECT * FROM order_status";
@@ -25,7 +10,7 @@ require_once('../includes/config.php');
     $userOrderStmt = $db_host->prepare($userOrderSql);
     $usersStmt = $db_host->prepare($usersSql);
     $orderStatusStmt = $db_host->prepare($orderStatusSql);
-// }
+
 
 try {
     $userOrderStmt->execute();

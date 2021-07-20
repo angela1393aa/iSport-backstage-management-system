@@ -10,6 +10,29 @@ require_once('includes/header.php');
 
 <!-- page content -->
 <div class="right_col" role="main">
+
+
+<!-- **************************************MODAL for DELETE************************************** -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content d-flex justify-content-center">
+            <div class="modal-header">
+                <h5 class="modal-title h4" id="exampleModalLabel">刪除訂單</h5>
+                </button>
+            </div>
+            <div class="modal-body" style="font-size: 18px;">
+                確認刪除<span class="text-danger" style="font-size: 22px;" id="deleteConfirm"></span>這張訂單?<br>
+                一經刪除無法復原 !
+            </div>
+            <div class="modal-footer">
+                <a type="button" class="btn btn-secondary text-white" data-dismiss="modal">取消</a>
+                <a href="" id="yesDelete" type="button" class="btn btn-primary">確認</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /**************************************MODAL for DELETE************************************** -->
+
     <div class="">
         <div class="page-title">
             <div class="title_left">
@@ -125,25 +148,5 @@ require_once('includes/header.php');
 
 <!-- /page content -->
 
-<!-- 彈跳視窗 -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content d-flex justify-content-center">
-            <div class="modal-header">
-                <h5 class="modal-title h4" id="exampleModalLabel">刪除訂單</h5>
-                </button>
-            </div>
-            <div class="modal-body" style="font-size: 18px;">
-                確認刪除<span class="text-danger" style="font-size: 22px;" id="deleteConfirm"></span>這張訂單?<br>
-                一經刪除無法復原 !
-            </div>
-            <div class="modal-footer">
-                <a type="button" class="btn btn-secondary text-white" data-dismiss="modal">取消</a>
-                <a href="" id="yesDelete" type="button" class="btn btn-primary">確認</a>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- /彈跳視窗 -->
 
 <?= require_once('includes/footer.php') ?>

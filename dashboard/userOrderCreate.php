@@ -18,8 +18,6 @@ $orderDetailSql = "INSERT INTO user_order_detail (order_id, product_id, qty) VAL
 $stmt = $db_host->prepare($sql);
 $usersStmt = $db_host->prepare($usersSql);
 $orderDetailStmt = $db_host->prepare($orderDetailSql);
-//$order_id = $db_host->lastInsertId($sql);  //PDO 取得上一筆新增的序號(user_order資料表的id)
-
 
 try{
     // 找到key為account的id value

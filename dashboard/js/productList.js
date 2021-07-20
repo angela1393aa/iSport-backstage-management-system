@@ -265,7 +265,7 @@ $('#productTbody').on('click', '#edit', function () {
             $('#productEditPageTitle').text(product.product_name);
             $('#editProductName').val(product.product_name);
             $('#editBrand').val(product.product_brand);
-            $('#editProductCategory1').val(product.category_id);
+            $('#editProductCategory').val(product.category_id);
             $('#editProductIntro').val(product.product_intro);
 
             // console.log(len);
@@ -318,7 +318,7 @@ $('#productTbody').on('click', '#edit', function () {
                     <td><input type="text" value="${element['stock']}" name="editStock[]" class="form-control" ></td>
                     <td><input type="text" value="${element['price']}" name="editPrice[]" class="form-control" ></td>
                     <td>
-                        <select name="editStatus[]" class="form-control" value="${element['status_id']}">
+                        <select name="editStatus[]" class="form-control editSkuCategory${element['product_sku_id']}" data-category="${element['product_sku_id']}" >
                             <option value="1">供貨中</option>
                             <option value="2">缺貨中</option>
                             <option value="3">已下架</option>
@@ -332,6 +332,10 @@ $('#productTbody').on('click', '#edit', function () {
                 `
             })
             $('#productSkuEditTbody').append(content);
+            productSku.forEach( element =>{
+                $(`.editSkuCategory${element['product_sku_id']}`).val(element['status_id']);
+            })
+
         }).catch(function (error) {
             console.log(error)
         })
@@ -384,9 +388,11 @@ $('#confirmUpdate').click(function () {
     $('form').submit();
 })
 
+
+
 //------------------------------------------------------------
-$('#myModal').on('shown.bs.modal', function () {
-    $('#myInput').trigger('focus')
-})
+// $('#myModal').on('shown.bs.modal', function () {
+//     $('#myInput').trigger('focus')
+// })
 
 

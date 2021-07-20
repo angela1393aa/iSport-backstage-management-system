@@ -7,7 +7,7 @@ require_once('../includes/config.php');
 // $stmt = $db_host->prepare($sql);
 
 $productSkuSql = "SELECT * FROM product_sku WHERE valid = 1";
-$productSql = "SELECT * FROM product WHERE valid = 1";
+$productSql = "SELECT * FROM product WHERE valid = 1 ORDER BY id DESC";
 $typeSql = "SELECT * FROM product_type_value";
 $categorySql = "SELECT * FROM product_category";
 $statusSql = "SELECT * FROM product_status";

@@ -95,7 +95,7 @@ if (true) {
 // echo ('<br>');
 // var_dump($editProductName);
 // echo ('<br>');
-var_dump($editBrand);
+// var_dump($editBrand);
 // echo ('<br>');
 // var_dump($editProductCategory);
 // echo ('<br>');
@@ -113,7 +113,7 @@ var_dump($editBrand);
 // echo('<br>');
 // var_dump($editPrice);
 // echo('<br>');
-// var_dump($editStatus);
+var_dump($editStatus);
 // echo('<br>');
 // var_dump($productSkuValid);
 // echo ('<br>');

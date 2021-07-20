@@ -27,17 +27,24 @@ axios({
     url: '/project_01/dashboard/api/userOrderCreateApi.php',
 }).then(function (response) {
     // console.log(response);
-    let data = response.data;
-    // console.log(data);
+    let productData = response.data.product;
+    let userOrderData = response.data.userOrder;
+    // console.log(productData);
     let datalistContent = "";
-    // console.log(data);
-    data.forEach((item) => {
+
+    productData.forEach((item) => {
         datalistContent +=`
         <option value="${item.sku_code} ${item.name}"></option>
         `
     })
     $("#productId").append(datalistContent);
+    
+    userOrderData.forEach((item) => {
+        
+    })
     // console.log(datalistContent);
+
+
     
 }).catch(function (error) {
     console.log(error);
