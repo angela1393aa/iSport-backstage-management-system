@@ -48,6 +48,7 @@ try {
     $statusRows = $statusStmt->fetchAll(PDO::FETCH_ASSOC);
     $brandRows = $brandStmt->fetchAll(PDO::FETCH_ASSOC);
 
+    $productIdArr =[];
     $creatTimeArr = [];
     $productArr = [];
     $productCategory = [];
@@ -58,6 +59,11 @@ try {
         '2' => 'danger',
         '3' => 'secondary'
     ];
+
+
+    foreach ($productRows as $row) {
+        $productIdArr[$row['id']] = $row['id'];                  //以id作為key產生新的陣列以便後續取值
+    }
     foreach ($productRows as $row) {
         $creatTimeArr[$row['id']] = $row['creat_time'];                  //以id作為key產生新的陣列以便後續取值
     }
@@ -88,15 +94,29 @@ try {
     }
 
     $totalArr = [];
-    for ($i = 1; $i <= count($productRows); $i++) {
-        $totalSql = "SELECT product_id,sum(stock) AS totalStock,sum(sale) AS totalSale,max(update_time) AS maxUpdateTime FROM product_sku WHERE product_id=$i";
-        $totalStmt = $db_host->prepare($totalSql);
-        $totalStmt->execute();
-        $totalRows = $totalStmt->fetchAll(PDO::FETCH_ASSOC);
-        $totalArr[$i] = $totalRows;
-    }
+
+        foreach($productIdArr as $id){
+            $totalSql = "SELECT product_id,sum(stock) AS totalStock,sum(sale) AS totalSale FROM product_sku WHERE product_id=$id";
+            $totalStmt = $db_host->prepare($totalSql);
+            $totalStmt->execute();
+            $totalRows = $totalStmt->fetchAll(PDO::FETCH_ASSOC);
+            foreach($totalRows as $row){
+                $totalArr[$row['product_id']] = [
+                    'totalStock' => $row['totalStock'], 
+                    'totalSale' => $row['totalSale']
+                ];
+            }
+
+        }
+    
+    // echo count($productIdArr);
     // echo count($productRows);
+    // print_r($productIdArr);
+    // print_r($totalRows);
     // print_r($totalArr);
+    // print_r($totalArr[26]['totalStock']);
+
+
 
     $imgArr = [];
         $imgSql = "SELECT product_id,GROUP_CONCAT(id) AS img_id,GROUP_CONCAT(img_name) AS img_name FROM product_img GROUP BY product_id ORDER BY product_id";
@@ -154,8 +174,8 @@ try {
             'product_brand' => $brandArr[$row['brand']],
             'product_intro' => $row['intro'],
             'price' => $row['price'],
-            'totalStock' => $totalArr[$row['id']][0]['totalStock'],
-            'totalSale' => $totalArr[$row['id']][0]['totalSale'],
+            'totalStock' => $totalArr[$row['id']]['totalStock'],
+            'totalSale' => $totalArr[$row['id']]['totalSale'],
             'create_time' => $row['creat_time'],
             'last_update_time' => $row['update_time'],
             // 'maxUpdateTime' => $totalArr[$row['id']][0]['maxUpdateTime'],
