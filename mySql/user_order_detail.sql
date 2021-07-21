@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2021-07-20 08:41:59
+-- 產生時間： 2021-07-21 03:21:41
 -- 伺服器版本： 10.4.19-MariaDB
 -- PHP 版本： 8.0.7
 
@@ -63,7 +63,17 @@ INSERT INTO `user_order_detail` (`id`, `order_id`, `product_id`, `qty`) VALUES
 (22, 13, 110, 1),
 (23, 14, 80, 2),
 (24, 15, 77, 1),
-(25, 15, 28, 2);
+(25, 15, 28, 2),
+(26, 16, 111, 2),
+(27, 17, 122, 1),
+(28, 18, 155, 2),
+(29, 19, 72, 1),
+(30, 20, 83, 2),
+(31, 21, 21, 3),
+(32, 22, 53, 1),
+(33, 23, 58, 5),
+(34, 24, 78, 1),
+(35, 25, 87, 1);
 
 --
 -- 已傾印資料表的索引
@@ -83,7 +93,7 @@ ALTER TABLE `user_order_detail`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `user_order_detail`
 --
 ALTER TABLE `user_order_detail`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
