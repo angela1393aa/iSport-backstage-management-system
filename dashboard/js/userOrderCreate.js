@@ -34,10 +34,18 @@ axios({
 
     productData.forEach((item) => {
         datalistContent +=`
-        <option value="${item.sku_code} ${item.name}"></option>
+        <option value="${item.sku_code}"></option>
         `
-    })
+    });
+
     $("#productId").append(datalistContent);
+
+    $("#skuCode").on("change", function () {
+        console.log("change");
+        let id=$(this).val();
+        console.log(productData.id);
+        $("#productName").attr("value", productData.id);
+    });
     
     userOrderData.forEach((item) => {
         

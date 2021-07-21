@@ -94,6 +94,13 @@ $rows = $productStmt->fetchAll(PDO::FETCH_ASSOC);
                                 </div>
                             </div>
                             <!-- <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="productName" required>品名
+                                </label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input id="productName" name="productName" class="form-control hidden" readonly>
+                                </div>
+                            </div> -->
+                            <!-- <div class="item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="color">顏色
                                     <span class="text-danger">*</span>
                                 </label>

@@ -49,27 +49,22 @@ try{
 
     foreach ($productRows as $productRow){
         $productArr[$productRow["id"]] = $productRow["name"];
-        // $arr = [
-            //         "id" => $productRow["id"],
-            //         "name" => $productRow["name"],
-            //     ];
-            //     array_push($resultArr, $arr);
-        };
+    };
         // print_r($productArr);
-        // echo json_encode($resultArr);
-        
-        foreach ($productSkuRows as $productSkuRow){
-            // $productSkuArr[$productSkuRow["id"]] = $productSkuRow["sku_code"];
-            // $productIdArr[$productSkuRow["id"]] = $productSkuRow["product_id"];
-            $arr = [
-                "id" => $productSkuRow["id"],
-                "product_id" => $productSkuRow["product_id"],
-                "sku_code" => $productSkuRow["sku_code"],
-                "name" => $productArr[$productSkuRow["product_id"]],
-            ];
-            array_push($productResultArr, $arr);
-        };
-        // print_r($productSkuArr);
+
+    foreach ($productSkuRows as $productSkuRow){
+        // $productSkuArr[$productSkuRow["id"]] = $productSkuRow["sku_code"];
+        // $productIdArr[$productSkuRow["id"]] = $productSkuRow["product_id"];
+        $arr = [
+            "id" => $productSkuRow["id"],
+            "product_id" => $productSkuRow["product_id"],
+            "sku_code" => $productSkuRow["sku_code"],
+            "name" => $productArr[$productSkuRow["product_id"]],
+            $productSkuRow["sku_code"] => $productArr[$productSkuRow["product_id"]],
+        ];
+        array_push($productResultArr, $arr);
+    };
+    // print_r($productSkuArr);
 
         // 將使用者訂單$orderArr與連結過後的產品陣列$productResultArr(product + product_sku資料表),合併成 $combineArr
         $combineArr = [

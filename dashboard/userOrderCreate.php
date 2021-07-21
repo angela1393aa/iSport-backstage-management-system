@@ -7,27 +7,39 @@ require_once('includes/config.php');
 //     header("location: user_order_create.php");
 // }
 
-//寫入user_order
+//***************************寫入user_order***************************
 $sql = "INSERT INTO user_order (user_id, recipient, phone, address, order_date, order_no, paytype, order_status, valid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-$usersSql = "SELECT id, account, address FROM users WHERE valid = 1";
-
-//寫入user_order_detail
 $orderDetailSql = "INSERT INTO user_order_detail (order_id, product_id, qty) VALUES (?, ?, ?)";
 
+//***************************查找***************************
+$usersSql = "SELECT id, account, address FROM users WHERE valid = 1";
+$productSkuSql = "SELECT id, product_id, sku_code FROM product_sku WHERE valid = 1";
+
+
 $stmt = $db_host->prepare($sql);
-$usersStmt = $db_host->prepare($usersSql);
 $orderDetailStmt = $db_host->prepare($orderDetailSql);
+$usersStmt = $db_host->prepare($usersSql);
+$productSkuStmt = $db_host->prepare($productSkuSql);
 
 try{
     // 找到key為account的id value
     $usersStmt->execute();
+    $productSkuStmt->execute();
+
     $userRows = $usersStmt->fetchAll(PDO::FETCH_ASSOC);
+    $productSkuRows = $productSkuStmt->fetchAll(PDO::FETCH_ASSOC);
+
     $userArr = [];
+    $productSkuArr = [];
+
     foreach ($userRows as $row){
         $userArr[$row["account"]] = $row["id"];
     };
-    // print_r($userArr);
+    foreach ($productSkuRows as $productSkuRow){
+        $productSkuArr[$productSkuRow["sku_code"]] = $productSkuRow["id"];
+    };
+    print_r($productSkuArr);
+
     $recipient = $_POST["account"];
     $phone = $_POST["phone"];
     $address = $_POST["address"];
@@ -44,7 +56,8 @@ try{
     $stmt->execute([$user_id, $recipient, $phone, $address, $order_date, $order_no, $paytype, $order_status, $valid]);
     $order_id = $db_host->lastInsertId($sql);  //PDO 取得上一筆新增的序號(user_order資料表的id), 必須execute後才可以產生
     
-    $product_id = $_POST["skuCode"];
+    $sku_id = $_POST["skuCode"];
+    $product_id = $productSkuArr["$sku_id"];
     $qty = $_POST["qty"];
     $orderDetailStmt->execute([$order_id, $product_id, $qty]);
 

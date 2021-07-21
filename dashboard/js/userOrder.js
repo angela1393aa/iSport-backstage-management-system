@@ -77,19 +77,19 @@ axios({
             firstPageContent = `
             <li id="thisPage" class="page-item" id="previous" data-page="${i}">
                 <a class="page-link" aria-label="Previous">
-                    <i class="fa fa-angle-double-left text-secondary"></i>
+                    <i class="fa fa-angle-double-left"></i>
                 </a>
             </li>
             `;
         }
         pageContent += `
-        <li id="thisPage" class="page-item" data-page="${i}"><a id="" class="page-link">${i}</a></li>
+        <li id="thisPage" class="page-item font-weight-bold" data-page="${i}"><a id="" class="page-link">${i}</a></li>
         `
         if (i == totalPage) {
             lastPageContent = `
                 <li id="thisPage" class="page-item" data-page="${i}">
                     <a class="page-link" aria-label="Next">
-                        <i class="fa fa-angle-double-right text-secondary"></i>
+                        <i class="fa fa-angle-double-right"></i>
                     </a>
                 </li>
             `;

@@ -128,13 +128,13 @@ require_once('includes/header.php');
                             <ul class="pagination justify-content-center" id="orderListPage">
                                 <!-- <li class="page-item" id="previous">
                                     <a class="page-link" href="user_order.php" aria-label="Previous">
-                                        <i class="fa fa-angle-double-left text-secondary"></i>
+                                        <i class="fa fa-angle-double-left"></i>
                                     </a>
                                 </li>
-                                <li class="page-item text-secondary"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
                                 <li id="thisPage" class="page-item" data-page="${i}">
                                     <a class="page-link" aria-label="Next">
-                                        <i class="fa fa-angle-double-right text-secondary"></i>
+                                        <i class="fa fa-angle-double-right"></i>
                                     </a>
                                 </i> -->
                             </ul>
