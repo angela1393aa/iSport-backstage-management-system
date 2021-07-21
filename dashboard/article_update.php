@@ -10,6 +10,7 @@ try{
 	echo "資料庫連結失敗";
 }
 ?>
+<script src="https://cdn.ckeditor.com/ckeditor5/29.0.0/decoupled-document/ckeditor.js"></script>
 <div class="right_col" role="main">
   <div class="">
     <div class="page-title">
@@ -29,13 +30,15 @@ try{
           </div>
           <div class="x_content">
             <div class="container">
-              <form action="articleUpdate.php" method="post">
-              <?php
+              <div class="row justify-content-center">
+                <div class="col-md-8 col-sm-8">
+                <form action="articleUpdate.php" method="post">
+                <?php
                   foreach($rows as $value){
               ?>
                 <input type="hidden" name="id" value="<?=$value["id"]?>">
                 <div class="mb-2">
-                  <label for="article_name">作者:</label>
+                  <label for="article_name">作者:<span style="color:red;">必填!!</span></label>
                   <input type="text" class="form-control " name="article_name" value="<?=$value["article_name"]?>">
                 </div>
                 <div class="mb-2">
@@ -49,7 +52,7 @@ try{
                   </select>
                 </div>
                 <div class="mb-2">
-                  <label for="added_by">標題:</label>
+                  <label for="added_by">標題:<span style="color:red;">必填!!</span></label>
                   <input type="text" class="form-control" name="added_by" value="<?=$value["added_by"]?>">
                 </div>
                 <div class="mb-2">
@@ -57,16 +60,40 @@ try{
                   <img class="img-fluid" src="images/article_upload/<?=$value["photos"]?>" alt="photos">
                 </div>
                 <div class="mb-2">
-                  <label for="content">內容:</label>
-                  <textarea class="form-control" rows="30" name="content"><?= $value["content"]?></textarea>
+                  <label for="content">內容:<span style="color:red;">必填!!</span></label>
+                  <div id="toolbar-container"></div>
+                  <div id="editor">
+                    <?= $value["content"]?>
+                  </div>
+                  <textarea name="content" id="content" style="display:none;"></textarea>
                 </div>
                 <div style="text-align: end;">
                   <a class="btn btn-secondary" href="article_list.php">返回</a>
-                  <button class="btn btn-secondary" type="article_list.php">修改</button>
+                  <button class="btn btn-secondary" type="article_list.php" id="button">修改</button>
                 </div>
                 <?php
                     } 
                 ?>
               </form>
+                </div>
+              </div>
             </div>
+            <script src="https://code.jquery.com/jquery-3.3.1.min.js"integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="crossorigin="anonymous"></script>
+            <script>
+              $(function () {
+                $('#button').on('click', function () {
+                  var html = $("#editor").html();
+                  $("textarea").val(html);
+                });
+              })
+              DecoupledEditor
+                .create(document.querySelector('#editor'))
+                .then(editor => {
+                  const toolbarContainer = document.querySelector('#toolbar-container');
+                  toolbarContainer.appendChild(editor.ui.view.toolbar.element);
+                })
+                .catch(error => {
+                  console.error(error);
+                });
+            </script>
             <?php require_once("includes/footer.php"); ?>

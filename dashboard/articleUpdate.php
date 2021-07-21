@@ -4,7 +4,7 @@ if (
     empty($_POST['article_name']) || empty($_POST['added_by']) || empty($_POST['content'])
  ) {
    echo '資料有缺，請再次填寫<br>';
-   header("refresh:1 ; url=article_update.php?id= $id");
+   header("refresh:1 ; url=article_list.php");
    exit(); 
 }
 $id = $_POST['id'];
