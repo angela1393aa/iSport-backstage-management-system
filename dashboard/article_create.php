@@ -1,5 +1,5 @@
 <?php 
-require_once("header.php"); 
+require_once("includes/header.php"); 
 ?>
 <div class="right_col" role="main">
   <div class="">
@@ -53,4 +53,4 @@ require_once("header.php");
                 </div>
               </form>
             </div>
-            <?php require_once("footer.php"); ?>
+            <?php require_once("includes/footer.php"); ?>
