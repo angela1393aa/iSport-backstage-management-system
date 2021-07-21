@@ -317,11 +317,17 @@ $('#productTbody').on('click', '#edit', function () {
 
             $('#productSkuEditTbody').empty();
             content = '';
+            $('#editNoType').text('');
             productSku.forEach(element => {
+                let sku_group = element['sku_group'];
+                if( sku_group == ''){
+                    sku_group = '無規格';
+                    $('#editNoType').text('無規格');
+                }
                 content += `
                 <tr class="even pointer p-0">
                 <input type="hidden" value="${element['product_sku_id']}" name="idOfEditProductSku[]" class="form-control" readonly>
-                    <td> <input type="text" value="${element['sku_group']}" class="form-control" readonly> </td>
+                    <td> <input type="text" value="${sku_group}" class="form-control" readonly> </td>
                     <td><input type="text" value="${element['sku_code']}" name="editSkuCode[]" class="form-control" ></td>
                     <td><input type="text" value="${element['stock']}" name="editStock[]" class="form-control" ></td>
                     <td><input type="text" value="${element['price']}" name="editPrice[]" class="form-control" ></td>

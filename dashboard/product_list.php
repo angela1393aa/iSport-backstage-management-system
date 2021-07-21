@@ -155,7 +155,7 @@ require_once("includes/header.php");
                                 </div>
                             </div>
 
-                            <h6 class="mt-3">規格</h6>
+                            <h6 class="mt-3">規格(<span id="editNoType">1231532</span>)</h6>
                             <hr>
                             <div class="" id="editProductTypeBlock">
                                 <div class="row mt-2">

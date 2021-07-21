@@ -108,7 +108,7 @@ newSkuType = () => {
     let newSkuTypeListContent = '';
     $('.newSkuTypeList').empty();
     if (typeInputeCount1 <= 0 && typeInputeCount2 <= 0) {
-        console.log('123466752');
+        // console.log('123466752');
         newSkuTypeListContent = '<option value="0">無</option>'
     } else if (typeInputeCount2 <= 0) {
         newSkuTypeListContent = '<option value="0">無</option>'

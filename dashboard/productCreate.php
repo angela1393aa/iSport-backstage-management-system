@@ -18,7 +18,7 @@ try {
     exit();
 }
 
-$productId = 41;
+// $productId = 41;
 
 $brand = $_POST['brand'];
 $newBrand = '';                         //篩選過的：轉成代號
@@ -219,7 +219,7 @@ if (true) {
 $productImgSql = "INSERT INTO product_img (product_id, img_name) VALUE (?, ?) ";
 $productImgStmt = $db_host->prepare($productImgSql);
 try{
-    for($i = 0; $i < count($dbSkuGroup); $i++){
+    for($i = 0; $i < $fileCount; $i++){
         $imgName = $_FILES['file']['name'][$i];
         $productImgStmt->execute(([$productId, $imgName]));
     }

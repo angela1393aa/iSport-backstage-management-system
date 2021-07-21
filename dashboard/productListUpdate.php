@@ -26,14 +26,17 @@ if (isset($_POST['productSkuValid'])) {
     $productSkuValid = $_POST['productSkuValid'];
 }
 
-
+if (isset($_POST['typeGroupEdit'])) {
+    $typeGroup = $_POST['typeGroupEdit'];
+    $typeValueIdGroup = array_keys($typeGroup);                 //id of type value
+}
 
 $editProductName = $_POST['editProductName'];
 $editBrand = $_POST['editBrand'];
 $editProductCategory = $_POST['editProductCategory'];
 $editProductIntro = $_POST['editProductIntro'];
-$typeGroup = $_POST['typeGroupEdit'];
-$typeValueIdGroup = array_keys($typeGroup);                 //id of type value
+// $typeGroup = $_POST['typeGroupEdit'];
+// $typeValueIdGroup = array_keys($typeGroup);                 //id of type value
 $idOfEditProductSku = $_POST['idOfEditProductSku'];
 $editSkuCode = $_POST['editSkuCode'];
 $editStock = $_POST['editStock'];
@@ -56,8 +59,8 @@ if (count($editPrice) > 1 &&  min($editPrice) != max($editPrice)) {
 } else {
     $editProductPrice = $editPrice[0];
 }
- 
-print_r($editProductPrice);
+
+// print_r($editProductPrice);
 
 # 取得上傳檔案數量
 $fileCount = count($_FILES['file']['name']);
@@ -83,7 +86,7 @@ if (true) {
                 move_uploaded_file($file, $dest);
             }
         } else {
-            echo '錯誤代碼：'; 
+            echo '錯誤代碼：';
             var_dump($_FILES['file']['error']);
             echo '<br/>';
         }
@@ -113,7 +116,7 @@ if (true) {
 // echo('<br>');
 // var_dump($editPrice);
 // echo('<br>');
-var_dump($editStatus);
+// var_dump($editStatus);
 // echo('<br>');
 // var_dump($productSkuValid);
 // echo ('<br>');
@@ -158,11 +161,14 @@ try {
     }
 
     //type value update
-    foreach ($typeValueIdGroup as $key) {
-        $typeValueId = $key;
-        $typeValue = $typeGroup[$key];
-        $productTypeValueStmt->execute([$typeValue, $typeValueId]);
+    if (isset($typeValueIdGroup)) {
+        foreach ($typeValueIdGroup as $key) {
+            $typeValueId = $key;
+            $typeValue = $typeGroup[$key];
+            $productTypeValueStmt->execute([$typeValue, $typeValueId]);
+        }
     }
+
 
     //img update
     if (count($changeImg) >= 1 && isset($editImg)) {
@@ -176,8 +182,8 @@ try {
     }
 
     //delete SKU
-    if(isset($productSkuValid)){
-        foreach($productSkuValid as $value){
+    if (isset($productSkuValid)) {
+        foreach ($productSkuValid as $value) {
             $deleteSkuStmt->execute([0, $value]);
         }
     }
