@@ -7,13 +7,14 @@ $phone = $_POST['phone'];
 $address = $_POST['address'];
 $paytype = $_POST['paytype'];
 $delivery = $_POST['delivery'];
+$order_status = $_POST['orderStatus'];
 
-$userOrderSql = "UPDATE user_order SET recipient = ?, phone = ?, address = ?, paytype = ?, delivery = ? WHERE id = ?";
+$userOrderSql = "UPDATE user_order SET recipient = ?, phone = ?, address = ?, paytype = ?, delivery = ?, order_status = ? WHERE id = ?";
 
 $userOrderStmt = $db_host->prepare($userOrderSql);
 
 try{
-    $userOrderStmt->execute([$recipient, $phone, $address, $paytype, $delivery, $id]);
+    $userOrderStmt->execute([$recipient, $phone, $address, $paytype, $delivery, $order_status, $id]);
 
     header("location: user_order.php");
 

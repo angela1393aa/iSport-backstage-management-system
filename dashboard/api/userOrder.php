@@ -56,6 +56,8 @@ try {
             'invoice_no' => $row['invoice_no'],
             'paytype' => $row['paytype'],
             'delivery' => $row['delivery'],
+            $row['id'] =>  $row['id'],
+
         ];
         array_push($orderArr, $arr);
     }

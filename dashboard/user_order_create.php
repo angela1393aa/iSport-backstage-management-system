@@ -39,11 +39,12 @@ $rows = $productStmt->fetchAll(PDO::FETCH_ASSOC);
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                     <div class="x_title d-flex">
-                        <h2 class="flex-grow-1">新增訂單<small></small></h2>
+                        <h2 class="flex-grow-1">新增訂單</h2>
                         <a class="btn btn-dark text-nowrap m-0 border-0 text-white" style="border-radius:5px; font-size:14px" href="user_order.php" type="submit">回訂單列表</a>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
+                    <p class="m-0"><span class="text-danger">*</span>為必填項目</p>
                         <br />
                         <h2 class="flex-grow-1 mb-2 mt-0">訂購人資料</h2>
                         <form id="" data-parsley-validate class="form-horizontal form-label-left" action="userOrderCreate.php" method="post">
@@ -59,8 +60,7 @@ $rows = $productStmt->fetchAll(PDO::FETCH_ASSOC);
                                 </div>
                             </div>
                             <div class="item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="email" required>E-mail
-                                    <span class="text-danger">*</span>
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="email" required>E-mail&nbsp;&nbsp;
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
                                     <input type="email" id="email" name="email" class="form-control" placeholder="james@isport.com">
@@ -91,15 +91,9 @@ $rows = $productStmt->fetchAll(PDO::FETCH_ASSOC);
                                     <input list="productId" id="skuCode" name="skuCode" class="form-control" placeholder="請選擇商品編號">
                                     <datalist id="productId">
                                     </datalist>
+                                    <p id="productName" class="my-2" style="font-size:14px"></p>
                                 </div>
                             </div>
-                            <!-- <div class="item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="productName" required>品名
-                                </label>
-                                <div class="col-md-6 col-sm-6 ">
-                                    <input id="productName" name="productName" class="form-control hidden" readonly>
-                                </div>
-                            </div> -->
                             <!-- <div class="item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="color">顏色
                                     <span class="text-danger">*</span>
@@ -126,8 +120,7 @@ $rows = $productStmt->fetchAll(PDO::FETCH_ASSOC);
                             </div>
                             <h2 class="flex-grow-1 mb-2">付款及出貨方式</h2>
                             <div class="item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="paytype">付款方式
-                                    <span class="text-danger">*</span>
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="paytype">付款方式&nbsp;&nbsp;
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
                                     <select class="form-control form-select" name="paytype" id="paytype">
@@ -138,8 +131,7 @@ $rows = $productStmt->fetchAll(PDO::FETCH_ASSOC);
                                 </div>
                             </div>
                             <div class="item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="delivery">運送方式
-                                    <span class="text-danger">*</span>
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="delivery">運送方式&nbsp;&nbsp;
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
                                     <select class="form-control form-select" name="delivery" id="delivery" name="delivery">
@@ -150,8 +142,7 @@ $rows = $productStmt->fetchAll(PDO::FETCH_ASSOC);
                                 </div>
                             </div>
                             <div class="item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="order_status">訂單狀態
-                                    <span class="text-danger">*</span>
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="order_status">訂單狀態&nbsp;&nbsp;
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
                                     <select class="form-control form-select" name="order_status" id="order_status">

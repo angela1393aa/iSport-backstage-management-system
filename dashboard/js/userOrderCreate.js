@@ -29,7 +29,7 @@ axios({
     // console.log(response);
     let productData = response.data.product;
     let userOrderData = response.data.userOrder;
-    // console.log(productData);
+    console.log(productData);
     let datalistContent = "";
 
     productData.forEach((item) => {
@@ -37,13 +37,23 @@ axios({
         <option value="${item.sku_code}"></option>
         `
     });
-
     $("#productId").append(datalistContent);
 
-    $("#skuCode").on("change", function () {
+    // **********************自動產生產品名稱************************
+    $("#skuCode").on("change", function () {          // 抓到sku_code
         console.log("change");
         let id=$(this).val();
-        console.log(productData.id);
+        console.log(id);
+        // 取得該sku_code名稱
+        for (let i = 0; i < productData.length; i++) {
+            let skuCodeString = productData[i].sku_code;
+            // console.log(skuCodeString);
+            if (skuCodeString == id) {
+                $("#productName").text(productData[i].name);
+                console.log(productData[i].name);
+            }
+        }
+        // console.log(productData.length);
         $("#productName").attr("value", productData.id);
     });
     

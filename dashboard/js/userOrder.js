@@ -35,7 +35,7 @@ let tableShowLoop = (startNum, endNum, data) => {
                     <div class="d-flex justify-content-center">
                         <a href="user_order_update.php?id=${data[i].order_id}"
                             class="btn btn-round btn-secondary d-flex justify-content-center align-items-center"
-                            style="width: 30px;height: 30px;" title="編輯"><i class="fas fa-edit"></i></a>
+                            style="width: 30px;height: 30px;" data-id="${i}" id="edit" title="編輯"><i class="fas fa-edit"></i></a>
                         <a class="btn btn-round btn-danger d-flex justify-content-center align-items-center text-white"
                             style="width: 30px;height: 30px;" data-id="${i}" id="delete" title="刪除" data-toggle="modal" data-target="#exampleModal">
                             <i class="fas fa-trash-alt"></i>
