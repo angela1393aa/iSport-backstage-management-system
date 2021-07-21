@@ -1,5 +1,5 @@
 <?php 
-session_start();
+//session_start();
 require_once("includes/header.php");
 ?>
 <script src="https://cdn.ckeditor.com/ckeditor5/29.0.0/decoupled-document/ckeditor.js"></script>
