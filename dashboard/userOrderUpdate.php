@@ -7,7 +7,7 @@ $phone = $_POST['phone'];
 $address = $_POST['address'];
 $paytype = $_POST['paytype'];
 $delivery = $_POST['delivery'];
-$order_status = $_POST['orderStatus'];
+$order_status = 1;
 
 $userOrderSql = "UPDATE user_order SET recipient = ?, phone = ?, address = ?, paytype = ?, delivery = ?, order_status = ? WHERE id = ?";
 

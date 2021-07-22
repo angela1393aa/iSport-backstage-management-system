@@ -94,8 +94,7 @@ $id=$_GET["id"];
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="productId" required>商品編號
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input type="text" id="productId" name="productId" class="form-control">
-                                    <p class="align-middle m-0 py-2" id="">自動帶出品名</p>
+                                    <input type="text" id="productId" name="productId" class="form-control" value="" readonly>
                                 </div>
                             </div>
                             <!-- <div class="item form-group">
@@ -118,7 +117,7 @@ $id=$_GET["id"];
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="qty">數量
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input type="number" id="qty" name="qty" class="form-control" value="1">
+                                    <input type="number" id="qty" name="qty" class="form-control" value="" readonly>
                                 </div>
                             </div>
                             <h2 class="flex-grow-1 mb-2">付款及出貨方式</h2>

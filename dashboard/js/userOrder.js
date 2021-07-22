@@ -57,7 +57,7 @@ axios({
 }).then(function (response) {
     // ***************************************設定API資料變數***************************************
     console.log("response: ", response);
-    let data = response.data;
+    let data = response.data.userOrder;
     // console.log(data);
     let content = "";
     // console.log(data);

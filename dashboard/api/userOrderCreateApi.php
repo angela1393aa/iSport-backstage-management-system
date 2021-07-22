@@ -4,8 +4,8 @@ require_once("../includes/config.php");
 // 用PDO將資料庫資料提取 -> 轉成json檔 -> 再以js方式取得json檔裡的資訊
 // 取得品名及料號
 $userOrderSql = "SELECT * FROM user_order WHERE valid = 1";
-$productSql = "SELECT id, name FROM product WHERE valid = 1";
-$productSkuSql = "SELECT id, product_id, sku_code FROM product_sku WHERE valid = 1";
+$productSql = "SELECT id, name FROM product";
+$productSkuSql = "SELECT id, product_id, sku_code FROM product_sku";
 
 $userOrderStmt = $db_host->prepare($userOrderSql);
 $productStmt = $db_host->prepare($productSql);
