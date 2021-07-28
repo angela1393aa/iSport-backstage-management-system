@@ -43,10 +43,9 @@ require_once('includes/header.php');
                 <div class="col-md-5 col-sm-5   form-group pull-right top_search">
                     <form action="user_order.php" method="get" class="d-flex">
                         <div class="input-group">
-                            <!-- <input type="text" class="form-control" placeholder="請輸入關鍵字" name="search"> -->
-                            <!-- <input type="search" class="form-control light-table-filter" data-table="order-table" placeholder="請輸入關鍵字"> -->
+                            <input id="searchInput" type="search" class="form-control light-table-filter" data-table="order-table" placeholder="請輸入關鍵字">
                             <span class="input-group-btn">
-                                <!-- <button id="searchButton" class="btn btn-default" >Go!</button> -->
+                                <button id="searchButton" class="btn btn-default">Go!</button>
                             </span>
                         </div>
                     </form>

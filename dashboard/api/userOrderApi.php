@@ -33,10 +33,32 @@ try {
     $productRows = $productStmt->fetchAll(PDO::FETCH_ASSOC);
     $productSkuRows = $productSkuStmt->fetchAll(PDO::FETCH_ASSOC);
 
-    // 從users資料表撈account, address及phone
+    // 將user_order欄位paytype及delivery改為代號, 以便select取值
+    $paytype = [
+        'ATM匯款' => '1',
+        '線上刷卡' => '2',
+        '貨到付款' => '3',
+    ];
+    $delivery = [
+        '郵寄' => '1',
+        '宅急便' => '2',
+        '超商取貨' => '3',
+    ];
+
     $userArr = [];
     $userAddressArr = [];
     $userPhoneArr = [];
+    $orderStatusArr = [];
+    $orderArr = [];
+    $orderUpdateArr = [];
+    $resultUserOrderDetailIdArr = [];
+    $userOrderDetailIdArray = [];
+    $productSkuArr = [];
+    $arr = [];
+    $arr1 =[];
+    $userOrderDetailArr = [];
+
+    // 從users資料表撈account, address及phone
     foreach ($usersRows as $row){
         $userArr[$row['id']] = $row['account'];
         $userAddressArr[$row['id']] = $row['address'];
@@ -44,8 +66,6 @@ try {
     }
 
     // 從order_status資料表撈出狀態
-    $orderStatusArr = [];
-    $orderArr = [];
     foreach ($orderStatusRows as $orderStatusRow){
         $orderStatusArr[$orderStatusRow['id']] = $orderStatusRow['status'];
     }
@@ -55,8 +75,6 @@ try {
         $productArr[$productRow["id"]] = $productRow["name"];
     };
 
-    $resultUserOrderDetailIdArr = [];
-    $userOrderDetailIdArray = [];
     foreach ($userOrderDetailRows as $userOrderDetailRow){
         // $arrUserOrderDetail = [
             //$userOrderDetailRow['id']] => $userOrderDetailRow['order_id'],
@@ -66,29 +84,13 @@ try {
     }
         // echo json_encode($userOrderDetailIdArray);
 
-    $productSkuArr = [];
     foreach ($productSkuRows as $productSkuRow){
         $productSkuArr[$productSkuRow["id"]] = $productSkuRow["sku_code"];
         $productSkuIdArr[$productSkuRow["sku_code"]] = $productSkuRow["product_id"];
     };
 
-    $arr = [];
+    // **************** for ORDER LIST ****************
     foreach ($userOrderRows as $userOrderRow){
-        // $condition1 = $userOrderRow['paytype'];
-        // $condition2 = $userOrderRow['delivery'];
-
-        // switch ($condition1) {
-        //     case "ATM匯款":
-        //         $userOrderRow['paytype'] = 1;
-        //         break;
-        //     case "線上刷卡":
-        //         $userOrderRow['paytype'] = 2;
-        //         break;
-        //     case "貨到付款":
-        //         $userOrderRow['paytype'] = 3;
-        //         break;
-        // }
-
         $arr = [
             'order_date' => $userOrderRow['order_date'],
             'order_id' => $userOrderRow['id'],
@@ -104,28 +106,43 @@ try {
             'delivery' => $userOrderRow['delivery'],
             'user_order_detail_id' => $userOrderDetailIdArray[$userOrderDetailRow['id']],
             $userOrderRow['id'] =>  $userOrderRow['id'],
-            // ************* for UPDATE (SELECT value要是option的value(設定為數字) )***************
-            'order_status_UPDATE' => $orderStatusRow['id'],
-            'paytype_UPDATE' => $userOrderRow['paytype'],
-            'delivery_UPDATE' => $userOrderRow['delivery'],
         ];
         array_push($orderArr, $arr);
     }
 
-    // ****************未完成****************(user_order_detail陣列, 要丟到UPDATE裡)
-    $arr1 =[];
-    $userOrderDetailArr = [];
+    // **************** for UPDATE ****************
+    foreach ($userOrderRows as $userOrderRow){
+        $arr = [
+            $userOrderRow['id'] =>  $userOrderRow['id'],
+            'order_date' => $userOrderRow['order_date'],
+            'order_id' => $userOrderRow['id'],
+            'order_no' => $userOrderRow['order_no'],
+            'recipient' => $userOrderRow['recipient'],
+            'user_id' => $userOrderRow['user_id'],
+            'user_account' => $userArr[$userOrderRow['user_id']],
+            'phone' => [$userOrderRow['phone']],
+            'address' => [$userOrderRow['address']],
+            'invoice_no' => $userOrderRow['invoice_no'],
+            'user_order_detail_id' => $userOrderDetailIdArray[$userOrderDetailRow['id']],
+            'order_status' => $userOrderRow['order_status'],
+            // ************* (SELECT value要是option的value(設定為數字))***************
+            'paytype' => $paytype[$userOrderRow['paytype']],
+            'delivery' => $delivery[$userOrderRow['delivery']],
+        ];
+        array_push($orderUpdateArr, $arr);
+    }
+
+    // **************** for UPDATE ****************
     foreach ($userOrderDetailRows as $userOrderDetailRow){
         // $userOrderDetailArr[$userOrderDetailRow['id']] = $userOrderDetailRow['order_id'];
         $arr1 = [
-            $userOrderDetailRow['id'] => $userOrderDetailRow['order_id'],
             'id' => $userOrderDetailRow['id'],
             'order_id' => $userOrderDetailRow['order_id'],
             'product_sku_id' => $userOrderDetailRow['product_id'],
             'qty' => $userOrderDetailRow['qty'],
             'sku_code' => $productSkuArr[$userOrderDetailRow['product_id']],
-            // 'product_id' => $productSkuIdArr[$productArr[$userOrderDetailRow['product_id']]],
-            // 'name' => $productArr[$productSkuIdArr[$productSkuRow["sku_code"]]],
+            'product_id' => $productSkuIdArr[$productSkuArr[$userOrderDetailRow['product_id']]],
+            'name' => $productArr[$productSkuIdArr[$productSkuArr[$userOrderDetailRow['product_id']]]],
         ];
         array_push($userOrderDetailArr, $arr1);
     }
@@ -133,10 +150,12 @@ try {
     // 陣列$orderArr與陣列$userOrderDetailArr合併成 $combineArr
     $combineArr = [
         'userOrder' => $orderArr,
+        'userOrderUpdate' => $orderUpdateArr,
         'userOrderDetail' => $userOrderDetailArr,
     ];
 
     echo json_encode($combineArr);
+    // echo json_encode($orderUpdateArr);
 
 } catch (PDOException $e) {
     echo '資料庫連結失敗<br>';

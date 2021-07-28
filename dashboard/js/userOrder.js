@@ -44,16 +44,16 @@ let tableShowLoop = (startNum, endNum, data) => {
                 </td>
             </tr>
             `;
-        }
-        $('tbody').empty();
-        $('tbody').append(content);
+    }
+    $('tbody').empty();
+    $('tbody').append(content);
 }
 
 
 
 axios({
     method: 'post',
-    url: '/project_01/dashboard/api/userOrder.php',
+    url: '/project_01/dashboard/api/userOrderApi.php',
 }).then(function (response) {
     // ***************************************設定API資料變數***************************************
     console.log("response: ", response);
@@ -100,7 +100,7 @@ axios({
     $("#orderListPage").append(lastPageContent);
 
     // ***************************************分頁按鈕綁定事件***************************************
-    $("#orderListPage").on("click", "#thisPage", function(){
+    $("#orderListPage").on("click", "#thisPage", function () {
         let page = $(this).data("page");   // $(this)是指pageContent的<li>
         let startNum = (page - 1) * perPage;
         let endNum = page * perPage;
@@ -110,14 +110,18 @@ axios({
 
         tableShowLoop(startNum, endNum, data);
     });
-    
+
     // ***************************************刪除按鈕***************************************
-    $("#userOrderTbody").on("click", "#delete", function() {
+    $("#userOrderTbody").on("click", "#delete", function () {
         let id = ($(this).data("id"));   // $(this)是指的<a>
         $("#deleteConfirm").text(`${data[id].order_no}`);
         $("#yesDelete").attr("href", `userOrderDelete.php?id=${data[id].order_id}`);
         console.log("id", id);
     })
+
+    // ***************************************搜尋按鈕***************************************
+
+
 
     // ***************************************顯示userOrder列表首頁(無分頁按鈕)***************************************
     tableShowLoop(0, perPage, data);
