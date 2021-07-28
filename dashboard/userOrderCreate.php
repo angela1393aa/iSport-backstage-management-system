@@ -1,10 +1,10 @@
 <?php
 require_once('includes/config.php');
 
-// if(!isset($_SESSION["user"])){
-//     echo "請先登入帳號";
+// if(!isset($_POST["account"])){
+//     echo "請選擇會員帳號";
 //     exit();
-//     header("location: user_order_create.php");
+//     header("location: href=''");
 // }
 
 //***************************寫入user_order***************************

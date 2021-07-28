@@ -21,72 +21,71 @@ $("#account").on({
     },
 });
 
-// 把product_sku資料表的sku_code打到UI上
+// 驗證
+$("#submitBtn").click(function(e) {
+    let accountValue = $("#account").val();
+    console.log("click");
+    e.preventDefault();
+
+    $("#submitAlert").empty();
+
+    alert = "";
+    if(accountValue == "") {
+        alert += "請填入會員帳號";
+    }
+})
+$("#submitAlert").append(alert);
+
+
+
+// *******************把userOrderCreateApi的資料打到UI上***********************
 axios({
     method: 'post',
     url: '/project_01/dashboard/api/userOrderCreateApi.php',
 }).then(function (response) {
     // console.log(response);
+    let userData = response.data.user;
     let productData = response.data.product;
     let userOrderData = response.data.userOrder;
-    console.log(productData);
+    // console.log(productData);
     let datalistContent = "";
+    let content = "";
 
-    productData.forEach((item) => {
-        datalistContent +=`
-        <option value="${item.sku_code}"></option>
-        `
-    });
-    $("#productId").append(datalistContent);
-
-    // **********************自動產生產品名稱************************
-    $("#skuCode").on("change", function () {          // 抓到sku_code
-        console.log("change");
-        let id=$(this).val();
-        console.log(id);
-        // 取得該sku_code名稱
-        for (let i = 0; i < productData.length; i++) {
-            let skuCodeString = productData[i].sku_code;
-            // console.log(skuCodeString);
-            if (skuCodeString == id) {
-                $("#productName").text(productData[i].name);
-                console.log(productData[i].name);
-            }
-        }
-        // console.log(productData.length);
-        $("#productName").attr("value", productData.id);
-    });
-    
-    userOrderData.forEach((item) => {
-        
-    })
-    // console.log(datalistContent);
-
-
-    
-}).catch(function (error) {
-    console.log(error);
-});
-
-
-// 把users資料表的account打到UI上
-axios({
-    method: 'post',
-    url: '/project_01/dashboard/api/userOrderCreateUserApi.php',
-}).then(function (response) {
-    // console.log(response);
-    let data = response.data;
-    // console.log(data);
-    let datalistContent = "";
-    // console.log(data);
-    data.forEach((item) => {
+    userData.forEach((item) => {
         datalistContent +=`
         <option value="${item.account}"></option>
         `
     })
     $("#userAccount").append(datalistContent);
+    
+    productData.forEach((item) => {
+        content +=`
+        <option value="${item.sku_code}"></option>
+        `
+    });
+    $("#productId").append(content);
+
+    // **********************自動產生產品名稱************************
+    $("#skuCode").on("keyup", function() {
+        console.log("key up");
+        let id=$(this).val();                               //  .val()取值, 取得商品編號的值(sku_code)
+        console.log("id", id);
+        $("#productName").empty();                          //  **沒有輸入品名時或沒有此商品編號時不顯示**
+        productData.forEach((item)=>{
+            let skuCode = item.sku_code;                    //  以sku_code作為key, 尋找品名
+            if (skuCode == id) {
+                $("#productName").text(item.name);
+                console.log(item.name);
+            }
+        })
+    });
+
+    userOrderData.forEach((item) => {
+        
+    })
     // console.log(datalistContent);
 
+    
 }).catch(function (error) {
     console.log(error);
 });

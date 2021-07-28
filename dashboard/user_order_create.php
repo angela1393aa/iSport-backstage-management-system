@@ -57,6 +57,7 @@ $rows = $productStmt->fetchAll(PDO::FETCH_ASSOC);
                                     <datalist id="userAccount">
                                     </datalist>
                                     <small class="text-danger align-middle m-0 py-2" id="accountMsg"></small>
+                                    <small class="text-danger align-middle m-0 py-2" id="accountAlert"></small>
                                 </div>
                             </div>
                             <div class="item form-group">
@@ -94,6 +95,14 @@ $rows = $productStmt->fetchAll(PDO::FETCH_ASSOC);
                                     <p id="productName" class="my-2" style="font-size:14px"></p>
                                 </div>
                             </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="qty">數量
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input type="number" id="qty" name="qty" class="form-control" value="1">
+                                </div>
+                            </div>
                             <!-- <div class="item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="color">顏色
                                     <span class="text-danger">*</span>
@@ -110,14 +119,6 @@ $rows = $productStmt->fetchAll(PDO::FETCH_ASSOC);
                                     <input type="text" id="size" name="size" class="form-control" required>
                                 </div>
                             </div> -->
-                            <div class="item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="qty">數量
-                                    <span class="text-danger">*</span>
-                                </label>
-                                <div class="col-md-6 col-sm-6 ">
-                                    <input type="number" id="qty" name="qty" class="form-control" value="1">
-                                </div>
-                            </div>
                             <h2 class="flex-grow-1 mb-2">付款及出貨方式</h2>
                             <div class="item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="paytype">付款方式&nbsp;&nbsp;
@@ -137,7 +138,7 @@ $rows = $productStmt->fetchAll(PDO::FETCH_ASSOC);
                                     <select class="form-control form-select" name="delivery" id="delivery" name="delivery">
                                         <option value="1">郵寄</option>
                                         <option value="2">宅急便</option>
-                                        <option value="3">超商貨到付款</option>
+                                        <option value="3">超商取貨</option>
                                     </select>
                                 </div>
                             </div>
@@ -155,9 +156,14 @@ $rows = $productStmt->fetchAll(PDO::FETCH_ASSOC);
                             <div class="ln_solid"></div>
                             <div class="item form-group">
                                 <div class="col-md-6 col-sm-6 offset-md-3">
+                                        <small class="text-danger align-middle m-0 py-2" id="submitAlert"></small>
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <div class="col-md-6 col-sm-6 offset-md-3">
                                     <a href="user_order.php" class="btn btn-primary" type="button">取消</a>
                                     <button class="btn btn-primary" type="reset">重設</button>
-                                    <button type="submit" class="btn btn-success">送出</button>
+                                    <button type="submit" class="btn btn-success" id="submitBtn">送出</button>
                                 </div>
                             </div>
                         </form>

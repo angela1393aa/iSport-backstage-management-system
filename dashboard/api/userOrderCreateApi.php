@@ -3,24 +3,29 @@ require_once("../includes/config.php");
 
 // 用PDO將資料庫資料提取 -> 轉成json檔 -> 再以js方式取得json檔裡的資訊
 // 取得品名及料號
+$userSql = "SELECT id, account FROM users WHERE valid = 1";
 $userOrderSql = "SELECT * FROM user_order WHERE valid = 1";
 $productSql = "SELECT id, name FROM product WHERE valid = 1";
 $productSkuSql = "SELECT id, product_id, sku_code FROM product_sku WHERE valid = 1";
 
+$userStmt = $db_host->prepare($userSql);
 $userOrderStmt = $db_host->prepare($userOrderSql);
 $productStmt = $db_host->prepare($productSql);
 $productSkuStmt = $db_host->prepare($productSkuSql);
 
 
 try{
+    $userStmt->execute();
     $userOrderStmt->execute();
     $productStmt->execute();
     $productSkuStmt->execute();
-
+    
+    $userRows = $userStmt->fetchAll(PDO::FETCH_ASSOC);
     $userOrderRows = $userOrderStmt->fetchAll(PDO::FETCH_ASSOC);
     $productRows = $productStmt->fetchAll(PDO::FETCH_ASSOC);
     $productSkuRows = $productSkuStmt->fetchAll(PDO::FETCH_ASSOC);
 
+    $userArr = [];
     $orderArr = [];
     $productArr = [];
     $productSkuArr = [];
@@ -28,6 +33,14 @@ try{
     $productResultArr = [];
     $arr = [];
     $combineArr = [];
+
+    foreach ($userRows as $userRow){
+        $arr = [
+            'id' => $userRow['id'],
+            'account' => $userRow['account'],
+        ];
+        array_push($userArr, $arr);
+    };
 
     foreach ($userOrderRows as $userOrderRow){
         $arr = [
@@ -68,6 +81,7 @@ try{
 
         // 將使用者訂單$orderArr與連結過後的產品陣列$productResultArr(product + product_sku資料表),合併成 $combineArr
         $combineArr = [
+            'user' => $userArr,
             'userOrder' => $orderArr,
             'product' => $productResultArr,
         ];
