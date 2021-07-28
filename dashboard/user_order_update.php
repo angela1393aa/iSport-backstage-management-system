@@ -95,8 +95,10 @@ $id=$_GET["id"];
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
                                     <input type="text" id="productId" name="productId" class="form-control" value="" readonly>
+                                    <p id="productName" class="my-2" style="font-size:14px"></p>
                                 </div>
                             </div>
+                            
                             <!-- <div class="item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="color">顏色
                                     <span class="text-danger">*</span>
@@ -125,7 +127,7 @@ $id=$_GET["id"];
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="paytype">付款方式
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <select class="form-control form-select" name="paytype" id="paytype" value="">
+                                    <select class="form-control form-select updatePaytype" name="paytype" id="paytype" value="">
                                         <option value="1">ATM匯款</option>
                                         <option value="2">線上刷卡</option>
                                         <option value="3">貨到付款</option>
@@ -139,14 +141,14 @@ $id=$_GET["id"];
                                     <select class="form-control form-select" name="delivery" id="delivery" value="">
                                         <option value="1">郵寄</option>
                                         <option value="2">宅急便</option>
-                                        <option value="3">超商貨到付款</option>
+                                        <option value="3">超商取貨</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="order_status">訂單狀態
                                 </label>
-                                <div class="col-md-6 col-sm-6 ">
+                                <div class="col-md-6 col-sm-6">
                                     <select class="form-control form-select" name="order_status" id="orderStatus" value="">
                                         <option value="1">待出貨</option>
                                         <option value="2">已出貨</option>
