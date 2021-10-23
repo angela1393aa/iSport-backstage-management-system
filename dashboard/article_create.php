@@ -1,6 +1,9 @@
 <?php 
 //session_start();
 require_once("includes/header.php");
+if (isset($_SESSION["article"]) == false){
+  $_SESSION['article']['article_name']=$_SESSION['article']['added_by']=$_SESSION['article']['content']='';
+}
 ?>
 <script src="https://cdn.ckeditor.com/ckeditor5/29.0.0/decoupled-document/ckeditor.js"></script>
 <div class="right_col" role="main">
